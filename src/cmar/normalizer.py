@@ -6,6 +6,15 @@ from .ledger import build_mass_ledger
 from .protocol import validate_protocol_payload
 def _clamp(x): return max(0.0,min(1.0,float(x)))
 def _ratio(a,b): return 0.0 if not b else float(a)/float(b)
+# --- Calibration parameters (recalibrated, not rewritten) ---
+# commits/day half-saturation point. k equals the old linear baseline (3.0), so the
+# origin slope (1/k) is preserved -> low/normal-activity behavior is identical to the
+# previous calibration, while the heavy-tailed high end is soft-saturated instead of
+# hard-clamped to 1.0, restoring ordering across very active accounts.
+_COMMIT_HALFSAT=3.0
+def _soft_sat(x,k):
+    x=max(float(x),0.0)
+    return 0.0 if x<=0.0 else x/(x+float(k))
 def normalize_payload(payload):
     scan=payload.get('scan',{}); ledger=payload.get('mass_ledger',{}); protocol=payload.get('protocol_report',{'valid':True}); total=max(float(scan.get('total_bytes') or ledger.get('total_bytes') or 0),1.0); layer=scan.get('layer_bytes') or {}; missing=set(scan.get('missing_surface') or [])
     vals={
@@ -29,7 +38,7 @@ def normalize_github_activity(report,window_days=None):
     private=d.get('private_repositories_if_visible')
     visibility=0.0 if not authed else (1.0 if private is not None else 0.5)
     sig={
-      'commit_activity_ratio':_clamp((commits/days)/3.0) if authed else 0.0,
+      'commit_activity_ratio':_clamp(_soft_sat(commits/days,_COMMIT_HALFSAT)) if authed else 0.0,
       'pr_merge_ratio':_clamp(_ratio(pr_merged,pr_open)) if authed else 0.0,
       'active_days_ratio':_clamp(_ratio(contrib,days)) if authed else 0.0,
       'repository_activity_ratio':_clamp(_ratio(active,seen)) if authed else 0.0,

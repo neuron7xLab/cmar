@@ -134,6 +134,38 @@ class GitHubActivityTests(unittest.TestCase):
             self.assertLessEqual(v, 1.0)
         self.assertEqual(sig["github_visibility_signal"], 1.0)
 
+    def _signals_for(self, commits, days=30, **over):
+        rep = {"authenticated": True, "window_days": days, "commits_authored": commits,
+               "pull_requests_opened": 1, "pull_requests_merged": 0, "contribution_days": 0,
+               "repositories_seen": 1, "active_repositories": [], "private_repositories_if_visible": 0}
+        rep.update(over)
+        return normalize_github_activity(rep)
+
+    def test_commit_calibration_preserves_low_end(self):
+        # Origin slope (1/3) is shared, so the true low end stays tight to the old
+        # linear baseline; mid-range divergence is bounded and by-design (soft sat).
+        for cpd in (0.1, 0.3, 0.5):
+            new = self._signals_for(int(round(cpd * 30)))["commit_activity_ratio"]
+            old = min(cpd / 3.0, 1.0)
+            self.assertLess(abs(new - old), 0.03, f"cpd={cpd}: new={new} old={old}")
+        # Normal activity (~1 commit/day) remains in the same low-moderate band.
+        self.assertTrue(0.20 <= self._signals_for(30)["commit_activity_ratio"] <= 0.34)
+
+    def test_commit_calibration_not_saturated_on_heavy_tail(self):
+        # The real neuron7xLab distribution (~37 commits/day) used to clamp to 1.0.
+        heavy = self._signals_for(1107, days=30)["commit_activity_ratio"]
+        self.assertLess(heavy, 1.0)
+        self.assertGreater(heavy, 0.85)
+
+    def test_commit_calibration_preserves_ordering_in_tail(self):
+        # Ordering across very active accounts must survive (the old clamp destroyed it).
+        a = self._signals_for(1107)["commit_activity_ratio"]
+        b = self._signals_for(1800)["commit_activity_ratio"]
+        c = self._signals_for(3600)["commit_activity_ratio"]
+        self.assertLess(a, b)
+        self.assertLess(b, c)
+        self.assertTrue(all(0.0 <= x < 1.0 for x in (a, b, c)))
+
     def test_unauthenticated_signals_zeroed(self):
         report = ga._empty_report("neuron7xLab", 30, authenticated=False, errors=["gh_auth_missing"])
         sig = normalize_github_activity(report)

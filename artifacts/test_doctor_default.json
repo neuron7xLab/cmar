@@ -17,22 +17,22 @@
     "verdict": "NOT_FALSIFIED"
   },
   "mass_ledger": {
-    "artifact_hash": "55797fe1ec8b642f233a31aa1f91b041f0519150da181a26a84ac0b50d46a242",
+    "artifact_hash": "0e88e820064a8d1d715b71dca22fe269d1e7f3cb69419210fcc2a292cc2baafc",
     "blocking_voids": 0,
     "hollow_mass_bytes": 28694060,
-    "hollow_mass_ratio": 0.985227,
+    "hollow_mass_ratio": 0.985112,
     "ledger_version": "cmar-mass-ledger/1.4.1",
     "release_blocked": false,
     "status": "PARTIAL_VALIDATED",
     "target_valid_mass_bytes": 1048576,
-    "total_bytes": 29124321,
-    "valid_mass_bytes": 430261,
+    "total_bytes": 29127712,
+    "valid_mass_bytes": 433652,
     "verdict": "Valid structure exists but target mass is not reached.",
     "void_closure_rate": 1.0,
     "voids_detected": 0
   },
   "normalization_report": {
-    "artifact_hash": "55797fe1ec8b642f233a31aa1f91b041f0519150da181a26a84ac0b50d46a242",
+    "artifact_hash": "0e88e820064a8d1d715b71dca22fe269d1e7f3cb69419210fcc2a292cc2baafc",
     "baselines": {
       "docs": 0.3,
       "source": 0.2,
@@ -40,8 +40,8 @@
     },
     "method": "baseline_clamped_unit_interval",
     "normalizer_version": "cmar-normalizer/1.4.1",
-    "release_readiness": 0.852582,
-    "structural_score": 0.509229,
+    "release_readiness": 0.853391,
+    "structural_score": 0.509346,
     "vector": {
       "blocking_pressure": 1.0,
       "ci_presence": 1.0,
@@ -49,9 +49,9 @@
       "protocol_validity": 1.0,
       "schema_presence": 1.0,
       "security_presence": 1.0,
-      "source_mass_ratio": 0.033795,
-      "test_mass_ratio": 0.018887,
-      "valid_mass_ratio": 0.410329,
+      "source_mass_ratio": 0.03388,
+      "test_mass_ratio": 0.019505,
+      "valid_mass_ratio": 0.413563,
       "void_pressure": 1.0
     }
   },
@@ -71,9 +71,9 @@
       "protocol_validity": 0.075,
       "schema_presence": 0.075,
       "security_presence": 0.075,
-      "source_mass_ratio": 0.066205,
-      "test_mass_ratio": 0.081113,
-      "valid_mass_ratio": 0.114671,
+      "source_mass_ratio": 0.06612,
+      "test_mass_ratio": 0.080495,
+      "valid_mass_ratio": 0.111437,
       "void_pressure": 0.075
     },
     "mean_ordinal": 2.6,
@@ -113,12 +113,12 @@
   },
   "repair_plan": {
     "actions": [],
-    "artifact_hash": "55797fe1ec8b642f233a31aa1f91b041f0519150da181a26a84ac0b50d46a242",
+    "artifact_hash": "0e88e820064a8d1d715b71dca22fe269d1e7f3cb69419210fcc2a292cc2baafc",
     "plan_version": "cmar-repair-plan/1.4.1",
     "status": "NO_ACTIONS_REQUIRED"
   },
   "scan": {
-    "artifact_hash": "55797fe1ec8b642f233a31aa1f91b041f0519150da181a26a84ac0b50d46a242",
+    "artifact_hash": "0e88e820064a8d1d715b71dca22fe269d1e7f3cb69419210fcc2a292cc2baafc",
     "ci_present": true,
     "docs_present": true,
     "entrypoints": [
@@ -182,10 +182,10 @@
         "sha256": "750663ec1ffa407691231dbb2de6e446dc6e17bc031b9df2500f4941c8d52130"
       },
       {
-        "bytes": 14925,
+        "bytes": 14931,
         "layer": "config",
         "path": "artifacts/runtime_real_account.json",
-        "sha256": "1666a63b971f87f1e6ed0ac5cea823fd38dd4a496905b5a3a10f235990709612"
+        "sha256": "00285e2068edee75b939aa11a5bfbf50c6fd29d07159d5cb43ecd0d79cf17bbb"
       },
       {
         "bytes": 12987,
@@ -206,10 +206,10 @@
         "sha256": "7d5f3bf8adb87f66954b151b643bb93e67bd76073781e12b1ac52bd91ff5e8e4"
       },
       {
-        "bytes": 10548,
+        "bytes": 10547,
         "layer": "config",
         "path": "artifacts/integrated_state_with_github.json",
-        "sha256": "affc8bde501820d31bfdd0e0f60f208d4b56fb0c2acce225ed003f2a28482884"
+        "sha256": "4ee4ae2edf9884108694cd88c0340b219c83ccc07c04d96d4ad7ab2f367717ae"
       },
       {
         "bytes": 10122,
@@ -224,10 +224,10 @@
         "sha256": "2600e7e14acb00405d4840282b9f45c151bcf702cbecb7fd90d7d1ee3c09dd38"
       },
       {
-        "bytes": 9220,
+        "bytes": 9249,
         "layer": "config",
         "path": "artifacts/integrated_state.json",
-        "sha256": "c5ae9038b869c1d2b21a827c5e69023faacbeb10237ebdaebed0adb3436d19ef"
+        "sha256": "ac130c246fe6c39b3ecf4342aa6975f05ed2fc4b68a4ee87dbbf9b1e021c844a"
       },
       {
         "bytes": 9206,
@@ -242,21 +242,21 @@
         "sha256": "3a76017005383f5947e40be240b105c1a759e2b0d9b38a37f8678f1bd077dea6"
       },
       {
-        "bytes": 8824,
+        "bytes": 8978,
         "layer": "test",
-        "path": "artifacts/test_doctor_default.json",
-        "sha256": "601ded2fdd2c445e41fe5b6c6eef7ebcfdc0945a04b6491810f2d02e8eff46ad"
+        "path": "tests/test_github_activity.py",
+        "sha256": "278225265dcb575e45218f29ac78a56ddf4aeacdc5aea8b6e5ee857fa349b769"
       }
     ],
     "layer_bytes": {
       "ci": 1666,
-      "config": 151536,
+      "config": 152601,
       "docs": 23525,
       "other": 28694060,
       "schema": 897,
       "security": 776,
-      "source": 196853,
-      "test": 55008
+      "source": 197372,
+      "test": 56815
     },
     "layer_files": {
       "ci": 2,
@@ -280,7 +280,7 @@
     "schemas_present": true,
     "security_present": true,
     "tests_present": true,
-    "total_bytes": 29124321,
+    "total_bytes": 29127712,
     "total_files": 126
   },
   "voids": []

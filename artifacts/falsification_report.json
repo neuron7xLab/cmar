@@ -12,6 +12,31 @@
     "no_release_bucket_with_failed_protocol"
   ],
   "falsifier_version": "cmar-falsifier/1.4.1",
-  "findings": [],
-  "verdict": "NOT_FALSIFIED"
+  "findings": [
+    {
+      "code": "missing_tests",
+      "field": "scan.missing_surface",
+      "message": "tests absent",
+      "severity": "critical"
+    },
+    {
+      "code": "missing_ci",
+      "field": "scan.missing_surface",
+      "message": "ci absent",
+      "severity": "critical"
+    },
+    {
+      "code": "missing_schemas",
+      "field": "scan.missing_surface",
+      "message": "schemas absent",
+      "severity": "high"
+    },
+    {
+      "code": "missing_entrypoint",
+      "field": "scan.missing_surface",
+      "message": "entrypoint absent",
+      "severity": "critical"
+    }
+  ],
+  "verdict": "FALSIFIED"
 }
