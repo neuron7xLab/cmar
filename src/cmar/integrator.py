@@ -11,6 +11,7 @@ from .ledger import build_mass_ledger
 from .protocol import validate_protocol_payload
 from .falsifier import falsify_payload
 from .synthesis import synthesize_cross_stream
+from .expander import compute_expansion
 
 def _load_github_activity(github_activity):
     """Accept a report dict/object or a path to a github_activity JSON artifact."""
@@ -32,8 +33,10 @@ def integrate_artifact_streams(root,target_valid_mass=1048576,github_activity=No
         gh_signals=normalize_github_activity(gh); flow+=['github_activity','github_signals']
         # Auxiliary evidence only: GitHub activity never overrides repository quality.
         verdict={**verdict,'github_evidence':'auxiliary','github_overrides_quality':False}
+    # Future-state projection: output of falsify+ledger becomes input to the expander.
+    expansion=compute_expansion(ledger.to_dict(),history=[]); flow.insert(len(flow),'expansion')
     flow.append('integrated_verdict')
-    state=IntegratedState('cmar-integrator/1.4.1',str(scan.root),flow,sd,norm.to_dict(),quant.to_dict(),[v.to_dict() for v in voids],plan.to_dict(),proto.to_dict(),fals.to_dict(),ledger.to_dict(),verdict,gh,gh_signals)
+    state=IntegratedState('cmar-integrator/1.4.1',str(scan.root),flow,sd,norm.to_dict(),quant.to_dict(),[v.to_dict() for v in voids],plan.to_dict(),proto.to_dict(),fals.to_dict(),ledger.to_dict(),verdict,gh,gh_signals,None,expansion,expansion['potential_mass'],expansion['expansion_verdict'])
     if gh is not None:
         # Emergent join: output of the repo + github streams becomes input to synthesis.
         synthesis=synthesize_cross_stream(state.to_dict()); object.__setattr__(state,'cross_stream_synthesis',synthesis)

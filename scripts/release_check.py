@@ -27,12 +27,30 @@ def main() -> int:
         [PY, "-m", "cmar.cli", "audit-project", str(audit), "--out", "artifacts/audit_projection.json"],
         [PY, "-m", "cmar.cli", "autofill", str(tmp), "--out", "artifacts/autofill_report.json"],
         [PY, "-m", "cmar.cli", "corpus-eval", "benchmark_corpus/runtime_v13/artifact_state_stress.jsonl", "--limit", "256", "--out", "artifacts/corpus_eval_report.json"],
+        [PY, "-m", "cmar.cli", "expand", "examples/seed_14kb_intent", "--horizon", "5", "--out", "artifacts/expansion_report.json"],
     ]
     failures=[]
     for cmd in commands:
         r=run(cmd)
         if r.returncode != 0:
             failures.append({"command": cmd, "returncode": r.returncode, "stdout": r.stdout[-2000:], "stderr": r.stderr[-2000:]})
+
+    # Future-state gate: project from a clean baseline (capability projection) and
+    # assert the system is not diverging and growth is projected.
+    exp_env = dict(ENV); exp_env["CMAR_LEDGER_HISTORY"] = "/tmp/cmar_expand_clean_history.jsonl"
+    Path("/tmp/cmar_expand_clean_history.jsonl").unlink(missing_ok=True)
+    er = subprocess.run([PY, "-m", "cmar.cli", "expand", "examples/seed_14kb_intent", "--out", "/tmp/exp.json"],
+                        cwd=ROOT, env=exp_env, text=True, capture_output=True)
+    if er.returncode != 0:
+        failures.append({"command": "expand-gate", "returncode": er.returncode, "stderr": er.stderr[-2000:]})
+    else:
+        data = json.loads(Path("/tmp/exp.json").read_text(encoding="utf-8"))
+        if data["expansion_verdict"] == "DIVERGING":
+            failures.append({"command": "expand-gate", "assert": "system is diverging", "expansion_verdict": data["expansion_verdict"]})
+        if not (data["potential_mass"] > data["current"]["valid_mass_bytes"]):
+            failures.append({"command": "expand-gate", "assert": "no growth projected",
+                             "potential_mass": data["potential_mass"], "current": data["current"]["valid_mass_bytes"]})
+
     summary={"commands": len(commands), "failures": failures, "status": "PASS" if not failures else "FAIL"}
     (ROOT/"artifacts/release_check_summary.json").parent.mkdir(parents=True, exist_ok=True)
     (ROOT/"artifacts/release_check_summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")

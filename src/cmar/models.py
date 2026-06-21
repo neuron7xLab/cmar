@@ -58,5 +58,5 @@ class AutofillReport:
     def to_dict(self): return asdict(self)
 @dataclass(frozen=True)
 class IntegratedState:
-    integrator_version:str; root:str; flow:list[str]; scan:dict[str,Any]; normalized_state:dict[str,Any]; quantized_state:dict[str,Any]; voids:list[dict[str,Any]]; repair_plan:dict[str,Any]; protocol_report:dict[str,Any]; falsification_report:dict[str,Any]; mass_ledger:dict[str,Any]; integrated_verdict:dict[str,Any]; github_activity:dict[str,Any]|None=None; github_signals:dict[str,float]|None=None; cross_stream_synthesis:dict[str,Any]|None=None
+    integrator_version:str; root:str; flow:list[str]; scan:dict[str,Any]; normalized_state:dict[str,Any]; quantized_state:dict[str,Any]; voids:list[dict[str,Any]]; repair_plan:dict[str,Any]; protocol_report:dict[str,Any]; falsification_report:dict[str,Any]; mass_ledger:dict[str,Any]; integrated_verdict:dict[str,Any]; github_activity:dict[str,Any]|None=None; github_signals:dict[str,float]|None=None; cross_stream_synthesis:dict[str,Any]|None=None; expansion:dict[str,Any]|None=None; potential_mass:int|None=None; expansion_verdict:str|None=None
     def to_dict(self): return asdict(self)

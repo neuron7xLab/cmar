@@ -1,6 +1,8 @@
 from __future__ import annotations
 import argparse
+import datetime
 import json
+import os
 from pathlib import Path
 from .scanner import scan_repository
 from .normalizer import normalize_repository
@@ -18,6 +20,36 @@ from .audit_stream import scan_audit_package, project_audit_to_cmar, integrate_a
 from .corpus_eval import evaluate_corpus
 from .report import doctor_markdown
 from .github_activity import collect_github_activity
+from .expander import compute_expansion
+
+def _history_path():
+    return Path(os.environ.get("CMAR_LEDGER_HISTORY", "artifacts/ledger_history.jsonl"))
+
+def _append_ledger_history(ld):
+    HISTORY_PATH = _history_path()
+    HISTORY_PATH.parent.mkdir(parents=True, exist_ok=True)
+    with HISTORY_PATH.open("a", encoding="utf-8") as f:
+        f.write(json.dumps({
+            "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+            "valid_mass_bytes": ld["valid_mass_bytes"],
+            "blocking_voids": ld["blocking_voids"],
+            "void_closure_rate": ld.get("void_closure_rate", 0),
+        }) + "\n")
+
+def _read_ledger_history():
+    HISTORY_PATH = _history_path()
+    if not HISTORY_PATH.exists():
+        return []
+    out = []
+    for line in HISTORY_PATH.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        try:
+            out.append(json.loads(line))
+        except json.JSONDecodeError:
+            continue
+    return out
 
 def emit(obj, out=None):
     if hasattr(obj, "to_dict"):
@@ -70,7 +102,12 @@ def c_serve(a):
     return run(a.host, a.port, a.root)
 def c_ledger(a):
     scan, voids, plan, ledger = stack(a.root, a.target_valid_mass)
+    _append_ledger_history(ledger.to_dict())
     return emit(ledger, a.out)
+def c_expand(a):
+    scan, voids, plan, ledger = stack(a.root, a.target_valid_mass)
+    history = _read_ledger_history()
+    return emit(compute_expansion(ledger.to_dict(), history=history, horizon=a.horizon), a.out)
 def c_runtime(a): return emit(run_runtime_pipeline(a.root, a.target_valid_mass, a.autofill, getattr(a, "github_owner", None), getattr(a, "days", 30)), a.out)
 def c_doctor(a):
     scan, voids, plan, ledger = stack(a.root, a.target_valid_mass)
@@ -123,6 +160,12 @@ def build_parser():
     ga.add_argument("--days", type=int, default=30)
     ga.add_argument("--out")
     ga.set_defaults(func=c_github_activity)
+    ex = sub.add_parser("expand")
+    ex.add_argument("root")
+    ex.add_argument("--horizon", type=int, default=5)
+    ex.add_argument("--target-valid-mass", type=int, default=1048576)
+    ex.add_argument("--out")
+    ex.set_defaults(func=c_expand)
     sv = sub.add_parser("serve")
     sv.add_argument("root", nargs="?", default=".")
     sv.add_argument("--host", default="127.0.0.1")

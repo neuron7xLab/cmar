@@ -11,7 +11,8 @@
       "valid_mass_not_greater_than_total_mass",
       "no_pass_with_blocking_voids",
       "docs_not_dominating_executable_mass",
-      "no_release_bucket_with_failed_protocol"
+      "no_release_bucket_with_failed_protocol",
+      "expansion_not_diverging_on_release"
     ],
     "falsifier_version": "cmar-falsifier/1.4.1",
     "findings": [],
@@ -47,19 +48,19 @@
     "data_source": "gh_api",
     "issues_closed": 21,
     "issues_opened": 35,
-    "latest_activity_utc": "2026-06-21T21:43:03+00:00",
+    "latest_activity_utc": "2026-06-21T22:20:48+00:00",
     "owner": "neuron7xLab",
     "private_repositories_if_visible": 18,
     "public_repositories": 14,
     "pull_requests_merged": 651,
-    "pull_requests_opened": 729,
+    "pull_requests_opened": 730,
     "report_version": "cmar-github-activity/1.0.0",
     "repositories_seen": 32,
     "window_days": 30
   },
   "integrated_state": {
     "cross_stream_synthesis": {
-      "activity_scalar": 0.836287,
+      "activity_scalar": 0.835982,
       "activity_theater_suspected": false,
       "convergence_state": "CONVERGENT_MATURE",
       "emergent": true,
@@ -70,10 +71,56 @@
       "overrides_quality": false,
       "reason": "structure and activity both attested",
       "repo_quality_scalar": 0.75,
-      "stream_coherence": 0.913713,
+      "stream_coherence": 0.914018,
       "synthesis_version": "cmar-synthesis/1.0.0",
       "tau": 0.5
     },
+    "expansion": {
+      "confidence": "LOW",
+      "current": {
+        "blocking_voids": 0,
+        "valid_mass_bytes": 476745,
+        "void_closure_rate": null
+      },
+      "entropy_estimate": 0.0,
+      "expansion_verdict": "CONVERGING",
+      "horizon": 5,
+      "interpretation": "[LOW confidence: conservative baseline, no history] mass grows ~1069/iter and voids do not increase; potential_mass=482090 at horizon 5",
+      "potential_mass": 482090,
+      "projected_states": [
+        {
+          "blocking_voids": 0,
+          "iteration": 1,
+          "valid_mass_bytes": 477814
+        },
+        {
+          "blocking_voids": 0,
+          "iteration": 2,
+          "valid_mass_bytes": 478883
+        },
+        {
+          "blocking_voids": 0,
+          "iteration": 3,
+          "valid_mass_bytes": 479952
+        },
+        {
+          "blocking_voids": 0,
+          "iteration": 4,
+          "valid_mass_bytes": 481021
+        },
+        {
+          "blocking_voids": 0,
+          "iteration": 5,
+          "valid_mass_bytes": 482090
+        }
+      ],
+      "schema": "cmar/expansion_report/v1",
+      "velocity": {
+        "valid_mass_per_iteration": 1069.0,
+        "voids_closed_per_iteration": 1.0
+      }
+    },
+    "expansion_verdict": "CONVERGING",
     "falsification_report": {
       "checked_invariants": [
         "tests_present",
@@ -85,7 +132,8 @@
         "valid_mass_not_greater_than_total_mass",
         "no_pass_with_blocking_voids",
         "docs_not_dominating_executable_mass",
-        "no_release_bucket_with_failed_protocol"
+        "no_release_bucket_with_failed_protocol",
+        "expansion_not_diverging_on_release"
       ],
       "falsifier_version": "cmar-falsifier/1.4.1",
       "findings": [],
@@ -102,6 +150,7 @@
       "mass_ledger",
       "github_activity",
       "github_signals",
+      "expansion",
       "cross_stream_synthesis",
       "integrated_verdict"
     ],
@@ -134,12 +183,12 @@
       "data_source": "gh_api",
       "issues_closed": 21,
       "issues_opened": 35,
-      "latest_activity_utc": "2026-06-21T21:43:03+00:00",
+      "latest_activity_utc": "2026-06-21T22:20:48+00:00",
       "owner": "neuron7xLab",
       "private_repositories_if_visible": 18,
       "public_repositories": 14,
       "pull_requests_merged": 651,
-      "pull_requests_opened": 729,
+      "pull_requests_opened": 730,
       "report_version": "cmar-github-activity/1.0.0",
       "repositories_seen": 32,
       "window_days": 30
@@ -148,7 +197,7 @@
       "active_days_ratio": 0.933333,
       "commit_activity_ratio": 0.925062,
       "github_visibility_signal": 1.0,
-      "pr_merge_ratio": 0.893004,
+      "pr_merge_ratio": 0.891781,
       "repository_activity_ratio": 0.59375
     },
     "integrated_verdict": {
@@ -160,22 +209,22 @@
     },
     "integrator_version": "cmar-integrator/1.4.1",
     "mass_ledger": {
-      "artifact_hash": "512d42c99d4afd02cb3a9ab7297ce95982d2cfe639029eeded2efc54c8175427",
+      "artifact_hash": "1eefeca18d91bad408cbcbde57fc573a0419828d497eb8c47c4c530c26079cdd",
       "blocking_voids": 0,
-      "hollow_mass_bytes": 28694060,
-      "hollow_mass_ratio": 0.984613,
+      "hollow_mass_bytes": 28696259,
+      "hollow_mass_ratio": 0.983658,
       "ledger_version": "cmar-mass-ledger/1.4.1",
       "release_blocked": false,
       "status": "PARTIAL_VALIDATED",
       "target_valid_mass_bytes": 1048576,
-      "total_bytes": 29142480,
-      "valid_mass_bytes": 448420,
+      "total_bytes": 29173004,
+      "valid_mass_bytes": 476745,
       "verdict": "Valid structure exists but target mass is not reached.",
       "void_closure_rate": 1.0,
       "voids_detected": 0
     },
     "normalized_state": {
-      "artifact_hash": "512d42c99d4afd02cb3a9ab7297ce95982d2cfe639029eeded2efc54c8175427",
+      "artifact_hash": "1eefeca18d91bad408cbcbde57fc573a0419828d497eb8c47c4c530c26079cdd",
       "baselines": {
         "docs": 0.3,
         "source": 0.2,
@@ -184,20 +233,21 @@
       "method": "baseline_clamped_unit_interval",
       "normalizer_version": "cmar-normalizer/1.4.1",
       "release_readiness": 0.75,
-      "structural_score": 0.509875,
+      "structural_score": 0.510382,
       "vector": {
         "blocking_pressure": 1.0,
         "ci_presence": 1.0,
-        "docs_ratio": 0.002959,
+        "docs_ratio": 0.0032,
         "protocol_validity": 1.0,
         "schema_presence": 1.0,
         "security_presence": 1.0,
-        "source_mass_ratio": 0.035347,
-        "test_mass_ratio": 0.020944,
+        "source_mass_ratio": 0.03668,
+        "test_mass_ratio": 0.022413,
         "valid_mass_ratio": 0.0,
         "void_pressure": 1.0
       }
     },
+    "potential_mass": 482090,
     "protocol_report": {
       "issues": [],
       "protocol_version": "cmar-protocol/1.4.1",
@@ -210,12 +260,12 @@
       "information_loss": {
         "blocking_pressure": 0.075,
         "ci_presence": 0.075,
-        "docs_ratio": 0.097041,
+        "docs_ratio": 0.0968,
         "protocol_validity": 0.075,
         "schema_presence": 0.075,
         "security_presence": 0.075,
-        "source_mass_ratio": 0.064653,
-        "test_mass_ratio": 0.079056,
+        "source_mass_ratio": 0.06332,
+        "test_mass_ratio": 0.077587,
         "valid_mass_ratio": 0.1,
         "void_pressure": 0.075
       },
@@ -256,13 +306,13 @@
     },
     "repair_plan": {
       "actions": [],
-      "artifact_hash": "512d42c99d4afd02cb3a9ab7297ce95982d2cfe639029eeded2efc54c8175427",
+      "artifact_hash": "1eefeca18d91bad408cbcbde57fc573a0419828d497eb8c47c4c530c26079cdd",
       "plan_version": "cmar-repair-plan/1.4.1",
       "status": "NO_ACTIONS_REQUIRED"
     },
     "root": "/tmp/cmar_final_repository_v1_4_1",
     "scan": {
-      "artifact_hash": "512d42c99d4afd02cb3a9ab7297ce95982d2cfe639029eeded2efc54c8175427",
+      "artifact_hash": "1eefeca18d91bad408cbcbde57fc573a0419828d497eb8c47c4c530c26079cdd",
       "ci_present": true,
       "docs_present": true,
       "entrypoints": [
@@ -296,10 +346,10 @@
           "sha256": "95f57aea8f369c3ca439a5e8c2e3e4db26de1f682735ca808821a1a8be9ffb4e"
         },
         {
-          "bytes": 26850,
+          "bytes": 28206,
           "layer": "config",
           "path": "artifacts/fused_integrated_state.json",
-          "sha256": "b6f2d67b6b44b859e87588d146297b27469037cfbc74c5f3e3f4547b1ec376c0"
+          "sha256": "2774dc29d16105e7a50d5521ffad7ed21430a7c9380419037b8450d870ff593c"
         },
         {
           "bytes": 26782,
@@ -326,10 +376,10 @@
           "sha256": "750663ec1ffa407691231dbb2de6e446dc6e17bc031b9df2500f4941c8d52130"
         },
         {
-          "bytes": 14928,
+          "bytes": 15479,
           "layer": "config",
           "path": "artifacts/runtime_real_account.json",
-          "sha256": "f7debcea4433c9e1de772c59ef54fc90529c22feaea1170c02c1717c78ad2bf3"
+          "sha256": "0e0d69b6b87992979407fb2c09ecda118d8bad9c72fe77c0fff6f65be22afec1"
         },
         {
           "bytes": 12987,
@@ -338,22 +388,28 @@
           "sha256": "6399273c0977ce1a4057dc448950952a7a693c339411b5b95f92c36b22eb5f47"
         },
         {
+          "bytes": 12819,
+          "layer": "config",
+          "path": "artifacts/integrated_state.json",
+          "sha256": "9fae3fe9183d3bffd726c1209ab4e7dd0a0d4cb0584db4f6e5d0453c082a471b"
+        },
+        {
           "bytes": 12479,
           "layer": "config",
           "path": "artifacts/runtime_report.json",
           "sha256": "dc8c4c188f1a531b617ab2acb3b738d314d2a16a386818c9c2ed2296b4464de7"
         },
         {
+          "bytes": 12330,
+          "layer": "config",
+          "path": "artifacts/integrated_state_with_github.json",
+          "sha256": "6aeaf7d103c353e982689db0d856becb32b5f5978e037da942a175c4a1080af2"
+        },
+        {
           "bytes": 11441,
           "layer": "config",
           "path": "artifacts/audit_snapshot.json",
           "sha256": "7d5f3bf8adb87f66954b151b643bb93e67bd76073781e12b1ac52bd91ff5e8e4"
-        },
-        {
-          "bytes": 11061,
-          "layer": "config",
-          "path": "artifacts/integrated_state_with_github.json",
-          "sha256": "7efb0f74e290c59b12af2a7ae4d4cae7ae2cc402d9e6e5abdb121cbafe9a755f"
         },
         {
           "bytes": 10122,
@@ -366,12 +422,6 @@
           "layer": "test",
           "path": "vendor/n7x_audit_v4/n7x/tests/test_quantizer.py",
           "sha256": "2600e7e14acb00405d4840282b9f45c151bcf702cbecb7fd90d7d1ee3c09dd38"
-        },
-        {
-          "bytes": 9249,
-          "layer": "config",
-          "path": "artifacts/integrated_state.json",
-          "sha256": "ac130c246fe6c39b3ecf4342aa6975f05ed2fc4b68a4ee87dbbf9b1e021c844a"
         },
         {
           "bytes": 9206,
@@ -394,23 +444,23 @@
       ],
       "layer_bytes": {
         "ci": 1666,
-        "config": 152151,
-        "docs": 25874,
-        "other": 28694060,
+        "config": 166000,
+        "docs": 28006,
+        "other": 28696259,
         "schema": 897,
         "security": 776,
-        "source": 206020,
-        "test": 61036
+        "source": 214014,
+        "test": 65386
       },
       "layer_files": {
         "ci": 2,
-        "config": 21,
+        "config": 25,
         "docs": 29,
         "other": 7,
         "schema": 8,
         "security": 1,
-        "source": 46,
-        "test": 16
+        "source": 47,
+        "test": 17
       },
       "license_present": true,
       "missing_surface": [],
@@ -424,13 +474,13 @@
       "schemas_present": true,
       "security_present": true,
       "tests_present": true,
-      "total_bytes": 29142480,
-      "total_files": 130
+      "total_bytes": 29173004,
+      "total_files": 136
     },
     "voids": []
   },
   "normalized_state": {
-    "artifact_hash": "512d42c99d4afd02cb3a9ab7297ce95982d2cfe639029eeded2efc54c8175427",
+    "artifact_hash": "1eefeca18d91bad408cbcbde57fc573a0419828d497eb8c47c4c530c26079cdd",
     "baselines": {
       "docs": 0.3,
       "source": 0.2,
@@ -438,18 +488,18 @@
     },
     "method": "baseline_clamped_unit_interval",
     "normalizer_version": "cmar-normalizer/1.4.1",
-    "release_readiness": 0.856912,
-    "structural_score": 0.509875,
+    "release_readiness": 0.863665,
+    "structural_score": 0.510382,
     "vector": {
       "blocking_pressure": 1.0,
       "ci_presence": 1.0,
-      "docs_ratio": 0.002959,
+      "docs_ratio": 0.0032,
       "protocol_validity": 1.0,
       "schema_presence": 1.0,
       "security_presence": 1.0,
-      "source_mass_ratio": 0.035347,
-      "test_mass_ratio": 0.020944,
-      "valid_mass_ratio": 0.427647,
+      "source_mass_ratio": 0.03668,
+      "test_mass_ratio": 0.022413,
+      "valid_mass_ratio": 0.454659,
       "void_pressure": 1.0
     }
   },
@@ -457,13 +507,13 @@
     "information_loss": {
       "blocking_pressure": 0.075,
       "ci_presence": 0.075,
-      "docs_ratio": 0.097041,
+      "docs_ratio": 0.0968,
       "protocol_validity": 0.075,
       "schema_presence": 0.075,
       "security_presence": 0.075,
-      "source_mass_ratio": 0.064653,
-      "test_mass_ratio": 0.079056,
-      "valid_mass_ratio": 0.097353,
+      "source_mass_ratio": 0.06332,
+      "test_mass_ratio": 0.077587,
+      "valid_mass_ratio": 0.070341,
       "void_pressure": 0.075
     },
     "mean_ordinal": 2.6,

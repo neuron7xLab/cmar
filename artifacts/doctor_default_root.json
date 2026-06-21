@@ -10,29 +10,30 @@
       "valid_mass_not_greater_than_total_mass",
       "no_pass_with_blocking_voids",
       "docs_not_dominating_executable_mass",
-      "no_release_bucket_with_failed_protocol"
+      "no_release_bucket_with_failed_protocol",
+      "expansion_not_diverging_on_release"
     ],
     "falsifier_version": "cmar-falsifier/1.4.1",
     "findings": [],
     "verdict": "NOT_FALSIFIED"
   },
   "mass_ledger": {
-    "artifact_hash": "3c60ec2c2314dcccb1a352a2a64cc0e03e03e0a66572628f7d3abdfd05678869",
+    "artifact_hash": "85e0a56ea4e843e0b194c082dba1bde60ea439661beec8755295a3b5e6d08cc7",
     "blocking_voids": 0,
-    "hollow_mass_bytes": 28694060,
-    "hollow_mass_ratio": 0.984613,
+    "hollow_mass_bytes": 28696259,
+    "hollow_mass_ratio": 0.983701,
     "ledger_version": "cmar-mass-ledger/1.4.1",
     "release_blocked": false,
     "status": "PARTIAL_VALIDATED",
     "target_valid_mass_bytes": 1048576,
-    "total_bytes": 29142474,
-    "valid_mass_bytes": 448414,
+    "total_bytes": 29171740,
+    "valid_mass_bytes": 475481,
     "verdict": "Valid structure exists but target mass is not reached.",
     "void_closure_rate": 1.0,
     "voids_detected": 0
   },
   "normalization_report": {
-    "artifact_hash": "3c60ec2c2314dcccb1a352a2a64cc0e03e03e0a66572628f7d3abdfd05678869",
+    "artifact_hash": "85e0a56ea4e843e0b194c082dba1bde60ea439661beec8755295a3b5e6d08cc7",
     "baselines": {
       "docs": 0.3,
       "source": 0.2,
@@ -40,18 +41,18 @@
     },
     "method": "baseline_clamped_unit_interval",
     "normalizer_version": "cmar-normalizer/1.4.1",
-    "release_readiness": 0.85691,
-    "structural_score": 0.509875,
+    "release_readiness": 0.863364,
+    "structural_score": 0.510383,
     "vector": {
       "blocking_pressure": 1.0,
       "ci_presence": 1.0,
-      "docs_ratio": 0.002959,
+      "docs_ratio": 0.0032,
       "protocol_validity": 1.0,
       "schema_presence": 1.0,
       "security_presence": 1.0,
-      "source_mass_ratio": 0.035347,
-      "test_mass_ratio": 0.020944,
-      "valid_mass_ratio": 0.427641,
+      "source_mass_ratio": 0.036682,
+      "test_mass_ratio": 0.022414,
+      "valid_mass_ratio": 0.453454,
       "void_pressure": 1.0
     }
   },
@@ -67,13 +68,13 @@
     "information_loss": {
       "blocking_pressure": 0.075,
       "ci_presence": 0.075,
-      "docs_ratio": 0.097041,
+      "docs_ratio": 0.0968,
       "protocol_validity": 0.075,
       "schema_presence": 0.075,
       "security_presence": 0.075,
-      "source_mass_ratio": 0.064653,
-      "test_mass_ratio": 0.079056,
-      "valid_mass_ratio": 0.097359,
+      "source_mass_ratio": 0.063318,
+      "test_mass_ratio": 0.077586,
+      "valid_mass_ratio": 0.071546,
       "void_pressure": 0.075
     },
     "mean_ordinal": 2.6,
@@ -113,12 +114,12 @@
   },
   "repair_plan": {
     "actions": [],
-    "artifact_hash": "3c60ec2c2314dcccb1a352a2a64cc0e03e03e0a66572628f7d3abdfd05678869",
+    "artifact_hash": "85e0a56ea4e843e0b194c082dba1bde60ea439661beec8755295a3b5e6d08cc7",
     "plan_version": "cmar-repair-plan/1.4.1",
     "status": "NO_ACTIONS_REQUIRED"
   },
   "scan": {
-    "artifact_hash": "3c60ec2c2314dcccb1a352a2a64cc0e03e03e0a66572628f7d3abdfd05678869",
+    "artifact_hash": "85e0a56ea4e843e0b194c082dba1bde60ea439661beec8755295a3b5e6d08cc7",
     "ci_present": true,
     "docs_present": true,
     "entrypoints": [
@@ -152,10 +153,10 @@
         "sha256": "95f57aea8f369c3ca439a5e8c2e3e4db26de1f682735ca808821a1a8be9ffb4e"
       },
       {
-        "bytes": 26850,
+        "bytes": 28206,
         "layer": "config",
         "path": "artifacts/fused_integrated_state.json",
-        "sha256": "b6f2d67b6b44b859e87588d146297b27469037cfbc74c5f3e3f4547b1ec376c0"
+        "sha256": "2774dc29d16105e7a50d5521ffad7ed21430a7c9380419037b8450d870ff593c"
       },
       {
         "bytes": 26782,
@@ -182,16 +183,22 @@
         "sha256": "750663ec1ffa407691231dbb2de6e446dc6e17bc031b9df2500f4941c8d52130"
       },
       {
-        "bytes": 14928,
+        "bytes": 15479,
         "layer": "config",
         "path": "artifacts/runtime_real_account.json",
-        "sha256": "f7debcea4433c9e1de772c59ef54fc90529c22feaea1170c02c1717c78ad2bf3"
+        "sha256": "0e0d69b6b87992979407fb2c09ecda118d8bad9c72fe77c0fff6f65be22afec1"
       },
       {
         "bytes": 12987,
         "layer": "source",
         "path": "vendor/n7x_audit_v4/n7x/src/n7x/renderers/readme.py",
         "sha256": "6399273c0977ce1a4057dc448950952a7a693c339411b5b95f92c36b22eb5f47"
+      },
+      {
+        "bytes": 12819,
+        "layer": "config",
+        "path": "artifacts/integrated_state.json",
+        "sha256": "9fae3fe9183d3bffd726c1209ab4e7dd0a0d4cb0584db4f6e5d0453c082a471b"
       },
       {
         "bytes": 12479,
@@ -206,10 +213,10 @@
         "sha256": "7d5f3bf8adb87f66954b151b643bb93e67bd76073781e12b1ac52bd91ff5e8e4"
       },
       {
-        "bytes": 11056,
+        "bytes": 11062,
         "layer": "config",
         "path": "artifacts/integrated_state_with_github.json",
-        "sha256": "917f6208cf01bfce31248f4ceef06eaab07272fe795e64b3caafbf917caeddf8"
+        "sha256": "97c5f9e0b7719e866328b5b29bf92b138331150579d944cde33d6dc8627920b5"
       },
       {
         "bytes": 10122,
@@ -222,12 +229,6 @@
         "layer": "test",
         "path": "vendor/n7x_audit_v4/n7x/tests/test_quantizer.py",
         "sha256": "2600e7e14acb00405d4840282b9f45c151bcf702cbecb7fd90d7d1ee3c09dd38"
-      },
-      {
-        "bytes": 9249,
-        "layer": "config",
-        "path": "artifacts/integrated_state.json",
-        "sha256": "ac130c246fe6c39b3ecf4342aa6975f05ed2fc4b68a4ee87dbbf9b1e021c844a"
       },
       {
         "bytes": 9206,
@@ -250,23 +251,23 @@
     ],
     "layer_bytes": {
       "ci": 1666,
-      "config": 152145,
-      "docs": 25874,
-      "other": 28694060,
+      "config": 164736,
+      "docs": 28006,
+      "other": 28696259,
       "schema": 897,
       "security": 776,
-      "source": 206020,
-      "test": 61036
+      "source": 214014,
+      "test": 65386
     },
     "layer_files": {
       "ci": 2,
-      "config": 21,
+      "config": 25,
       "docs": 29,
       "other": 7,
       "schema": 8,
       "security": 1,
-      "source": 46,
-      "test": 16
+      "source": 47,
+      "test": 17
     },
     "license_present": true,
     "missing_surface": [],
@@ -280,8 +281,8 @@
     "schemas_present": true,
     "security_present": true,
     "tests_present": true,
-    "total_bytes": 29142474,
-    "total_files": 130
+    "total_bytes": 29171740,
+    "total_files": 136
   },
   "voids": []
 }

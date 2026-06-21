@@ -92,3 +92,24 @@ curl -s "http://127.0.0.1:8787/runtime"
 Zero-dependency (stdlib only), read-only, fixed root, fail-closed, never returns
 tokens. Binds to localhost by default; put it behind an authenticating proxy
 before exposing publicly (it shares the server's GitHub read scope).
+
+
+## Future-state projection v1.7.0 (expand)
+
+CMAR projects where the artifact is heading, not just where it is:
+
+```bash
+cmar expand examples/seed_14kb_intent --horizon 5 --out artifacts/expansion_report.json
+```
+
+Output: `potential_mass` (computed N iterations ahead), `velocity`
+(valid-mass and void-closure per iteration), `projected_states`, a deterministic
+`entropy_estimate` = `blocking_voids / (voids_detected + 1)`, and an
+`expansion_verdict` ∈ {`CONVERGING`, `STABLE`, `DIVERGING`} derived from velocity
+signs. With no history it uses a conservative baseline (`confidence: LOW`);
+`cmar ledger` appends snapshots to `artifacts/ledger_history.jsonl`
+(override path via `CMAR_LEDGER_HISTORY`), so velocity becomes measured after 2+
+runs. `integrate` embeds `expansion` / `potential_mass` / `expansion_verdict`.
+
+Falsifier invariant **F11** (`expansion_not_diverging_on_release`): a release
+must not pass while the system is projected to degrade.

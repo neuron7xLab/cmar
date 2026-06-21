@@ -6,7 +6,8 @@ from .planner import build_repair_plan
 from .ledger import build_mass_ledger
 from .protocol import validate_protocol_payload
 from .quantizer import quantize_artifact_state
-INV=['tests_present','ci_present','schemas_present','entrypoint_present','protocol_valid','ledger_hash_matches_scan_hash','valid_mass_not_greater_than_total_mass','no_pass_with_blocking_voids','docs_not_dominating_executable_mass','no_release_bucket_with_failed_protocol']
+from .expander import compute_expansion
+INV=['tests_present','ci_present','schemas_present','entrypoint_present','protocol_valid','ledger_hash_matches_scan_hash','valid_mass_not_greater_than_total_mass','no_pass_with_blocking_voids','docs_not_dominating_executable_mass','no_release_bucket_with_failed_protocol','expansion_not_diverging_on_release']
 def _f(c,s,field,m): return FalsificationFinding(c,s,field,m)
 def falsify_payload(payload):
     scan=payload.get('scan',{}); ledger=payload.get('mass_ledger',{}); protocol=payload.get('protocol_report',{}); quant=payload.get('quantization_report',{}); miss=set(scan.get('missing_surface') or []); f=[]
@@ -19,6 +20,13 @@ def falsify_payload(payload):
     layer=scan.get('layer_bytes') or {}; total=max(scan.get('total_bytes',0) or 0,1); exe=sum(layer.get(k,0) for k in ['source','test','ci','schema','security','config']);
     if layer.get('docs',0)/total>0.65 and layer.get('docs',0)>exe: f.append(_f('docs_heavy_weak_executable_mass','high','scan.layer_bytes','docs dominate executable mass'))
     if quant.get('verdict')=='RELEASE' and protocol and protocol.get('valid') is not True: f.append(_f('release_bucket_failed_protocol','critical','quantization_report.verdict','release quantization failed protocol'))
+    # F11: a release must not be granted while the system is projected to degrade.
+    exp=payload.get('expansion') or (compute_expansion(ledger,history=[]) if ledger else None)
+    if exp:
+        gate=(payload.get('integrated_verdict') or {}).get('gate')
+        release_passing=(gate=='PASS') or (ledger.get('status')=='PASS') or (quant.get('verdict')=='RELEASE')
+        if release_passing and exp.get('expansion_verdict')=='DIVERGING':
+            f.append(_f('release_while_diverging','high','expansion.expansion_verdict','RELEASE_WHILE_DIVERGING: система деградує але release проходить'))
     verdict='FALSIFIED' if any(x.severity=='critical' for x in f) else ('PARTIAL' if f else 'NOT_FALSIFIED')
     return FalsificationReport('cmar-falsifier/1.4.1',verdict,f,INV)
 def falsify_repository(root,target_valid_mass=1048576):

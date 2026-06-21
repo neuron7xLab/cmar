@@ -1,0 +1,98 @@
+{
+  "actions": [
+    {
+      "acceptance_gate": "machine gate must pass",
+      "action_id": "R-001",
+      "command_hint": "Add CLI entrypoint.",
+      "priority": 28.0,
+      "target_paths": [
+        "src/<pkg>/cli.py",
+        "pyproject.toml"
+      ],
+      "title": "No executable entrypoint detected",
+      "void_id": "V-EXEC-001"
+    },
+    {
+      "acceptance_gate": "machine gate must pass",
+      "action_id": "R-002",
+      "command_hint": "Add pyproject.toml.",
+      "priority": 26.0,
+      "target_paths": [
+        "pyproject.toml"
+      ],
+      "title": "No package metadata detected",
+      "void_id": "V-CAP-001"
+    },
+    {
+      "acceptance_gate": "machine gate must pass",
+      "action_id": "R-003",
+      "command_hint": "Add CI.",
+      "priority": 20.0,
+      "target_paths": [
+        ".github/workflows/ci.yml"
+      ],
+      "title": "No CI gate detected",
+      "void_id": "V-CI-001"
+    },
+    {
+      "acceptance_gate": "machine gate must pass",
+      "action_id": "R-005",
+      "command_hint": "Add LICENSE.",
+      "priority": 16.0,
+      "target_paths": [
+        "CHANGELOG.md",
+        "RELEASE_VERDICT.md"
+      ],
+      "title": "No license detected",
+      "void_id": "V-REL-001"
+    },
+    {
+      "acceptance_gate": "machine gate must pass",
+      "action_id": "R-006",
+      "command_hint": "Add SECURITY.md.",
+      "priority": 7.0,
+      "target_paths": [
+        "SECURITY.md"
+      ],
+      "title": "No security policy detected",
+      "void_id": "V-SEC-001"
+    },
+    {
+      "acceptance_gate": "machine gate must pass",
+      "action_id": "R-004",
+      "command_hint": "Add tests.",
+      "priority": 6.8267,
+      "target_paths": [
+        "tests/"
+      ],
+      "title": "No test layer detected",
+      "void_id": "V-TEST-001"
+    },
+    {
+      "acceptance_gate": "machine gate must pass",
+      "action_id": "R-007",
+      "command_hint": "Add release metadata.",
+      "priority": 6.0,
+      "target_paths": [
+        "CHANGELOG.md",
+        "RELEASE_VERDICT.md"
+      ],
+      "title": "No release metadata detected",
+      "void_id": "V-REL-002"
+    },
+    {
+      "acceptance_gate": "machine gate must pass",
+      "action_id": "R-008",
+      "command_hint": "Add JSON schemas.",
+      "priority": 3.072,
+      "target_paths": [
+        "schemas/"
+      ],
+      "title": "No schema layer detected",
+      "void_id": "V-SCHEMA-001"
+    }
+  ],
+  "artifact_hash": "b46dd753dc78ac4605528bea4a2202efaf5bb36bb7a1596688817e66135ac2f6",
+  "plan_version": "cmar-repair-plan/1.4.1",
+  "status": "REPAIR_REQUIRED"
+}

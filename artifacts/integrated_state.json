@@ -1,4 +1,51 @@
 {
+  "cross_stream_synthesis": null,
+  "expansion": {
+    "confidence": "LOW",
+    "current": {
+      "blocking_voids": 5,
+      "valid_mass_bytes": 119,
+      "void_closure_rate": null
+    },
+    "entropy_estimate": 0.555556,
+    "expansion_verdict": "CONVERGING",
+    "horizon": 5,
+    "interpretation": "[LOW confidence: conservative baseline, no history] mass grows ~1069/iter and voids do not increase; potential_mass=5464 at horizon 5",
+    "potential_mass": 5464,
+    "projected_states": [
+      {
+        "blocking_voids": 4,
+        "iteration": 1,
+        "valid_mass_bytes": 1188
+      },
+      {
+        "blocking_voids": 3,
+        "iteration": 2,
+        "valid_mass_bytes": 2257
+      },
+      {
+        "blocking_voids": 2,
+        "iteration": 3,
+        "valid_mass_bytes": 3326
+      },
+      {
+        "blocking_voids": 1,
+        "iteration": 4,
+        "valid_mass_bytes": 4395
+      },
+      {
+        "blocking_voids": 0,
+        "iteration": 5,
+        "valid_mass_bytes": 5464
+      }
+    ],
+    "schema": "cmar/expansion_report/v1",
+    "velocity": {
+      "valid_mass_per_iteration": 1069.0,
+      "voids_closed_per_iteration": 1.0
+    }
+  },
+  "expansion_verdict": "CONVERGING",
   "falsification_report": {
     "checked_invariants": [
       "tests_present",
@@ -10,11 +57,37 @@
       "valid_mass_not_greater_than_total_mass",
       "no_pass_with_blocking_voids",
       "docs_not_dominating_executable_mass",
-      "no_release_bucket_with_failed_protocol"
+      "no_release_bucket_with_failed_protocol",
+      "expansion_not_diverging_on_release"
     ],
     "falsifier_version": "cmar-falsifier/1.4.1",
-    "findings": [],
-    "verdict": "NOT_FALSIFIED"
+    "findings": [
+      {
+        "code": "missing_tests",
+        "field": "scan.missing_surface",
+        "message": "tests absent",
+        "severity": "critical"
+      },
+      {
+        "code": "missing_ci",
+        "field": "scan.missing_surface",
+        "message": "ci absent",
+        "severity": "critical"
+      },
+      {
+        "code": "missing_schemas",
+        "field": "scan.missing_surface",
+        "message": "schemas absent",
+        "severity": "high"
+      },
+      {
+        "code": "missing_entrypoint",
+        "field": "scan.missing_surface",
+        "message": "entrypoint absent",
+        "severity": "critical"
+      }
+    ],
+    "verdict": "FALSIFIED"
   },
   "flow": [
     "scan",
@@ -25,33 +98,34 @@
     "protocol",
     "falsify",
     "mass_ledger",
+    "expansion",
     "integrated_verdict"
   ],
   "github_activity": null,
   "github_signals": null,
   "integrated_verdict": {
-    "gate": "CONTINUE_REPAIR",
-    "reason": "state below threshold",
-    "state": "REPAIR_REQUIRED"
+    "gate": "FAIL_FALSIFICATION",
+    "reason": "critical falsification findings exist",
+    "state": "FALSIFIED"
   },
   "integrator_version": "cmar-integrator/1.4.1",
   "mass_ledger": {
-    "artifact_hash": "1b2cbd83ebc3c179d25ccd75283a428a24d4f97b858e31536589362431e84bca",
-    "blocking_voids": 0,
-    "hollow_mass_bytes": 28694060,
-    "hollow_mass_ratio": 0.985245,
+    "artifact_hash": "b46dd753dc78ac4605528bea4a2202efaf5bb36bb7a1596688817e66135ac2f6",
+    "blocking_voids": 5,
+    "hollow_mass_bytes": 0,
+    "hollow_mass_ratio": 0.0,
     "ledger_version": "cmar-mass-ledger/1.4.1",
-    "release_blocked": false,
-    "status": "PARTIAL_VALIDATED",
+    "release_blocked": true,
+    "status": "BLOCKED",
     "target_valid_mass_bytes": 1048576,
-    "total_bytes": 29123792,
-    "valid_mass_bytes": 429732,
-    "verdict": "Valid structure exists but target mass is not reached.",
-    "void_closure_rate": 1.0,
-    "voids_detected": 0
+    "total_bytes": 119,
+    "valid_mass_bytes": 119,
+    "verdict": "Release is blocked by critical voids.",
+    "void_closure_rate": 0.0,
+    "voids_detected": 8
   },
   "normalized_state": {
-    "artifact_hash": "1b2cbd83ebc3c179d25ccd75283a428a24d4f97b858e31536589362431e84bca",
+    "artifact_hash": "b46dd753dc78ac4605528bea4a2202efaf5bb36bb7a1596688817e66135ac2f6",
     "baselines": {
       "docs": 0.3,
       "source": 0.2,
@@ -60,20 +134,21 @@
     "method": "baseline_clamped_unit_interval",
     "normalizer_version": "cmar-normalizer/1.4.1",
     "release_readiness": 0.75,
-    "structural_score": 0.509229,
+    "structural_score": 0.333333,
     "vector": {
       "blocking_pressure": 1.0,
-      "ci_presence": 1.0,
-      "docs_ratio": 0.002693,
+      "ci_presence": 0.0,
+      "docs_ratio": 1.0,
       "protocol_validity": 1.0,
-      "schema_presence": 1.0,
-      "security_presence": 1.0,
-      "source_mass_ratio": 0.033796,
-      "test_mass_ratio": 0.018888,
+      "schema_presence": 0.0,
+      "security_presence": 0.0,
+      "source_mass_ratio": 1.0,
+      "test_mass_ratio": 0.0,
       "valid_mass_ratio": 0.0,
       "void_pressure": 1.0
     }
   },
+  "potential_mass": 5464,
   "protocol_report": {
     "issues": [],
     "protocol_version": "cmar-protocol/1.4.1",
@@ -85,26 +160,26 @@
   "quantized_state": {
     "information_loss": {
       "blocking_pressure": 0.075,
-      "ci_presence": 0.075,
-      "docs_ratio": 0.097307,
+      "ci_presence": 0.1,
+      "docs_ratio": 0.075,
       "protocol_validity": 0.075,
-      "schema_presence": 0.075,
-      "security_presence": 0.075,
-      "source_mass_ratio": 0.066204,
-      "test_mass_ratio": 0.081112,
+      "schema_presence": 0.1,
+      "security_presence": 0.1,
+      "source_mass_ratio": 0.075,
+      "test_mass_ratio": 0.1,
       "valid_mass_ratio": 0.1,
       "void_pressure": 0.075
     },
-    "mean_ordinal": 2.4,
+    "mean_ordinal": 2.0,
     "method": "visible_threshold_bucket_quantization",
     "ordinal_vector": {
       "blocking_pressure": 4,
-      "ci_presence": 4,
-      "docs_ratio": 0,
+      "ci_presence": 0,
+      "docs_ratio": 4,
       "protocol_validity": 4,
-      "schema_presence": 4,
-      "security_presence": 4,
-      "source_mass_ratio": 0,
+      "schema_presence": 0,
+      "security_presence": 0,
+      "source_mass_ratio": 4,
       "test_mass_ratio": 0,
       "valid_mass_ratio": 0,
       "void_pressure": 4
@@ -112,12 +187,12 @@
     "quantizer_version": "cmar-quantizer/1.4.1",
     "state_vector": {
       "blocking_pressure": "RELEASE",
-      "ci_presence": "RELEASE",
-      "docs_ratio": "VOID",
+      "ci_presence": "VOID",
+      "docs_ratio": "RELEASE",
       "protocol_validity": "RELEASE",
-      "schema_presence": "RELEASE",
-      "security_presence": "RELEASE",
-      "source_mass_ratio": "VOID",
+      "schema_presence": "VOID",
+      "security_presence": "VOID",
+      "source_mass_ratio": "RELEASE",
       "test_mass_ratio": "VOID",
       "valid_mass_ratio": "VOID",
       "void_pressure": "RELEASE"
@@ -131,177 +206,268 @@
     "verdict": "VOID"
   },
   "repair_plan": {
-    "actions": [],
-    "artifact_hash": "1b2cbd83ebc3c179d25ccd75283a428a24d4f97b858e31536589362431e84bca",
-    "plan_version": "cmar-repair-plan/1.4.1",
-    "status": "NO_ACTIONS_REQUIRED"
-  },
-  "root": "/tmp/cmar_final_repository_v1_4_1",
-  "scan": {
-    "artifact_hash": "1b2cbd83ebc3c179d25ccd75283a428a24d4f97b858e31536589362431e84bca",
-    "ci_present": true,
-    "docs_present": true,
-    "entrypoints": [
-      "pyproject.toml",
-      "src/cmar/cli.py",
-      "vendor/n7x_audit_v4/n7x/src/n7x/cli.py"
+    "actions": [
+      {
+        "acceptance_gate": "machine gate must pass",
+        "action_id": "R-001",
+        "command_hint": "Add CLI entrypoint.",
+        "priority": 28.0,
+        "target_paths": [
+          "src/<pkg>/cli.py",
+          "pyproject.toml"
+        ],
+        "title": "No executable entrypoint detected",
+        "void_id": "V-EXEC-001"
+      },
+      {
+        "acceptance_gate": "machine gate must pass",
+        "action_id": "R-002",
+        "command_hint": "Add pyproject.toml.",
+        "priority": 26.0,
+        "target_paths": [
+          "pyproject.toml"
+        ],
+        "title": "No package metadata detected",
+        "void_id": "V-CAP-001"
+      },
+      {
+        "acceptance_gate": "machine gate must pass",
+        "action_id": "R-003",
+        "command_hint": "Add CI.",
+        "priority": 20.0,
+        "target_paths": [
+          ".github/workflows/ci.yml"
+        ],
+        "title": "No CI gate detected",
+        "void_id": "V-CI-001"
+      },
+      {
+        "acceptance_gate": "machine gate must pass",
+        "action_id": "R-005",
+        "command_hint": "Add LICENSE.",
+        "priority": 16.0,
+        "target_paths": [
+          "CHANGELOG.md",
+          "RELEASE_VERDICT.md"
+        ],
+        "title": "No license detected",
+        "void_id": "V-REL-001"
+      },
+      {
+        "acceptance_gate": "machine gate must pass",
+        "action_id": "R-006",
+        "command_hint": "Add SECURITY.md.",
+        "priority": 7.0,
+        "target_paths": [
+          "SECURITY.md"
+        ],
+        "title": "No security policy detected",
+        "void_id": "V-SEC-001"
+      },
+      {
+        "acceptance_gate": "machine gate must pass",
+        "action_id": "R-004",
+        "command_hint": "Add tests.",
+        "priority": 6.8267,
+        "target_paths": [
+          "tests/"
+        ],
+        "title": "No test layer detected",
+        "void_id": "V-TEST-001"
+      },
+      {
+        "acceptance_gate": "machine gate must pass",
+        "action_id": "R-007",
+        "command_hint": "Add release metadata.",
+        "priority": 6.0,
+        "target_paths": [
+          "CHANGELOG.md",
+          "RELEASE_VERDICT.md"
+        ],
+        "title": "No release metadata detected",
+        "void_id": "V-REL-002"
+      },
+      {
+        "acceptance_gate": "machine gate must pass",
+        "action_id": "R-008",
+        "command_hint": "Add JSON schemas.",
+        "priority": 3.072,
+        "target_paths": [
+          "schemas/"
+        ],
+        "title": "No schema layer detected",
+        "void_id": "V-SCHEMA-001"
+      }
     ],
+    "artifact_hash": "b46dd753dc78ac4605528bea4a2202efaf5bb36bb7a1596688817e66135ac2f6",
+    "plan_version": "cmar-repair-plan/1.4.1",
+    "status": "REPAIR_REQUIRED"
+  },
+  "root": "/tmp/cmar_final_repository_v1_4_1/examples/seed_14kb_intent",
+  "scan": {
+    "artifact_hash": "b46dd753dc78ac4605528bea4a2202efaf5bb36bb7a1596688817e66135ac2f6",
+    "ci_present": false,
+    "docs_present": true,
+    "entrypoints": [],
     "largest_files": [
       {
-        "bytes": 14711645,
-        "layer": "other",
-        "path": "benchmark_corpus/runtime_v13/adversarial_artifact_states.jsonl",
-        "sha256": "8ef324c7488d34ff0c967b00347e6a147d4855c364e1b71f107af7b594a36f4b"
+        "bytes": 60,
+        "layer": "docs",
+        "path": "README.md",
+        "sha256": "5032b3323d45520c3757c386abafe596ec69282d7485e207c9fc4fa20a9c2f43"
       },
       {
-        "bytes": 13870357,
-        "layer": "other",
-        "path": "benchmark_corpus/runtime_v13/artifact_state_stress.jsonl",
-        "sha256": "f1441a9e144b15a959c62a782c658195952995b86c47c3c2517ecaee586395b1"
-      },
-      {
-        "bytes": 58706,
-        "layer": "other",
-        "path": "data/external_audit_seed/n7x-audit-v4.zip",
-        "sha256": "a22d0ff6e11b6c9ce3a01c5d856d8c3a5c97be9b82688c4aa54a66833f2931c4"
-      },
-      {
-        "bytes": 50176,
-        "layer": "other",
-        "path": "data/external_audit_seed/n7x-audit-v3.zip",
-        "sha256": "95f57aea8f369c3ca439a5e8c2e3e4db26de1f682735ca808821a1a8be9ffb4e"
-      },
-      {
-        "bytes": 26814,
-        "layer": "config",
-        "path": "artifacts/fused_integrated_state.json",
-        "sha256": "997d0a4a763d8969673174355cede858dd3dec25db531923fbc81738a0d22c41"
-      },
-      {
-        "bytes": 26782,
-        "layer": "config",
-        "path": "artifacts/audit_fusion_report.json",
-        "sha256": "1696302d5f66b0da6f3eb65db5f6f2212e4815dad768f91da70f3e22e8426ae0"
-      },
-      {
-        "bytes": 23210,
+        "bytes": 59,
         "layer": "source",
-        "path": "vendor/n7x_audit_v4/n7x/src/n7x/scorers/debt.py",
-        "sha256": "2d421e59b2ecf5aa260794cfbe213747164fdc6434239246a192da98cf5f1517"
-      },
-      {
-        "bytes": 19397,
-        "layer": "config",
-        "path": "RELEASE_MANIFEST.json",
-        "sha256": "b52f902ac5620e41fc44feac6816d4dab5c638a05d431c2ac222f9f727fe3a1d"
-      },
-      {
-        "bytes": 16858,
-        "layer": "source",
-        "path": "vendor/n7x_audit_v4/n7x/src/n7x/collectors/repo.py",
-        "sha256": "750663ec1ffa407691231dbb2de6e446dc6e17bc031b9df2500f4941c8d52130"
-      },
-      {
-        "bytes": 14925,
-        "layer": "config",
-        "path": "artifacts/runtime_real_account.json",
-        "sha256": "1666a63b971f87f1e6ed0ac5cea823fd38dd4a496905b5a3a10f235990709612"
-      },
-      {
-        "bytes": 12987,
-        "layer": "source",
-        "path": "vendor/n7x_audit_v4/n7x/src/n7x/renderers/readme.py",
-        "sha256": "6399273c0977ce1a4057dc448950952a7a693c339411b5b95f92c36b22eb5f47"
-      },
-      {
-        "bytes": 12479,
-        "layer": "config",
-        "path": "artifacts/runtime_report.json",
-        "sha256": "dc8c4c188f1a531b617ab2acb3b738d314d2a16a386818c9c2ed2296b4464de7"
-      },
-      {
-        "bytes": 11441,
-        "layer": "config",
-        "path": "artifacts/audit_snapshot.json",
-        "sha256": "7d5f3bf8adb87f66954b151b643bb93e67bd76073781e12b1ac52bd91ff5e8e4"
-      },
-      {
-        "bytes": 10548,
-        "layer": "config",
-        "path": "artifacts/integrated_state_with_github.json",
-        "sha256": "affc8bde501820d31bfdd0e0f60f208d4b56fb0c2acce225ed003f2a28482884"
-      },
-      {
-        "bytes": 10122,
-        "layer": "source",
-        "path": "src/cmar/audit_stream.py",
-        "sha256": "d0db0b89b556b786b49e33fbe5ac7114ec7f052bb760c29783c07426158c27d5"
-      },
-      {
-        "bytes": 9485,
-        "layer": "test",
-        "path": "vendor/n7x_audit_v4/n7x/tests/test_quantizer.py",
-        "sha256": "2600e7e14acb00405d4840282b9f45c151bcf702cbecb7fd90d7d1ee3c09dd38"
-      },
-      {
-        "bytes": 9220,
-        "layer": "config",
-        "path": "artifacts/integrated_state.json",
-        "sha256": "c5ae9038b869c1d2b21a827c5e69023faacbeb10237ebdaebed0adb3436d19ef"
-      },
-      {
-        "bytes": 9206,
-        "layer": "source",
-        "path": "vendor/n7x_audit_v4/n7x/src/n7x/pipeline/normalizer.py",
-        "sha256": "c7d3d85039b3bc01ef2740b0ce4673865695670c5f0af8e4b32b257182da269d"
-      },
-      {
-        "bytes": 9135,
-        "layer": "source",
-        "path": "src/cmar/github_activity.py",
-        "sha256": "3a76017005383f5947e40be240b105c1a759e2b0d9b38a37f8678f1bd077dea6"
-      },
-      {
-        "bytes": 8824,
-        "layer": "test",
-        "path": "artifacts/test_doctor_default.json",
-        "sha256": "5ff1053c2c409d3ee4667cdfbe044e3f3f6480bf812b2c394867c78118e54d73"
+        "path": "intent.py",
+        "sha256": "606d3b7a4f72b022353f7d36aaff1aab638b9d341f71f805c421a849e3bc810c"
       }
     ],
     "layer_bytes": {
-      "ci": 1666,
-      "config": 151007,
-      "docs": 23525,
-      "other": 28694060,
-      "schema": 897,
-      "security": 776,
-      "source": 196853,
-      "test": 55008
+      "docs": 60,
+      "source": 59
     },
     "layer_files": {
-      "ci": 2,
-      "config": 21,
-      "docs": 29,
-      "other": 7,
-      "schema": 8,
-      "security": 1,
-      "source": 44,
-      "test": 14
+      "docs": 1,
+      "source": 1
     },
-    "license_present": true,
-    "missing_surface": [],
-    "package_files": [
-      "pyproject.toml"
+    "license_present": false,
+    "missing_surface": [
+      "entrypoint",
+      "package_metadata",
+      "tests",
+      "ci",
+      "license",
+      "security",
+      "schemas",
+      "release_metadata"
     ],
-    "release_metadata_present": true,
-    "risk_flags": [],
-    "root": "/tmp/cmar_final_repository_v1_4_1",
+    "package_files": [],
+    "release_metadata_present": false,
+    "risk_flags": [
+      "source_without_tests",
+      "source_without_ci"
+    ],
+    "root": "/tmp/cmar_final_repository_v1_4_1/examples/seed_14kb_intent",
     "scanner_version": "cmar-scan/1.4.1",
-    "schemas_present": true,
-    "security_present": true,
-    "tests_present": true,
-    "total_bytes": 29123792,
-    "total_files": 126
+    "schemas_present": false,
+    "security_present": false,
+    "tests_present": false,
+    "total_bytes": 119,
+    "total_files": 2
   },
-  "voids": []
+  "voids": [
+    {
+      "blocks_release": true,
+      "description": "No executable entrypoint detected",
+      "estimated_valid_bytes": 4096,
+      "evidence": [
+        "entrypoints=[]"
+      ],
+      "recommended_action": "Add CLI entrypoint.",
+      "severity": "critical",
+      "title": "No executable entrypoint detected",
+      "void_id": "V-EXEC-001",
+      "void_type": "execution_void",
+      "weight": 14
+    },
+    {
+      "blocks_release": true,
+      "description": "No package metadata detected",
+      "estimated_valid_bytes": 4096,
+      "evidence": [
+        "package_files=[]"
+      ],
+      "recommended_action": "Add pyproject.toml.",
+      "severity": "critical",
+      "title": "No package metadata detected",
+      "void_id": "V-CAP-001",
+      "void_type": "capability_void",
+      "weight": 13
+    },
+    {
+      "blocks_release": true,
+      "description": "No CI gate detected",
+      "estimated_valid_bytes": 4096,
+      "evidence": [
+        "ci_present=false"
+      ],
+      "recommended_action": "Add CI.",
+      "severity": "critical",
+      "title": "No CI gate detected",
+      "void_id": "V-CI-001",
+      "void_type": "ci_void",
+      "weight": 10
+    },
+    {
+      "blocks_release": true,
+      "description": "No test layer detected",
+      "estimated_valid_bytes": 12000,
+      "evidence": [
+        "tests_present=false"
+      ],
+      "recommended_action": "Add tests.",
+      "severity": "critical",
+      "title": "No test layer detected",
+      "void_id": "V-TEST-001",
+      "void_type": "test_void",
+      "weight": 10
+    },
+    {
+      "blocks_release": true,
+      "description": "No license detected",
+      "estimated_valid_bytes": 4096,
+      "evidence": [
+        "license_present=false"
+      ],
+      "recommended_action": "Add LICENSE.",
+      "severity": "high",
+      "title": "No license detected",
+      "void_id": "V-REL-001",
+      "void_type": "release_void",
+      "weight": 8
+    },
+    {
+      "blocks_release": false,
+      "description": "No security policy detected",
+      "estimated_valid_bytes": 4096,
+      "evidence": [
+        "security_present=false"
+      ],
+      "recommended_action": "Add SECURITY.md.",
+      "severity": "high",
+      "title": "No security policy detected",
+      "void_id": "V-SEC-001",
+      "void_type": "security_void",
+      "weight": 7
+    },
+    {
+      "blocks_release": false,
+      "description": "No release metadata detected",
+      "estimated_valid_bytes": 4096,
+      "evidence": [
+        "release_metadata_present=false"
+      ],
+      "recommended_action": "Add release metadata.",
+      "severity": "medium",
+      "title": "No release metadata detected",
+      "void_id": "V-REL-002",
+      "void_type": "release_void",
+      "weight": 6
+    },
+    {
+      "blocks_release": false,
+      "description": "No schema layer detected",
+      "estimated_valid_bytes": 8000,
+      "evidence": [
+        "schemas_present=false"
+      ],
+      "recommended_action": "Add JSON schemas.",
+      "severity": "medium",
+      "title": "No schema layer detected",
+      "void_id": "V-SCHEMA-001",
+      "void_type": "schema_void",
+      "weight": 6
+    }
+  ]
 }

@@ -9,7 +9,8 @@
     "valid_mass_not_greater_than_total_mass",
     "no_pass_with_blocking_voids",
     "docs_not_dominating_executable_mass",
-    "no_release_bucket_with_failed_protocol"
+    "no_release_bucket_with_failed_protocol",
+    "expansion_not_diverging_on_release"
   ],
   "falsifier_version": "cmar-falsifier/1.4.1",
   "findings": [

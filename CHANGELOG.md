@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.7.0
+
+- Added future-state projector (`src/cmar/expander.py`): `compute_expansion(ledger, history, horizon)` computes `potential_mass`, an `expansion_vector` (velocity), `projected_states`, a deterministic `entropy_estimate` (`blocking_voids / (voids_detected + 1)`), and an `expansion_verdict` (`CONVERGING` / `STABLE` / `DIVERGING`) derived from velocity signs. Empty history → conservative baseline marked `confidence: LOW`.
+- Added `cmar expand <repo> [--horizon N] [--out]`.
+- Wired expansion into `integrate`: `integrated_state` now carries `expansion`, `potential_mass`, `expansion_verdict`.
+- Added ledger-history persistence: `cmar ledger` appends a snapshot to `artifacts/ledger_history.jsonl` (path overridable via `CMAR_LEDGER_HISTORY`), so velocity becomes measured after 2+ runs.
+- Added falsifier invariant F11 `expansion_not_diverging_on_release` (`RELEASE_WHILE_DIVERGING`, high): release must not pass while the system is projected to degrade.
+- Extended `release_check.py` with a future-state gate (not diverging + growth projected from a clean baseline).
+- Added `tests/test_expander.py` (47 tests total).
+
 ## 1.6.0
 
 - Added cross-stream synthesis (`src/cmar/synthesis.py`): joins the repository-quality stream and the GitHub-activity stream into an emergent convergence state (`CONVERGENT_MATURE` / `ACTIVITY_WITHOUT_STRUCTURE` / `STRUCTURE_WITHOUT_ACTIVITY` / `IMMATURE_BOTH_STREAMS`) with a `stream_coherence` scalar and an `activity_theater_suspected` cross-stream finding. Descriptive only — never overrides the release gate.

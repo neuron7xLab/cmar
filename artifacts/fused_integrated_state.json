@@ -450,6 +450,52 @@
   },
   "cmar_integrated_state": {
     "cross_stream_synthesis": null,
+    "expansion": {
+      "confidence": "LOW",
+      "current": {
+        "blocking_voids": 5,
+        "valid_mass_bytes": 119,
+        "void_closure_rate": null
+      },
+      "entropy_estimate": 0.555556,
+      "expansion_verdict": "CONVERGING",
+      "horizon": 5,
+      "interpretation": "[LOW confidence: conservative baseline, no history] mass grows ~1069/iter and voids do not increase; potential_mass=5464 at horizon 5",
+      "potential_mass": 5464,
+      "projected_states": [
+        {
+          "blocking_voids": 4,
+          "iteration": 1,
+          "valid_mass_bytes": 1188
+        },
+        {
+          "blocking_voids": 3,
+          "iteration": 2,
+          "valid_mass_bytes": 2257
+        },
+        {
+          "blocking_voids": 2,
+          "iteration": 3,
+          "valid_mass_bytes": 3326
+        },
+        {
+          "blocking_voids": 1,
+          "iteration": 4,
+          "valid_mass_bytes": 4395
+        },
+        {
+          "blocking_voids": 0,
+          "iteration": 5,
+          "valid_mass_bytes": 5464
+        }
+      ],
+      "schema": "cmar/expansion_report/v1",
+      "velocity": {
+        "valid_mass_per_iteration": 1069.0,
+        "voids_closed_per_iteration": 1.0
+      }
+    },
+    "expansion_verdict": "CONVERGING",
     "falsification_report": {
       "checked_invariants": [
         "tests_present",
@@ -461,7 +507,8 @@
         "valid_mass_not_greater_than_total_mass",
         "no_pass_with_blocking_voids",
         "docs_not_dominating_executable_mass",
-        "no_release_bucket_with_failed_protocol"
+        "no_release_bucket_with_failed_protocol",
+        "expansion_not_diverging_on_release"
       ],
       "falsifier_version": "cmar-falsifier/1.4.1",
       "findings": [
@@ -501,6 +548,7 @@
       "protocol",
       "falsify",
       "mass_ledger",
+      "expansion",
       "integrated_verdict"
     ],
     "github_activity": null,
@@ -550,6 +598,7 @@
         "void_pressure": 1.0
       }
     },
+    "potential_mass": 5464,
     "protocol_report": {
       "issues": [],
       "protocol_version": "cmar-protocol/1.4.1",
