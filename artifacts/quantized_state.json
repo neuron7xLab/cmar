@@ -1,25 +1,48 @@
 {
-  "overall_state": "WEAK",
-  "per_signal_state": {
-    "ci_presence": "VOID",
+  "information_loss": {
+    "blocking_pressure": 0.075,
+    "ci_presence": 0.075,
+    "docs_ratio": 0.097308,
+    "protocol_validity": 0.075,
+    "schema_presence": 0.075,
+    "security_presence": 0.075,
+    "source_mass_ratio": 0.066205,
+    "test_mass_ratio": 0.081113,
+    "valid_mass_ratio": 0.114652,
+    "void_pressure": 0.075
+  },
+  "mean_ordinal": 2.6,
+  "method": "visible_threshold_bucket_quantization",
+  "ordinal_vector": {
+    "blocking_pressure": 4,
+    "ci_presence": 4,
+    "docs_ratio": 0,
+    "protocol_validity": 4,
+    "schema_presence": 4,
+    "security_presence": 4,
+    "source_mass_ratio": 0,
+    "test_mass_ratio": 0,
+    "valid_mass_ratio": 2,
+    "void_pressure": 4
+  },
+  "quantizer_version": "cmar-quantizer/1.4.1",
+  "state_vector": {
+    "blocking_pressure": "RELEASE",
+    "ci_presence": "RELEASE",
+    "docs_ratio": "VOID",
     "protocol_validity": "RELEASE",
-    "schema_presence": "VOID",
-    "security_presence": "VOID",
-    "source_mass_ratio": "RELEASE",
+    "schema_presence": "RELEASE",
+    "security_presence": "RELEASE",
+    "source_mass_ratio": "VOID",
     "test_mass_ratio": "VOID",
-    "test_to_source_ratio": "VOID",
-    "valid_mass_ratio": "VOID",
+    "valid_mass_ratio": "PARTIAL",
     "void_pressure": "RELEASE"
   },
-  "quantized_sha256": "fbeb83022ed6ff304f1113ac376889780740481adb453fb804e65611f63adcaa",
-  "readiness_score": 0.1,
-  "repo": "seed_14kb_intent",
-  "schema_version": "cmar.quantized/v1",
-  "states_legend": [
-    "VOID",
-    "WEAK",
-    "PARTIAL",
-    "STRONG",
-    "RELEASE"
-  ]
+  "thresholds": [
+    0.2,
+    0.4,
+    0.65,
+    0.85
+  ],
+  "verdict": "VOID"
 }

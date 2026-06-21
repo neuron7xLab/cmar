@@ -1,0 +1,925 @@
+{
+  "audit_package": "/tmp/cmar_final_repository_v1_4_1/data/external_audit_seed/n7x-audit-v4.zip",
+  "audit_projection": {
+    "accepted_capabilities": [
+      "ci",
+      "cli",
+      "collectors",
+      "falsifier",
+      "integrator",
+      "normalizer",
+      "quantizer",
+      "scorers",
+      "tests"
+    ],
+    "capability_vector": {
+      "ci": 1.0,
+      "cli": 1.0,
+      "collectors": 1.0,
+      "falsifier": 1.0,
+      "integrator": 1.0,
+      "normalizer": 1.0,
+      "quantizer": 1.0,
+      "scorers": 1.0,
+      "tests": 1.0
+    },
+    "projection_verdict": "AUDIT_STREAM_ACCEPTED",
+    "projection_version": "cmar-audit-projection/1.4.1",
+    "rejected_capabilities": [],
+    "source_package_hash": "a22d0ff6e11b6c9ce3a01c5d856d8c3a5c97be9b82688c4aa54a66833f2931c4"
+  },
+  "audit_snapshot": {
+    "audit_stream_version": "cmar-audit-stream/1.4.1",
+    "cli_files": [
+      "n7x/run.py",
+      "n7x/src/n7x/cli.py"
+    ],
+    "declared_commands": [
+      "cmd_collect",
+      "cmd_delta",
+      "cmd_doctor",
+      "cmd_falsify",
+      "cmd_history",
+      "cmd_integrate",
+      "cmd_normalize",
+      "cmd_quantize",
+      "cmd_score",
+      "delta",
+      "doctor",
+      "history"
+    ],
+    "exported_symbols": {
+      "n7x/run.py": [
+        "main"
+      ],
+      "n7x/scripts/release_check.py": [
+        "check",
+        "main"
+      ],
+      "n7x/src/n7x/__init__.py": [],
+      "n7x/src/n7x/cli.py": [
+        "_write",
+        "cmd_collect",
+        "cmd_score",
+        "cmd_normalize",
+        "cmd_quantize",
+        "cmd_falsify",
+        "cmd_integrate",
+        "cmd_delta",
+        "cmd_history",
+        "cmd_doctor",
+        "main"
+      ],
+      "n7x/src/n7x/collectors/__init__.py": [],
+      "n7x/src/n7x/collectors/account.py": [
+        "collect",
+        "_bus_factor"
+      ],
+      "n7x/src/n7x/collectors/repo.py": [
+        "collect",
+        "_ci_metrics",
+        "_commit_metrics",
+        "_pr_metrics",
+        "_issue_metrics",
+        "_dependency_metrics",
+        "_size_metrics"
+      ],
+      "n7x/src/n7x/gh.py": [
+        "InsufficientEvidence",
+        "RateLimitExceeded",
+        "_headers",
+        "get",
+        "pages",
+        "search",
+        "graphql",
+        "is_bot"
+      ],
+      "n7x/src/n7x/models.py": [
+        "Confidence",
+        "Metric",
+        "DebtSignal",
+        "RepoSnapshot",
+        "AccountSnapshot"
+      ],
+      "n7x/src/n7x/pipeline/__init__.py": [],
+      "n7x/src/n7x/pipeline/falsifier.py": [
+        "_v",
+        "FalsificationCheck",
+        "falsify_from_snapshot"
+      ],
+      "n7x/src/n7x/pipeline/integrator.py": [
+        "run_pipeline",
+        "_integrate_verdict"
+      ],
+      "n7x/src/n7x/pipeline/normalizer.py": [
+        "_v",
+        "_norm_log",
+        "normalize_from_snapshot"
+      ],
+      "n7x/src/n7x/pipeline/projector.py": [
+        "project",
+        "_plain_verdict"
+      ],
+      "n7x/src/n7x/pipeline/quantizer.py": [
+        "_sig",
+        "quantize"
+      ],
+      "n7x/src/n7x/renderers/__init__.py": [],
+      "n7x/src/n7x/renderers/readme.py": [
+        "_bar",
+        "_delta",
+        "_sev_emoji",
+        "_conf_badge",
+        "_sparkline",
+        "_velocity_section",
+        "_coherence_section",
+        "_target_section",
+        "render",
+        "write"
+      ],
+      "n7x/src/n7x/scorers/__init__.py": [],
+      "n7x/src/n7x/scorers/coherence.py": [
+        "compute_coherence"
+      ],
+      "n7x/src/n7x/scorers/debt.py": [
+        "_get",
+        "_severity",
+        "_debt_from_severity",
+        "score_repo",
+        "score_account",
+        "_gcei_axes",
+        "_geometric_mean",
+        "_debt_level",
+        "_gcei_level"
+      ],
+      "n7x/src/n7x/scorers/target.py": [
+        "score_for_target",
+        "compare_targets"
+      ],
+      "n7x/src/n7x/scorers/velocity.py": [
+        "compute_velocity"
+      ],
+      "n7x/src/n7x/storage.py": [
+        "_ensure_dirs",
+        "_snap_to_dict",
+        "save",
+        "load_previous",
+        "compute_deltas",
+        "load_history"
+      ],
+      "n7x/tests/test_falsifier.py": [],
+      "n7x/tests/test_normalizer.py": [
+        "_make_snap",
+        "TestNormalizer"
+      ],
+      "n7x/tests/test_pipeline.py": [
+        "_full_snap",
+        "TestPipelineIntegration"
+      ],
+      "n7x/tests/test_quantizer.py": [
+        "_norm",
+        "TestQuantizer",
+        "TestFalsifier"
+      ],
+      "n7x/tests/test_scorer.py": [
+        "make_repo",
+        "test_debt_score_high_for_bad_repo",
+        "test_debt_score_low_for_healthy_repo",
+        "test_deletion_ratio_critical_is_high_debt",
+        "test_no_ci_is_critical",
+        "test_geometric_mean_zero_collapses",
+        "test_geometric_mean_all_high",
+        "test_debt_level_thresholds",
+        "test_gcei_level_thresholds"
+      ]
+    },
+    "files": [
+      {
+        "bytes": 1326,
+        "layer": "ci",
+        "path": "n7x/.github/workflows/audit.yml",
+        "sha256": "96793ad8c7721c47d711c1518a2bc94b5d556e4e4a193ac6b6cfec3bd2af7d8e"
+      },
+      {
+        "bytes": 0,
+        "layer": "other",
+        "path": "n7x/data/history/.gitkeep",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 523,
+        "layer": "entrypoint",
+        "path": "n7x/pyproject.toml",
+        "sha256": "8756a17520d92c74616f80ce520999c319cd8db3cc86140f2130091f0f7f61b2"
+      },
+      {
+        "bytes": 2897,
+        "layer": "entrypoint",
+        "path": "n7x/run.py",
+        "sha256": "6fbf14914d50a9eb241adacd77ad91efeeaca20601ee1a2268f85e7e4731afc9"
+      },
+      {
+        "bytes": 8394,
+        "layer": "source",
+        "path": "n7x/scripts/release_check.py",
+        "sha256": "59813bbd8839d641b3ca684bf3de5b5a8c7570c46dee73ab2a9efd2b5153358a"
+      },
+      {
+        "bytes": 37,
+        "layer": "source",
+        "path": "n7x/src/n7x/__init__.py",
+        "sha256": "c063db01631ef463c105b6dca89070a01922d6cf46daad9db7abf8217bad0b51"
+      },
+      {
+        "bytes": 7231,
+        "layer": "source",
+        "path": "n7x/src/n7x/cli.py",
+        "sha256": "78a559f9af36a9e4975f6d722ed3f67500750a880465f382b3c51f06864d1923"
+      },
+      {
+        "bytes": 0,
+        "layer": "collector",
+        "path": "n7x/src/n7x/collectors/__init__.py",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 7108,
+        "layer": "collector",
+        "path": "n7x/src/n7x/collectors/account.py",
+        "sha256": "0bca72f2fd7eb85a77b7711c5f7a666ac43a3376ff86788b03f3fce7d07f546e"
+      },
+      {
+        "bytes": 16858,
+        "layer": "collector",
+        "path": "n7x/src/n7x/collectors/repo.py",
+        "sha256": "750663ec1ffa407691231dbb2de6e446dc6e17bc031b9df2500f4941c8d52130"
+      },
+      {
+        "bytes": 3803,
+        "layer": "source",
+        "path": "n7x/src/n7x/gh.py",
+        "sha256": "f9cf32a21e9163485108344f94aee31478bd336872bf278832f9f1b74d4ae7aa"
+      },
+      {
+        "bytes": 2745,
+        "layer": "source",
+        "path": "n7x/src/n7x/models.py",
+        "sha256": "1b7f83b0ee0eefe5888e9484960db625a9cc264a18f76cf1ed28775bda845306"
+      },
+      {
+        "bytes": 0,
+        "layer": "pipeline",
+        "path": "n7x/src/n7x/pipeline/__init__.py",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 8178,
+        "layer": "pipeline",
+        "path": "n7x/src/n7x/pipeline/falsifier.py",
+        "sha256": "62702bd6ae6ce81db1303075d69145e2c0c0310e2a8497b84414971c0308c70d"
+      },
+      {
+        "bytes": 4890,
+        "layer": "pipeline",
+        "path": "n7x/src/n7x/pipeline/integrator.py",
+        "sha256": "9c950a2d17dd7eae4555dd41cd27380de36f1d4bf00467b154e94b4038537e95"
+      },
+      {
+        "bytes": 9206,
+        "layer": "pipeline",
+        "path": "n7x/src/n7x/pipeline/normalizer.py",
+        "sha256": "c7d3d85039b3bc01ef2740b0ce4673865695670c5f0af8e4b32b257182da269d"
+      },
+      {
+        "bytes": 4971,
+        "layer": "pipeline",
+        "path": "n7x/src/n7x/pipeline/projector.py",
+        "sha256": "74701553ba79ed4b1dd08f4aca847a6a48bba399bd3d2592c25ae47a4f43015d"
+      },
+      {
+        "bytes": 3735,
+        "layer": "pipeline",
+        "path": "n7x/src/n7x/pipeline/quantizer.py",
+        "sha256": "bdc64342c792e754ae0d27dafedab9df27608a6d00a326a22fae994f5338972e"
+      },
+      {
+        "bytes": 0,
+        "layer": "renderer",
+        "path": "n7x/src/n7x/renderers/__init__.py",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 12987,
+        "layer": "renderer",
+        "path": "n7x/src/n7x/renderers/readme.py",
+        "sha256": "6399273c0977ce1a4057dc448950952a7a693c339411b5b95f92c36b22eb5f47"
+      },
+      {
+        "bytes": 0,
+        "layer": "scorer",
+        "path": "n7x/src/n7x/scorers/__init__.py",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 4903,
+        "layer": "scorer",
+        "path": "n7x/src/n7x/scorers/coherence.py",
+        "sha256": "056cbe0a8bb903d22c72638492bf962c4a66eae9eb461698649830435df84d83"
+      },
+      {
+        "bytes": 23210,
+        "layer": "scorer",
+        "path": "n7x/src/n7x/scorers/debt.py",
+        "sha256": "2d421e59b2ecf5aa260794cfbe213747164fdc6434239246a192da98cf5f1517"
+      },
+      {
+        "bytes": 5474,
+        "layer": "scorer",
+        "path": "n7x/src/n7x/scorers/target.py",
+        "sha256": "f02ebe3c7ec314d201f5eb327b6851954f9b130b3a1c63c1fcd5c45ca53bab16"
+      },
+      {
+        "bytes": 4948,
+        "layer": "scorer",
+        "path": "n7x/src/n7x/scorers/velocity.py",
+        "sha256": "3c2377386519804e5b7a6a79db9948492cf11463dcc4eef3b89d3166ca78cdc6"
+      },
+      {
+        "bytes": 2788,
+        "layer": "source",
+        "path": "n7x/src/n7x/storage.py",
+        "sha256": "222287bdf1a4ace29d5cfeadfaaeec99bdbe7e105d67ec3ae07038ad97f864ea"
+      },
+      {
+        "bytes": 434,
+        "layer": "test",
+        "path": "n7x/tests/test_falsifier.py",
+        "sha256": "82b12210d52e906d3ffd7329adcb69fa35426f935fb5bf2ff8af8722f6e70863"
+      },
+      {
+        "bytes": 4818,
+        "layer": "test",
+        "path": "n7x/tests/test_normalizer.py",
+        "sha256": "04064f309c4630fbc24b47f0f8aa7ca26d610d5f65a4b440702e7e8ea4b51606"
+      },
+      {
+        "bytes": 5818,
+        "layer": "test",
+        "path": "n7x/tests/test_pipeline.py",
+        "sha256": "e1694a6bd9dd0160070fca8eed2dfd2e2cbc541c730d7006a82331bb2759f4b2"
+      },
+      {
+        "bytes": 9485,
+        "layer": "test",
+        "path": "n7x/tests/test_quantizer.py",
+        "sha256": "2600e7e14acb00405d4840282b9f45c151bcf702cbecb7fd90d7d1ee3c09dd38"
+      },
+      {
+        "bytes": 5596,
+        "layer": "test",
+        "path": "n7x/tests/test_scorer.py",
+        "sha256": "43a3875a6b5215ee1d3296b98fc9e86ed21feefba585e3b673490e7cf546c27b"
+      }
+    ],
+    "layer_bytes": {
+      "ci": 1326,
+      "collector": 23966,
+      "entrypoint": 3420,
+      "other": 0,
+      "pipeline": 30980,
+      "renderer": 12987,
+      "scorer": 38535,
+      "source": 24998,
+      "test": 26151
+    },
+    "layer_files": {
+      "ci": 1,
+      "collector": 3,
+      "entrypoint": 2,
+      "other": 1,
+      "pipeline": 6,
+      "renderer": 2,
+      "scorer": 5,
+      "source": 6,
+      "test": 5
+    },
+    "package_hash": "a22d0ff6e11b6c9ce3a01c5d856d8c3a5c97be9b82688c4aa54a66833f2931c4",
+    "package_path": "/tmp/cmar_final_repository_v1_4_1/data/external_audit_seed/n7x-audit-v4.zip",
+    "python_modules": [
+      "n7x/run.py",
+      "n7x/scripts/release_check.py",
+      "n7x/src/n7x/__init__.py",
+      "n7x/src/n7x/cli.py",
+      "n7x/src/n7x/collectors/__init__.py",
+      "n7x/src/n7x/collectors/account.py",
+      "n7x/src/n7x/collectors/repo.py",
+      "n7x/src/n7x/gh.py",
+      "n7x/src/n7x/models.py",
+      "n7x/src/n7x/pipeline/__init__.py",
+      "n7x/src/n7x/pipeline/falsifier.py",
+      "n7x/src/n7x/pipeline/integrator.py",
+      "n7x/src/n7x/pipeline/normalizer.py",
+      "n7x/src/n7x/pipeline/projector.py",
+      "n7x/src/n7x/pipeline/quantizer.py",
+      "n7x/src/n7x/renderers/__init__.py",
+      "n7x/src/n7x/renderers/readme.py",
+      "n7x/src/n7x/scorers/__init__.py",
+      "n7x/src/n7x/scorers/coherence.py",
+      "n7x/src/n7x/scorers/debt.py",
+      "n7x/src/n7x/scorers/target.py",
+      "n7x/src/n7x/scorers/velocity.py",
+      "n7x/src/n7x/storage.py",
+      "n7x/tests/test_falsifier.py",
+      "n7x/tests/test_normalizer.py",
+      "n7x/tests/test_pipeline.py",
+      "n7x/tests/test_quantizer.py",
+      "n7x/tests/test_scorer.py"
+    ],
+    "test_files": [
+      "n7x/tests/test_falsifier.py",
+      "n7x/tests/test_normalizer.py",
+      "n7x/tests/test_pipeline.py",
+      "n7x/tests/test_quantizer.py",
+      "n7x/tests/test_scorer.py"
+    ],
+    "total_bytes": 162363,
+    "total_files": 31,
+    "workflow_files": [
+      "n7x/.github/workflows/audit.yml"
+    ]
+  },
+  "cmar_integrated_state": {
+    "falsification_report": {
+      "checked_invariants": [
+        "tests_present",
+        "ci_present",
+        "schemas_present",
+        "entrypoint_present",
+        "protocol_valid",
+        "ledger_hash_matches_scan_hash",
+        "valid_mass_not_greater_than_total_mass",
+        "no_pass_with_blocking_voids",
+        "docs_not_dominating_executable_mass",
+        "no_release_bucket_with_failed_protocol"
+      ],
+      "falsifier_version": "cmar-falsifier/1.4.1",
+      "findings": [
+        {
+          "code": "missing_tests",
+          "field": "scan.missing_surface",
+          "message": "tests absent",
+          "severity": "critical"
+        },
+        {
+          "code": "missing_ci",
+          "field": "scan.missing_surface",
+          "message": "ci absent",
+          "severity": "critical"
+        },
+        {
+          "code": "missing_schemas",
+          "field": "scan.missing_surface",
+          "message": "schemas absent",
+          "severity": "high"
+        },
+        {
+          "code": "missing_entrypoint",
+          "field": "scan.missing_surface",
+          "message": "entrypoint absent",
+          "severity": "critical"
+        }
+      ],
+      "verdict": "FALSIFIED"
+    },
+    "flow": [
+      "scan",
+      "normalize",
+      "quantize",
+      "voids",
+      "repair_plan",
+      "protocol",
+      "falsify",
+      "mass_ledger",
+      "integrated_verdict"
+    ],
+    "github_activity": null,
+    "github_signals": null,
+    "integrated_verdict": {
+      "gate": "FAIL_FALSIFICATION",
+      "reason": "critical falsification findings exist",
+      "state": "FALSIFIED"
+    },
+    "integrator_version": "cmar-integrator/1.4.1",
+    "mass_ledger": {
+      "artifact_hash": "b46dd753dc78ac4605528bea4a2202efaf5bb36bb7a1596688817e66135ac2f6",
+      "blocking_voids": 5,
+      "hollow_mass_bytes": 0,
+      "hollow_mass_ratio": 0.0,
+      "ledger_version": "cmar-mass-ledger/1.4.1",
+      "release_blocked": true,
+      "status": "BLOCKED",
+      "target_valid_mass_bytes": 1048576,
+      "total_bytes": 119,
+      "valid_mass_bytes": 119,
+      "verdict": "Release is blocked by critical voids.",
+      "void_closure_rate": 0.0,
+      "voids_detected": 8
+    },
+    "normalized_state": {
+      "artifact_hash": "b46dd753dc78ac4605528bea4a2202efaf5bb36bb7a1596688817e66135ac2f6",
+      "baselines": {
+        "docs": 0.3,
+        "source": 0.2,
+        "test": 0.1
+      },
+      "method": "baseline_clamped_unit_interval",
+      "normalizer_version": "cmar-normalizer/1.4.1",
+      "release_readiness": 0.75,
+      "structural_score": 0.333333,
+      "vector": {
+        "blocking_pressure": 1.0,
+        "ci_presence": 0.0,
+        "docs_ratio": 1.0,
+        "protocol_validity": 1.0,
+        "schema_presence": 0.0,
+        "security_presence": 0.0,
+        "source_mass_ratio": 1.0,
+        "test_mass_ratio": 0.0,
+        "valid_mass_ratio": 0.0,
+        "void_pressure": 1.0
+      }
+    },
+    "protocol_report": {
+      "issues": [],
+      "protocol_version": "cmar-protocol/1.4.1",
+      "schema_valid": true,
+      "semantic_valid": true,
+      "syntax_valid": true,
+      "valid": true
+    },
+    "quantized_state": {
+      "information_loss": {
+        "blocking_pressure": 0.075,
+        "ci_presence": 0.1,
+        "docs_ratio": 0.075,
+        "protocol_validity": 0.075,
+        "schema_presence": 0.1,
+        "security_presence": 0.1,
+        "source_mass_ratio": 0.075,
+        "test_mass_ratio": 0.1,
+        "valid_mass_ratio": 0.1,
+        "void_pressure": 0.075
+      },
+      "mean_ordinal": 2.0,
+      "method": "visible_threshold_bucket_quantization",
+      "ordinal_vector": {
+        "blocking_pressure": 4,
+        "ci_presence": 0,
+        "docs_ratio": 4,
+        "protocol_validity": 4,
+        "schema_presence": 0,
+        "security_presence": 0,
+        "source_mass_ratio": 4,
+        "test_mass_ratio": 0,
+        "valid_mass_ratio": 0,
+        "void_pressure": 4
+      },
+      "quantizer_version": "cmar-quantizer/1.4.1",
+      "state_vector": {
+        "blocking_pressure": "RELEASE",
+        "ci_presence": "VOID",
+        "docs_ratio": "RELEASE",
+        "protocol_validity": "RELEASE",
+        "schema_presence": "VOID",
+        "security_presence": "VOID",
+        "source_mass_ratio": "RELEASE",
+        "test_mass_ratio": "VOID",
+        "valid_mass_ratio": "VOID",
+        "void_pressure": "RELEASE"
+      },
+      "thresholds": [
+        0.2,
+        0.4,
+        0.65,
+        0.85
+      ],
+      "verdict": "VOID"
+    },
+    "repair_plan": {
+      "actions": [
+        {
+          "acceptance_gate": "machine gate must pass",
+          "action_id": "R-001",
+          "command_hint": "Add CLI entrypoint.",
+          "priority": 28.0,
+          "target_paths": [
+            "src/<pkg>/cli.py",
+            "pyproject.toml"
+          ],
+          "title": "No executable entrypoint detected",
+          "void_id": "V-EXEC-001"
+        },
+        {
+          "acceptance_gate": "machine gate must pass",
+          "action_id": "R-002",
+          "command_hint": "Add pyproject.toml.",
+          "priority": 26.0,
+          "target_paths": [
+            "pyproject.toml"
+          ],
+          "title": "No package metadata detected",
+          "void_id": "V-CAP-001"
+        },
+        {
+          "acceptance_gate": "machine gate must pass",
+          "action_id": "R-003",
+          "command_hint": "Add CI.",
+          "priority": 20.0,
+          "target_paths": [
+            ".github/workflows/ci.yml"
+          ],
+          "title": "No CI gate detected",
+          "void_id": "V-CI-001"
+        },
+        {
+          "acceptance_gate": "machine gate must pass",
+          "action_id": "R-005",
+          "command_hint": "Add LICENSE.",
+          "priority": 16.0,
+          "target_paths": [
+            "CHANGELOG.md",
+            "RELEASE_VERDICT.md"
+          ],
+          "title": "No license detected",
+          "void_id": "V-REL-001"
+        },
+        {
+          "acceptance_gate": "machine gate must pass",
+          "action_id": "R-006",
+          "command_hint": "Add SECURITY.md.",
+          "priority": 7.0,
+          "target_paths": [
+            "SECURITY.md"
+          ],
+          "title": "No security policy detected",
+          "void_id": "V-SEC-001"
+        },
+        {
+          "acceptance_gate": "machine gate must pass",
+          "action_id": "R-004",
+          "command_hint": "Add tests.",
+          "priority": 6.8267,
+          "target_paths": [
+            "tests/"
+          ],
+          "title": "No test layer detected",
+          "void_id": "V-TEST-001"
+        },
+        {
+          "acceptance_gate": "machine gate must pass",
+          "action_id": "R-007",
+          "command_hint": "Add release metadata.",
+          "priority": 6.0,
+          "target_paths": [
+            "CHANGELOG.md",
+            "RELEASE_VERDICT.md"
+          ],
+          "title": "No release metadata detected",
+          "void_id": "V-REL-002"
+        },
+        {
+          "acceptance_gate": "machine gate must pass",
+          "action_id": "R-008",
+          "command_hint": "Add JSON schemas.",
+          "priority": 3.072,
+          "target_paths": [
+            "schemas/"
+          ],
+          "title": "No schema layer detected",
+          "void_id": "V-SCHEMA-001"
+        }
+      ],
+      "artifact_hash": "b46dd753dc78ac4605528bea4a2202efaf5bb36bb7a1596688817e66135ac2f6",
+      "plan_version": "cmar-repair-plan/1.4.1",
+      "status": "REPAIR_REQUIRED"
+    },
+    "root": "/tmp/cmar_final_repository_v1_4_1/examples/seed_14kb_intent",
+    "scan": {
+      "artifact_hash": "b46dd753dc78ac4605528bea4a2202efaf5bb36bb7a1596688817e66135ac2f6",
+      "ci_present": false,
+      "docs_present": true,
+      "entrypoints": [],
+      "largest_files": [
+        {
+          "bytes": 60,
+          "layer": "docs",
+          "path": "README.md",
+          "sha256": "5032b3323d45520c3757c386abafe596ec69282d7485e207c9fc4fa20a9c2f43"
+        },
+        {
+          "bytes": 59,
+          "layer": "source",
+          "path": "intent.py",
+          "sha256": "606d3b7a4f72b022353f7d36aaff1aab638b9d341f71f805c421a849e3bc810c"
+        }
+      ],
+      "layer_bytes": {
+        "docs": 60,
+        "source": 59
+      },
+      "layer_files": {
+        "docs": 1,
+        "source": 1
+      },
+      "license_present": false,
+      "missing_surface": [
+        "entrypoint",
+        "package_metadata",
+        "tests",
+        "ci",
+        "license",
+        "security",
+        "schemas",
+        "release_metadata"
+      ],
+      "package_files": [],
+      "release_metadata_present": false,
+      "risk_flags": [
+        "source_without_tests",
+        "source_without_ci"
+      ],
+      "root": "/tmp/cmar_final_repository_v1_4_1/examples/seed_14kb_intent",
+      "scanner_version": "cmar-scan/1.4.1",
+      "schemas_present": false,
+      "security_present": false,
+      "tests_present": false,
+      "total_bytes": 119,
+      "total_files": 2
+    },
+    "voids": [
+      {
+        "blocks_release": true,
+        "description": "No executable entrypoint detected",
+        "estimated_valid_bytes": 4096,
+        "evidence": [
+          "entrypoints=[]"
+        ],
+        "recommended_action": "Add CLI entrypoint.",
+        "severity": "critical",
+        "title": "No executable entrypoint detected",
+        "void_id": "V-EXEC-001",
+        "void_type": "execution_void",
+        "weight": 14
+      },
+      {
+        "blocks_release": true,
+        "description": "No package metadata detected",
+        "estimated_valid_bytes": 4096,
+        "evidence": [
+          "package_files=[]"
+        ],
+        "recommended_action": "Add pyproject.toml.",
+        "severity": "critical",
+        "title": "No package metadata detected",
+        "void_id": "V-CAP-001",
+        "void_type": "capability_void",
+        "weight": 13
+      },
+      {
+        "blocks_release": true,
+        "description": "No CI gate detected",
+        "estimated_valid_bytes": 4096,
+        "evidence": [
+          "ci_present=false"
+        ],
+        "recommended_action": "Add CI.",
+        "severity": "critical",
+        "title": "No CI gate detected",
+        "void_id": "V-CI-001",
+        "void_type": "ci_void",
+        "weight": 10
+      },
+      {
+        "blocks_release": true,
+        "description": "No test layer detected",
+        "estimated_valid_bytes": 12000,
+        "evidence": [
+          "tests_present=false"
+        ],
+        "recommended_action": "Add tests.",
+        "severity": "critical",
+        "title": "No test layer detected",
+        "void_id": "V-TEST-001",
+        "void_type": "test_void",
+        "weight": 10
+      },
+      {
+        "blocks_release": true,
+        "description": "No license detected",
+        "estimated_valid_bytes": 4096,
+        "evidence": [
+          "license_present=false"
+        ],
+        "recommended_action": "Add LICENSE.",
+        "severity": "high",
+        "title": "No license detected",
+        "void_id": "V-REL-001",
+        "void_type": "release_void",
+        "weight": 8
+      },
+      {
+        "blocks_release": false,
+        "description": "No security policy detected",
+        "estimated_valid_bytes": 4096,
+        "evidence": [
+          "security_present=false"
+        ],
+        "recommended_action": "Add SECURITY.md.",
+        "severity": "high",
+        "title": "No security policy detected",
+        "void_id": "V-SEC-001",
+        "void_type": "security_void",
+        "weight": 7
+      },
+      {
+        "blocks_release": false,
+        "description": "No release metadata detected",
+        "estimated_valid_bytes": 4096,
+        "evidence": [
+          "release_metadata_present=false"
+        ],
+        "recommended_action": "Add release metadata.",
+        "severity": "medium",
+        "title": "No release metadata detected",
+        "void_id": "V-REL-002",
+        "void_type": "release_void",
+        "weight": 6
+      },
+      {
+        "blocks_release": false,
+        "description": "No schema layer detected",
+        "estimated_valid_bytes": 8000,
+        "evidence": [
+          "schemas_present=false"
+        ],
+        "recommended_action": "Add JSON schemas.",
+        "severity": "medium",
+        "title": "No schema layer detected",
+        "void_id": "V-SCHEMA-001",
+        "void_type": "schema_void",
+        "weight": 6
+      }
+    ]
+  },
+  "cmar_root": "/tmp/cmar_final_repository_v1_4_1/examples/seed_14kb_intent",
+  "fused_verdict": {
+    "audit_gate": "PASS_AUDIT_STREAM",
+    "cmar_gate": "FAIL_FALSIFICATION",
+    "gate": "CONTINUE_INTEGRATION",
+    "reason": "CMAR runtime stream and N7X audit package stream were projected into one fused verdict.",
+    "state": "FUSED_PARTIAL_OPERATIONAL_STATE"
+  },
+  "fusion_version": "cmar-audit-fusion/1.4.1",
+  "stream_linkage": [
+    {
+      "from": "cmar.scan.output",
+      "to": "cmar.normalizer.input"
+    },
+    {
+      "from": "cmar.normalizer.output",
+      "to": "cmar.quantizer.input"
+    },
+    {
+      "from": "cmar.quantizer.output",
+      "to": "cmar.void_graph.input"
+    },
+    {
+      "from": "cmar.void_graph.output",
+      "to": "cmar.repair_plan.input"
+    },
+    {
+      "from": "cmar.repair_plan.output",
+      "to": "cmar.protocol.input"
+    },
+    {
+      "from": "cmar.protocol.output",
+      "to": "cmar.falsifier.input"
+    },
+    {
+      "from": "n7x.audit_zip",
+      "to": "audit_stream.scan.input"
+    },
+    {
+      "from": "audit_stream.scan.output",
+      "to": "audit_projection.input"
+    },
+    {
+      "from": "audit_projection.output",
+      "to": "fusion_verdict.input"
+    },
+    {
+      "from": "cmar.integrated_verdict.output",
+      "to": "fusion_verdict.input"
+    }
+  ]
+}

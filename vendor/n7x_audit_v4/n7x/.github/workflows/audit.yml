@@ -1,0 +1,52 @@
+name: n7x engineering audit
+
+on:
+  schedule:
+    - cron: "0 6 * * *"   # 06:00 UTC daily
+    - cron: "0 18 * * *"  # 18:00 UTC daily
+  workflow_dispatch:
+    inputs:
+      window_days:
+        description: "Measurement window (days)"
+        default: "90"
+        required: false
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install deps
+        run: pip install requests
+
+      - name: Run audit
+        env:
+          GH_TOKEN:    ${{ secrets.GH_TOKEN }}
+          GH_HANDLE:   neuron7xLab
+          WINDOW_DAYS: ${{ github.event.inputs.window_days || '90' }}
+          N7X_DATA_DIR: ${{ github.workspace }}/data
+          N7X_ROOT:    ${{ github.workspace }}
+        run: python run.py
+
+      - name: Commit results
+        run: |
+          git config user.name  "n7x-audit"
+          git config user.email "n7x-audit@users.noreply.github.com"
+          git add README.md data/
+          git diff --cached --quiet && echo "no changes" || (
+            git commit -m "chore: n7x audit $(date -u +%Y-%m-%dT%H:%M:%SZ)" &&
+            git push
+          )

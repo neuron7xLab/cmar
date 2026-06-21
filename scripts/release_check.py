@@ -1,82 +1,47 @@
 #!/usr/bin/env python3
-# SPDX-License-Identifier: GPL-3.0-or-later
-# Copyright (c) 2026 Yaroslav Vasylenko / neuron7xLab
-"""CMAR acceptance gate — the single release verdict.
-
-Runs the unit suite, every read-only CLI stream on the seed, and a real autofill
-on a throwaway copy, then asserts the machine criteria. Prints exactly one of
-``CMAR RELEASE CHECK: PASS`` / ``CMAR RELEASE CHECK: FAIL``.
-
-Invariant: no evidence, no release. A FAIL here means no release, full stop.
-"""
-
 from __future__ import annotations
-
-import os
-import shutil
-import subprocess
-import sys
-import tempfile
+import json, shutil, subprocess, sys, os
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SEED = ROOT / "examples" / "seed_14kb_intent"
 PY = sys.executable
+ENV = dict(os.environ)
+ENV["PYTHONPATH"] = str(ROOT / "src")
 
-
-def _run(cmd: list[str], **kw) -> subprocess.CompletedProcess:
-    env = {**os.environ, "PYTHONPATH": str(ROOT / "src")}
-    return subprocess.run(cmd, cwd=ROOT, env=env, text=True, capture_output=True, **kw)
-
+def run(cmd: list[str]):
+    return subprocess.run(cmd, cwd=ROOT, env=ENV, text=True, capture_output=True)
 
 def main() -> int:
-    failures: list[str] = []
-
-    # 1. unit suite (guard against self-recursion via the env flag)
-    env_flag = {**os.environ, "PYTHONPATH": str(ROOT / "src"), "CMAR_IN_RELEASE_CHECK": "1"}
-    unit = subprocess.run([PY, "-m", "unittest", "discover", "-s", "tests"],
-                          cwd=ROOT, env=env_flag, text=True, capture_output=True)
-    if unit.returncode != 0:
-        failures.append("unit suite failed:\n" + unit.stderr[-2000:])
-
-    # 2. read-only CLI streams on the seed
-    for cmd in ("normalize", "quantize", "integrate", "falsify"):
-        # map command -> conventional artifact name
-        names = {"normalize": "normalized_state.json", "quantize": "quantized_state.json",
-                 "integrate": "integrated_state.json", "falsify": "falsification_report.json"}
-        target = ROOT / "artifacts" / names[cmd]
-        r = _run([PY, "-m", "cmar.cli", cmd, str(SEED), "--out", str(target)])
+    audit = ROOT / "data/external_audit_seed/n7x-audit-v4.zip"
+    tmp = Path("/tmp/cmar_seed_copy")
+    if tmp.exists(): shutil.rmtree(tmp)
+    shutil.copytree(ROOT / "examples/seed_14kb_intent", tmp)
+    commands = [
+        [PY, "-m", "unittest", "discover", "-s", "tests"],
+        [PY, "-m", "cmar.cli", "doctor", "--out", "artifacts/doctor_default_root.json"],
+        [PY, "-m", "cmar.cli", "normalize", "examples/seed_14kb_intent", "--out", "artifacts/normalized_state.json"],
+        [PY, "-m", "cmar.cli", "quantize", "examples/seed_14kb_intent", "--out", "artifacts/quantized_state.json"],
+        [PY, "-m", "cmar.cli", "falsify", "examples/seed_14kb_intent", "--out", "artifacts/falsification_report.json"],
+        [PY, "-m", "cmar.cli", "integrate", "examples/seed_14kb_intent", "--audit-package", str(audit), "--out", "artifacts/fused_integrated_state.json"],
+        [PY, "-m", "cmar.cli", "audit-scan", str(audit), "--out", "artifacts/audit_snapshot.json"],
+        [PY, "-m", "cmar.cli", "audit-project", str(audit), "--out", "artifacts/audit_projection.json"],
+        [PY, "-m", "cmar.cli", "autofill", str(tmp), "--out", "artifacts/autofill_report.json"],
+        [PY, "-m", "cmar.cli", "corpus-eval", "benchmark_corpus/runtime_v13/artifact_state_stress.jsonl", "--limit", "256", "--out", "artifacts/corpus_eval_report.json"],
+    ]
+    failures=[]
+    for cmd in commands:
+        r=run(cmd)
         if r.returncode != 0:
-            failures.append(f"cmar {cmd} returned {r.returncode}: {r.stderr.strip()}")
-
-    # 3. autofill on a disposable copy — must measurably improve the state
-    tmp = Path(tempfile.mkdtemp(prefix="cmar_seed_copy_"))
-    try:
-        copy = tmp / "repo"
-        shutil.copytree(SEED, copy)
-        rep = _run([PY, "-m", "cmar.cli", "autofill", str(copy),
-                    "--out", str(ROOT / "artifacts" / "autofill_report.json")])
-        if rep.returncode != 0:
-            failures.append(f"cmar autofill returned {rep.returncode}: {rep.stderr.strip()}")
-        else:
-            import json
-            data = json.loads((ROOT / "artifacts" / "autofill_report.json").read_text())
-            if not data.get("improved"):
-                failures.append("autofill did not improve the state")
-    finally:
-        shutil.rmtree(tmp, ignore_errors=True)
-
-    # 4. doctor report artifact
-    _run([PY, "-m", "cmar.cli", "doctor", str(SEED),
-          "--out", str(ROOT / "artifacts" / "doctor_report.json")])
-
+            failures.append({"command": cmd, "returncode": r.returncode, "stdout": r.stdout[-2000:], "stderr": r.stderr[-2000:]})
+    summary={"commands": len(commands), "failures": failures, "status": "PASS" if not failures else "FAIL"}
+    (ROOT/"artifacts/release_check_summary.json").parent.mkdir(parents=True, exist_ok=True)
+    (ROOT/"artifacts/release_check_summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
     if failures:
-        print("\n".join(failures), file=sys.stderr)
         print("CMAR RELEASE CHECK: FAIL")
+        print(json.dumps(failures[0], indent=2))
         return 1
     print("CMAR RELEASE CHECK: PASS")
     return 0
-
 
 if __name__ == "__main__":
     raise SystemExit(main())

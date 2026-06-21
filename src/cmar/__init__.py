@@ -1,13 +1,20 @@
-# SPDX-License-Identifier: GPL-3.0-or-later
-# Copyright (c) 2026 Yaroslav Vasylenko / neuron7xLab
-"""CMAR — Cognitive Mass Autofill Runtime.
+"""CMAR Cognitive Mass Autofill Runtime."""
+__version__='1.5.0'
+from .scanner import scan_repository
+from .normalizer import normalize_repository
+from .quantizer import quantize_repository
+from .voids import build_void_graph
+from .planner import build_repair_plan
+from .ledger import build_mass_ledger
+from .protocol import validate_protocol_payload
+from .falsifier import falsify_repository
+from .autofill import autofill_repository
+from .integrator import integrate_artifact_streams
+from .runtime import run_runtime_pipeline
 
-Turns raw software intent into a validated artifact state through a deterministic
-pipeline: intent -> scan -> normalize -> quantize -> void graph -> repair plan ->
-deterministic repair/autofill -> protocol validation -> integration -> mass ledger
--> release verdict.
+from .audit_stream import scan_audit_package, project_audit_to_cmar, integrate_audit_with_cmar
 
-Invariant: no evidence, no release.
-"""
+from .corpus_eval import evaluate_corpus
 
-__version__ = "0.1.0"
+from .github_activity import collect_github_activity, GitHubActivityReport
+from .normalizer import normalize_github_activity

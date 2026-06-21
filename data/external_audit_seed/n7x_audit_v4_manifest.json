@@ -1,0 +1,163 @@
+{
+  "filename": "n7x-audit-v4.zip",
+  "bytes": 58706,
+  "sha256": "a22d0ff6e11b6c9ce3a01c5d856d8c3a5c97be9b82688c4aa54a66833f2931c4",
+  "file_count": 31,
+  "files": [
+    {
+      "path": "n7x/src/n7x/cli.py",
+      "bytes": 7231,
+      "compress_size": 2102
+    },
+    {
+      "path": "n7x/src/n7x/scorers/__init__.py",
+      "bytes": 0,
+      "compress_size": 0
+    },
+    {
+      "path": "n7x/src/n7x/scorers/velocity.py",
+      "bytes": 4948,
+      "compress_size": 1824
+    },
+    {
+      "path": "n7x/src/n7x/scorers/target.py",
+      "bytes": 5474,
+      "compress_size": 1889
+    },
+    {
+      "path": "n7x/src/n7x/scorers/coherence.py",
+      "bytes": 4903,
+      "compress_size": 1741
+    },
+    {
+      "path": "n7x/src/n7x/scorers/debt.py",
+      "bytes": 23210,
+      "compress_size": 6359
+    },
+    {
+      "path": "n7x/src/n7x/storage.py",
+      "bytes": 2788,
+      "compress_size": 1083
+    },
+    {
+      "path": "n7x/src/n7x/gh.py",
+      "bytes": 3803,
+      "compress_size": 1511
+    },
+    {
+      "path": "n7x/src/n7x/__init__.py",
+      "bytes": 37,
+      "compress_size": 37
+    },
+    {
+      "path": "n7x/src/n7x/pipeline/__init__.py",
+      "bytes": 0,
+      "compress_size": 0
+    },
+    {
+      "path": "n7x/src/n7x/pipeline/integrator.py",
+      "bytes": 4890,
+      "compress_size": 1643
+    },
+    {
+      "path": "n7x/src/n7x/pipeline/projector.py",
+      "bytes": 4971,
+      "compress_size": 1757
+    },
+    {
+      "path": "n7x/src/n7x/pipeline/normalizer.py",
+      "bytes": 9206,
+      "compress_size": 2469
+    },
+    {
+      "path": "n7x/src/n7x/pipeline/quantizer.py",
+      "bytes": 3735,
+      "compress_size": 1342
+    },
+    {
+      "path": "n7x/src/n7x/pipeline/falsifier.py",
+      "bytes": 8178,
+      "compress_size": 2630
+    },
+    {
+      "path": "n7x/src/n7x/collectors/repo.py",
+      "bytes": 16858,
+      "compress_size": 3898
+    },
+    {
+      "path": "n7x/src/n7x/collectors/account.py",
+      "bytes": 7108,
+      "compress_size": 1991
+    },
+    {
+      "path": "n7x/src/n7x/collectors/__init__.py",
+      "bytes": 0,
+      "compress_size": 0
+    },
+    {
+      "path": "n7x/src/n7x/models.py",
+      "bytes": 2745,
+      "compress_size": 1068
+    },
+    {
+      "path": "n7x/src/n7x/renderers/__init__.py",
+      "bytes": 0,
+      "compress_size": 0
+    },
+    {
+      "path": "n7x/src/n7x/renderers/readme.py",
+      "bytes": 12987,
+      "compress_size": 4600
+    },
+    {
+      "path": "n7x/.github/workflows/audit.yml",
+      "bytes": 1326,
+      "compress_size": 639
+    },
+    {
+      "path": "n7x/scripts/release_check.py",
+      "bytes": 8394,
+      "compress_size": 2523
+    },
+    {
+      "path": "n7x/tests/test_scorer.py",
+      "bytes": 5596,
+      "compress_size": 1632
+    },
+    {
+      "path": "n7x/tests/test_falsifier.py",
+      "bytes": 434,
+      "compress_size": 269
+    },
+    {
+      "path": "n7x/tests/test_pipeline.py",
+      "bytes": 5818,
+      "compress_size": 1859
+    },
+    {
+      "path": "n7x/tests/test_quantizer.py",
+      "bytes": 9485,
+      "compress_size": 2054
+    },
+    {
+      "path": "n7x/tests/test_normalizer.py",
+      "bytes": 4818,
+      "compress_size": 1307
+    },
+    {
+      "path": "n7x/data/history/.gitkeep",
+      "bytes": 0,
+      "compress_size": 0
+    },
+    {
+      "path": "n7x/run.py",
+      "bytes": 2897,
+      "compress_size": 1263
+    },
+    {
+      "path": "n7x/pyproject.toml",
+      "bytes": 523,
+      "compress_size": 310
+    }
+  ]
+}

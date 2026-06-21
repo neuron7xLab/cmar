@@ -1,75 +1,64 @@
-<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+# CMAR Cognitive Mass Autofill Runtime
 
-```text
- ██████ ███    ███  █████  ██████
-██      ████  ████ ██   ██ ██   ██
-██      ██ ████ ██ ███████ ██████
-██      ██  ██  ██ ██   ██ ██   ██
- ██████ ██      ██ ██   ██ ██   ██
-```
-
-# CMAR — Cognitive Mass Autofill Runtime
-
-**Turns raw software intent into a validated, falsification-gated artifact state.**
-
-CMAR does not describe quality — it *measures* it, *materializes* what is missing,
-and *refuses to lie* about the result. It is a deterministic pipeline of
-independent streams, each chained into the next, ending in a machine verdict.
-
-```text
-intent → scan → normalize → quantize → void graph → repair plan
-       → deterministic repair → protocol validation → integration
-       → mass ledger → release verdict
-```
-
-## Invariant
-
-```text
-No evidence, no release.
-No validated capability, no product.
-No protocol verdict, no completion.
-```
-
-## Quickstart
+Executable runtime for repository state transformation.
 
 ```bash
-python -m pip install -e .
-python scripts/release_check.py                 # CMAR RELEASE CHECK: PASS
-cmar integrate examples/seed_14kb_intent        # BLOCKED — the seed is honestly incomplete
-cmar falsify   examples/seed_14kb_intent        # PARTIAL — weak, but not a lie
-cp -r examples/seed_14kb_intent /tmp/copy && cmar autofill /tmp/copy   # improved: true
+cmar scan examples/seed_14kb_intent
+cmar normalize examples/seed_14kb_intent --out artifacts/normalized_state.json
+cmar quantize examples/seed_14kb_intent --out artifacts/quantized_state.json
+cmar falsify examples/seed_14kb_intent --out artifacts/falsification_report.json
+cmar integrate examples/seed_14kb_intent --out artifacts/integrated_state.json
+cmar autofill /tmp/cmar_seed_copy --out artifacts/autofill_report.json
+python scripts/release_check.py
 ```
 
-## What each command does
 
-`scan` · `normalize` · `quantize` · `voids` · `plan` · `repair` · `autofill` ·
-`protocol` · `integrate` · `falsify` · `ledger` · `doctor` — 12 deterministic,
-JSON-emitting streams (`--out`, returncode 0 on valid input). See [docs/CLI.md](docs/CLI.md).
+## Audit Stream Integration v1.4.1
 
-## Why it cannot lie
-
-- **Protocol** marks a repo `INVALID` only when it *claims* release while blocking
-  voids remain — the one lie CMAR exists to catch ([docs/INVARIANT.md](docs/INVARIANT.md)).
-- **Ledger** enforces `valid_mass ≤ total_mass` over a hash chain; docs-only mass
-  is never valid mass.
-- **Falsifier** actively tries to refute the state before any release verdict
-  ([docs/FALSIFICATION.md](docs/FALSIFICATION.md)).
-- **Autofill** proves completion by a measured before/after delta, not a claim
-  ([docs/AUTOFILL.md](docs/AUTOFILL.md)).
-- **Release gate** (`scripts/release_check.py`) is the single source of the verdict.
-
-## Layout
-
-```text
-src/cmar/        14 runtime modules
-tests/           14 unittest modules
-examples/        seed intent the runtime operates on
-schemas/         5 artifact JSON schemas
-docs/            8 documents
-artifacts/       generated machine state
-scripts/         release_check.py — the acceptance gate
+```bash
+cmar audit-scan data/external_audit_seed/n7x-audit-v4.zip --out artifacts/audit_snapshot.json
+cmar audit-project data/external_audit_seed/n7x-audit-v4.zip --out artifacts/audit_projection.json
+cmar integrate examples/seed_14kb_intent --audit-package data/external_audit_seed/n7x-audit-v4.zip --out artifacts/fused_integrated_state.json
 ```
 
-Architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) ·
-Pipeline: [docs/PIPELINE.md](docs/PIPELINE.md) ·
-Demo: [docs/DEMO.md](docs/DEMO.md). Licensed GPL-3.0-or-later (code), CC-BY-4.0 (docs).
+
+## Final hardening v1.4.1
+
+```bash
+cmar doctor
+cmar corpus-eval benchmark_corpus/runtime_v13/artifact_state_stress.jsonl --limit 256 --out artifacts/corpus_eval_report.json
+python scripts/release_check.py
+```
+
+`cmar doctor` now defaults to the current directory. The benchmark corpus is now consumed by tests and release check, so it is not dead mass.
+
+
+## Real GitHub Activity Evidence v1.5.0
+
+CMAR can collect **real** engineering-activity evidence for a GitHub owner using
+the authenticated GitHub CLI. It never fakes private data, never prints or stores
+tokens, and fails closed when authentication is missing.
+
+```bash
+# 1. Authenticate locally (operator action — credentials never touch the repo)
+gh auth status   # or: gh auth login
+
+# 2. Collect real activity (last 30 days)
+cmar github-activity neuron7xLab --days 30 --out artifacts/github_activity_30d.json
+
+# 3. Fuse the activity report into the integrated release state (auxiliary evidence)
+cmar integrate . --github-activity artifacts/github_activity_30d.json --out artifacts/integrated_state_with_github.json
+
+# 4. One-shot runtime that collects live activity and integrates it
+cmar runtime . --github-owner neuron7xLab --days 30 --out artifacts/runtime_real_account.json
+```
+
+Allowed authentication sources: the GitHub CLI session, `GITHUB_TOKEN`, or a
+fine-grained PAT — **environment only**. If auth is absent, the command returns a
+machine-readable error (`{"authenticated": false, "collection_errors": ["gh_auth_missing"]}`)
+and a non-zero exit code.
+
+GitHub activity is an **auxiliary** evidence stream. The normalized signals
+(`commit_activity_ratio`, `pr_merge_ratio`, `active_days_ratio`,
+`repository_activity_ratio`, `github_visibility_signal`) never override repository
+quality — the integrated verdict records `github_overrides_quality: false`.

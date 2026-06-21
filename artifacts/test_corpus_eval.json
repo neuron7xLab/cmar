@@ -1,0 +1,16 @@
+{
+  "corpus_path": "/tmp/cmar_final_repository_v1_4_1/benchmark_corpus/runtime_v13/artifact_state_stress.jsonl",
+  "evaluator_version": "cmar-corpus-eval/1.4.1",
+  "expected_blocked_accuracy": 1.0,
+  "falsification_distribution": {
+    "FALSIFIED": 4,
+    "NOT_FALSIFIED": 57,
+    "PARTIAL": 3
+  },
+  "quantized_distribution": {
+    "RELEASE": 40,
+    "STRONG": 3,
+    "VOID": 21
+  },
+  "records": 64
+}

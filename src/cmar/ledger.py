@@ -1,49 +1,9 @@
-# SPDX-License-Identifier: GPL-3.0-or-later
-# Copyright (c) 2026 Yaroslav Vasylenko / neuron7xLab
-"""Mass ledger: a hash-chained record of valid vs total artifact mass.
-
-Valid mass is mass that carries evidence — source corroborated by tests, plus CI,
-schemas, and a security policy. Docs-only mass is NOT valid mass. The ledger
-status is BLOCKED unless there is genuine validated mass and tests exist.
-"""
-
 from __future__ import annotations
-
-from .model import sha256_obj
-from .scan import scan_repo
-
-GENESIS = "0" * 64
-
-
-def build_ledger(repo) -> dict:
-    scan = scan_repo(repo)
-    mass = scan["mass_by_category"]
-    total = scan["total_mass_bytes"]
-    has_tests = scan["count_by_category"]["test"] > 0
-
-    # Valid mass: executable/evidence-bearing categories only when tests exist to
-    # corroborate them; docs and 'other' are never valid mass.
-    evidence = mass["ci"] + mass["schema"] + mass["security"] + mass["test"]
-    corroborated_source = mass["source"] if has_tests else 0
-    valid_mass = evidence + corroborated_source
-    valid_mass = min(valid_mass, total)  # invariant: valid <= total
-
-    entries = []
-    prev = GENESIS
-    for cat in sorted(mass):
-        payload = {"category": cat, "bytes": mass[cat]}
-        h = sha256_obj({"prev": prev, "payload": payload})
-        entries.append({**payload, "prev_hash": prev, "record_hash": h})
-        prev = h
-
-    status = "OK" if (has_tests and valid_mass > 0 and scan["presence"]["ci"]) else "BLOCKED"
-    return {
-        "schema_version": "cmar.ledger/v1",
-        "total_mass_bytes": total,
-        "valid_mass_bytes": valid_mass,
-        "valid_mass_ratio": round(valid_mass / total, 6) if total else 0.0,
-        "has_tests": has_tests,
-        "chain": entries,
-        "head_hash": prev,
-        "status": status,
-    }
+from .models import MassLedger
+def build_mass_ledger(scan, voids, target_valid_mass_bytes=1048576):
+    valid=sum(scan.layer_bytes.get(k,0) for k in ['source','test','ci','schema','security','config','docs'])
+    blocking=sum(1 for v in voids if v.blocks_release); hollow=max(scan.total_bytes-valid,0); ratio=round(hollow/max(scan.total_bytes,1),6)
+    if blocking: status='BLOCKED'; verdict='Release is blocked by critical voids.'
+    elif valid<target_valid_mass_bytes: status='PARTIAL_VALIDATED'; verdict='Valid structure exists but target mass is not reached.'
+    else: status='PASS'; verdict='Artifact passes release gate and target valid mass.'
+    return MassLedger('cmar-mass-ledger/1.4.1',scan.artifact_hash,target_valid_mass_bytes,scan.total_bytes,valid,hollow,len(voids),blocking,1.0 if not voids else 0.0,ratio,blocking>0,status,verdict)

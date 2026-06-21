@@ -1,12 +1,17 @@
 {
-  "falsification_sha256": "95e3766be6c504061e239f67329bd0a278611611df5478d3d571b5e405d833a3",
-  "hard_findings": [],
-  "repo": "seed_14kb_intent",
-  "schema_version": "cmar.falsification/v1",
-  "verdict": "PARTIAL",
-  "weak_findings": [
-    "no tests",
-    "no CI",
-    "no schemas"
-  ]
+  "checked_invariants": [
+    "tests_present",
+    "ci_present",
+    "schemas_present",
+    "entrypoint_present",
+    "protocol_valid",
+    "ledger_hash_matches_scan_hash",
+    "valid_mass_not_greater_than_total_mass",
+    "no_pass_with_blocking_voids",
+    "docs_not_dominating_executable_mass",
+    "no_release_bucket_with_failed_protocol"
+  ],
+  "falsifier_version": "cmar-falsifier/1.4.1",
+  "findings": [],
+  "verdict": "NOT_FALSIFIED"
 }

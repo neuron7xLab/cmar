@@ -1,18 +1,24 @@
 {
-  "ledger_status": "BLOCKED",
-  "normalized_sha256": "9cfcb1c9363a402a47282973330506f9b3a813e94deb4780676e1f9f7e00e3a6",
-  "repo": "seed_14kb_intent",
-  "schema_version": "cmar.normalized/v1",
-  "signals": {
-    "ci_presence": 0.0,
+  "artifact_hash": "0ca8f070e5e804cb0cf79c585b915dde32ab0f972f378c0b95a28606f9d8b0c9",
+  "baselines": {
+    "docs": 0.3,
+    "source": 0.2,
+    "test": 0.1
+  },
+  "method": "baseline_clamped_unit_interval",
+  "normalizer_version": "cmar-normalizer/1.4.1",
+  "release_readiness": 0.852583,
+  "structural_score": 0.509229,
+  "vector": {
+    "blocking_pressure": 1.0,
+    "ci_presence": 1.0,
+    "docs_ratio": 0.002692,
     "protocol_validity": 1.0,
-    "release_blocking_pressure": 1.0,
-    "schema_presence": 0.0,
-    "security_presence": 0.0,
-    "source_mass_ratio": 0.907056,
-    "test_mass_ratio": 0.0,
-    "test_to_source_ratio": 0.0,
-    "valid_mass_ratio": 0.0,
+    "schema_presence": 1.0,
+    "security_presence": 1.0,
+    "source_mass_ratio": 0.033795,
+    "test_mass_ratio": 0.018887,
+    "valid_mass_ratio": 0.410334,
     "void_pressure": 1.0
   }
 }

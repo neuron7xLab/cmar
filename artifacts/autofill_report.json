@@ -1,30 +1,58 @@
 {
+  "acceptance": {
+    "blocking_voids_not_increased": true,
+    "total_files_increased": true,
+    "valid_mass_increased": true
+  },
   "after": {
+    "artifact_hash": "f8f2e7bf9bdec31af3594aa6fbe5a980e58cc55ef2bc89ee331122f02e246d28",
     "blocking_voids": 0,
-    "ledger_status": "OK",
-    "total_mass_bytes": 7733,
-    "valid_mass_bytes": 6368,
-    "void_count": 0
+    "hollow_mass_bytes": 0,
+    "hollow_mass_ratio": 0.0,
+    "ledger_version": "cmar-mass-ledger/1.4.1",
+    "release_blocked": false,
+    "status": "PARTIAL_VALIDATED",
+    "target_valid_mass_bytes": 1048576,
+    "total_bytes": 1188,
+    "valid_mass_bytes": 1188,
+    "verdict": "Valid structure exists but target mass is not reached.",
+    "void_closure_rate": 1.0,
+    "voids_detected": 0
   },
+  "autofill_version": "cmar-autofill/1.4.1",
   "before": {
+    "artifact_hash": "b46dd753dc78ac4605528bea4a2202efaf5bb36bb7a1596688817e66135ac2f6",
     "blocking_voids": 5,
-    "ledger_status": "BLOCKED",
-    "total_mass_bytes": 5272,
-    "valid_mass_bytes": 0,
-    "void_count": 8
+    "hollow_mass_bytes": 0,
+    "hollow_mass_ratio": 0.0,
+    "ledger_version": "cmar-mass-ledger/1.4.1",
+    "release_blocked": true,
+    "status": "BLOCKED",
+    "target_valid_mass_bytes": 1048576,
+    "total_bytes": 119,
+    "valid_mass_bytes": 119,
+    "verdict": "Release is blocked by critical voids.",
+    "void_closure_rate": 0.0,
+    "voids_detected": 8
   },
-  "blocking_voids_closed": 5,
-  "created": [
+  "created_files": [
     ".github/workflows/ci.yml",
     "CHANGELOG.md",
+    "LICENSE",
     "RELEASE_VERDICT.md",
     "SECURITY.md",
-    "artifacts/release_manifest.json",
-    "docs/OVERVIEW.md",
+    "artifacts/.gitkeep",
+    "docs/runtime_pipeline.md",
+    "pyproject.toml",
     "schemas/artifact.schema.json",
-    "tests/test_smoke.py"
+    "schemas/runtime_state.schema.json",
+    "src/cmar_seed_copy/__init__.py",
+    "src/cmar_seed_copy/cli.py",
+    "tests/test_cli.py"
   ],
-  "improved": true,
-  "schema_version": "cmar.autofill/v1",
-  "valid_mass_gained_bytes": 6368
+  "root": "/tmp/cmar_seed_copy",
+  "skipped_files": [
+    "README.md"
+  ],
+  "success": true
 }

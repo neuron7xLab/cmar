@@ -1,43 +1,307 @@
 {
-  "blocking_voids": 5,
-  "ledger_status": "BLOCKED",
-  "overall_state": "WEAK",
-  "protocol_verdict": "VALID",
-  "readiness_score": 0.1,
-  "release_verdict": "BLOCKED",
-  "repo": "seed_14kb_intent",
-  "root_hash": "f4e1f814b4b04ebb17b6071d686f740992845e4eb181523b3014e4f4485e40f3",
-  "schema_version": "cmar.integrated/v1",
-  "stream_chain": [
-    {
-      "digest": "19c16921700949d62831663630681c4e760a96a548d9f0a50ce497ea0fa52434",
-      "link": "7eb71aa429c722caea651c58c5ff0fcf353176f753d39ab963cb959c244dfeae",
-      "stream": "scan"
+  "falsification_report": {
+    "checked_invariants": [
+      "tests_present",
+      "ci_present",
+      "schemas_present",
+      "entrypoint_present",
+      "protocol_valid",
+      "ledger_hash_matches_scan_hash",
+      "valid_mass_not_greater_than_total_mass",
+      "no_pass_with_blocking_voids",
+      "docs_not_dominating_executable_mass",
+      "no_release_bucket_with_failed_protocol"
+    ],
+    "falsifier_version": "cmar-falsifier/1.4.1",
+    "findings": [],
+    "verdict": "NOT_FALSIFIED"
+  },
+  "flow": [
+    "scan",
+    "normalize",
+    "quantize",
+    "voids",
+    "repair_plan",
+    "protocol",
+    "falsify",
+    "mass_ledger",
+    "integrated_verdict"
+  ],
+  "github_activity": null,
+  "github_signals": null,
+  "integrated_verdict": {
+    "gate": "CONTINUE_REPAIR",
+    "reason": "state below threshold",
+    "state": "REPAIR_REQUIRED"
+  },
+  "integrator_version": "cmar-integrator/1.4.1",
+  "mass_ledger": {
+    "artifact_hash": "1b2cbd83ebc3c179d25ccd75283a428a24d4f97b858e31536589362431e84bca",
+    "blocking_voids": 0,
+    "hollow_mass_bytes": 28694060,
+    "hollow_mass_ratio": 0.985245,
+    "ledger_version": "cmar-mass-ledger/1.4.1",
+    "release_blocked": false,
+    "status": "PARTIAL_VALIDATED",
+    "target_valid_mass_bytes": 1048576,
+    "total_bytes": 29123792,
+    "valid_mass_bytes": 429732,
+    "verdict": "Valid structure exists but target mass is not reached.",
+    "void_closure_rate": 1.0,
+    "voids_detected": 0
+  },
+  "normalized_state": {
+    "artifact_hash": "1b2cbd83ebc3c179d25ccd75283a428a24d4f97b858e31536589362431e84bca",
+    "baselines": {
+      "docs": 0.3,
+      "source": 0.2,
+      "test": 0.1
     },
-    {
-      "digest": "9cfcb1c9363a402a47282973330506f9b3a813e94deb4780676e1f9f7e00e3a6",
-      "link": "3479ca2ea2a2f8b7c7d918c408cdbdfaa00abce4a771be1f3a05397d1f7a3c9f",
-      "stream": "normalized"
-    },
-    {
-      "digest": "fbeb83022ed6ff304f1113ac376889780740481adb453fb804e65611f63adcaa",
-      "link": "157d7523c85eae3314c2c76ec0d9025fdcd6e39597be362a413de9853207950d",
-      "stream": "quantized"
-    },
-    {
-      "digest": "fc862eb65d741ca6a5aedebff4e7ac63fc82869269bc9b853b2023435f1b2379",
-      "link": "69aed5f0880e689af459b8b98948194c2223b969f002d60be7876af8c33726fc",
-      "stream": "protocol"
-    },
-    {
-      "digest": "97737c3429db4cd5c3cf20021de4cdaa85b9adf2ea9ca8064015c7c519a78e51",
-      "link": "a500dfc9287267639862fb61a92d2694cb94fef748bdb54bac6f1a74c6e90c2d",
-      "stream": "plan"
-    },
-    {
-      "digest": "3660137a6bb156c77694643935edc12adfef41a17c10308f469007ea2021fa0e",
-      "link": "f4e1f814b4b04ebb17b6071d686f740992845e4eb181523b3014e4f4485e40f3",
-      "stream": "ledger"
+    "method": "baseline_clamped_unit_interval",
+    "normalizer_version": "cmar-normalizer/1.4.1",
+    "release_readiness": 0.75,
+    "structural_score": 0.509229,
+    "vector": {
+      "blocking_pressure": 1.0,
+      "ci_presence": 1.0,
+      "docs_ratio": 0.002693,
+      "protocol_validity": 1.0,
+      "schema_presence": 1.0,
+      "security_presence": 1.0,
+      "source_mass_ratio": 0.033796,
+      "test_mass_ratio": 0.018888,
+      "valid_mass_ratio": 0.0,
+      "void_pressure": 1.0
     }
-  ]
+  },
+  "protocol_report": {
+    "issues": [],
+    "protocol_version": "cmar-protocol/1.4.1",
+    "schema_valid": true,
+    "semantic_valid": true,
+    "syntax_valid": true,
+    "valid": true
+  },
+  "quantized_state": {
+    "information_loss": {
+      "blocking_pressure": 0.075,
+      "ci_presence": 0.075,
+      "docs_ratio": 0.097307,
+      "protocol_validity": 0.075,
+      "schema_presence": 0.075,
+      "security_presence": 0.075,
+      "source_mass_ratio": 0.066204,
+      "test_mass_ratio": 0.081112,
+      "valid_mass_ratio": 0.1,
+      "void_pressure": 0.075
+    },
+    "mean_ordinal": 2.4,
+    "method": "visible_threshold_bucket_quantization",
+    "ordinal_vector": {
+      "blocking_pressure": 4,
+      "ci_presence": 4,
+      "docs_ratio": 0,
+      "protocol_validity": 4,
+      "schema_presence": 4,
+      "security_presence": 4,
+      "source_mass_ratio": 0,
+      "test_mass_ratio": 0,
+      "valid_mass_ratio": 0,
+      "void_pressure": 4
+    },
+    "quantizer_version": "cmar-quantizer/1.4.1",
+    "state_vector": {
+      "blocking_pressure": "RELEASE",
+      "ci_presence": "RELEASE",
+      "docs_ratio": "VOID",
+      "protocol_validity": "RELEASE",
+      "schema_presence": "RELEASE",
+      "security_presence": "RELEASE",
+      "source_mass_ratio": "VOID",
+      "test_mass_ratio": "VOID",
+      "valid_mass_ratio": "VOID",
+      "void_pressure": "RELEASE"
+    },
+    "thresholds": [
+      0.2,
+      0.4,
+      0.65,
+      0.85
+    ],
+    "verdict": "VOID"
+  },
+  "repair_plan": {
+    "actions": [],
+    "artifact_hash": "1b2cbd83ebc3c179d25ccd75283a428a24d4f97b858e31536589362431e84bca",
+    "plan_version": "cmar-repair-plan/1.4.1",
+    "status": "NO_ACTIONS_REQUIRED"
+  },
+  "root": "/tmp/cmar_final_repository_v1_4_1",
+  "scan": {
+    "artifact_hash": "1b2cbd83ebc3c179d25ccd75283a428a24d4f97b858e31536589362431e84bca",
+    "ci_present": true,
+    "docs_present": true,
+    "entrypoints": [
+      "pyproject.toml",
+      "src/cmar/cli.py",
+      "vendor/n7x_audit_v4/n7x/src/n7x/cli.py"
+    ],
+    "largest_files": [
+      {
+        "bytes": 14711645,
+        "layer": "other",
+        "path": "benchmark_corpus/runtime_v13/adversarial_artifact_states.jsonl",
+        "sha256": "8ef324c7488d34ff0c967b00347e6a147d4855c364e1b71f107af7b594a36f4b"
+      },
+      {
+        "bytes": 13870357,
+        "layer": "other",
+        "path": "benchmark_corpus/runtime_v13/artifact_state_stress.jsonl",
+        "sha256": "f1441a9e144b15a959c62a782c658195952995b86c47c3c2517ecaee586395b1"
+      },
+      {
+        "bytes": 58706,
+        "layer": "other",
+        "path": "data/external_audit_seed/n7x-audit-v4.zip",
+        "sha256": "a22d0ff6e11b6c9ce3a01c5d856d8c3a5c97be9b82688c4aa54a66833f2931c4"
+      },
+      {
+        "bytes": 50176,
+        "layer": "other",
+        "path": "data/external_audit_seed/n7x-audit-v3.zip",
+        "sha256": "95f57aea8f369c3ca439a5e8c2e3e4db26de1f682735ca808821a1a8be9ffb4e"
+      },
+      {
+        "bytes": 26814,
+        "layer": "config",
+        "path": "artifacts/fused_integrated_state.json",
+        "sha256": "997d0a4a763d8969673174355cede858dd3dec25db531923fbc81738a0d22c41"
+      },
+      {
+        "bytes": 26782,
+        "layer": "config",
+        "path": "artifacts/audit_fusion_report.json",
+        "sha256": "1696302d5f66b0da6f3eb65db5f6f2212e4815dad768f91da70f3e22e8426ae0"
+      },
+      {
+        "bytes": 23210,
+        "layer": "source",
+        "path": "vendor/n7x_audit_v4/n7x/src/n7x/scorers/debt.py",
+        "sha256": "2d421e59b2ecf5aa260794cfbe213747164fdc6434239246a192da98cf5f1517"
+      },
+      {
+        "bytes": 19397,
+        "layer": "config",
+        "path": "RELEASE_MANIFEST.json",
+        "sha256": "b52f902ac5620e41fc44feac6816d4dab5c638a05d431c2ac222f9f727fe3a1d"
+      },
+      {
+        "bytes": 16858,
+        "layer": "source",
+        "path": "vendor/n7x_audit_v4/n7x/src/n7x/collectors/repo.py",
+        "sha256": "750663ec1ffa407691231dbb2de6e446dc6e17bc031b9df2500f4941c8d52130"
+      },
+      {
+        "bytes": 14925,
+        "layer": "config",
+        "path": "artifacts/runtime_real_account.json",
+        "sha256": "1666a63b971f87f1e6ed0ac5cea823fd38dd4a496905b5a3a10f235990709612"
+      },
+      {
+        "bytes": 12987,
+        "layer": "source",
+        "path": "vendor/n7x_audit_v4/n7x/src/n7x/renderers/readme.py",
+        "sha256": "6399273c0977ce1a4057dc448950952a7a693c339411b5b95f92c36b22eb5f47"
+      },
+      {
+        "bytes": 12479,
+        "layer": "config",
+        "path": "artifacts/runtime_report.json",
+        "sha256": "dc8c4c188f1a531b617ab2acb3b738d314d2a16a386818c9c2ed2296b4464de7"
+      },
+      {
+        "bytes": 11441,
+        "layer": "config",
+        "path": "artifacts/audit_snapshot.json",
+        "sha256": "7d5f3bf8adb87f66954b151b643bb93e67bd76073781e12b1ac52bd91ff5e8e4"
+      },
+      {
+        "bytes": 10548,
+        "layer": "config",
+        "path": "artifacts/integrated_state_with_github.json",
+        "sha256": "affc8bde501820d31bfdd0e0f60f208d4b56fb0c2acce225ed003f2a28482884"
+      },
+      {
+        "bytes": 10122,
+        "layer": "source",
+        "path": "src/cmar/audit_stream.py",
+        "sha256": "d0db0b89b556b786b49e33fbe5ac7114ec7f052bb760c29783c07426158c27d5"
+      },
+      {
+        "bytes": 9485,
+        "layer": "test",
+        "path": "vendor/n7x_audit_v4/n7x/tests/test_quantizer.py",
+        "sha256": "2600e7e14acb00405d4840282b9f45c151bcf702cbecb7fd90d7d1ee3c09dd38"
+      },
+      {
+        "bytes": 9220,
+        "layer": "config",
+        "path": "artifacts/integrated_state.json",
+        "sha256": "c5ae9038b869c1d2b21a827c5e69023faacbeb10237ebdaebed0adb3436d19ef"
+      },
+      {
+        "bytes": 9206,
+        "layer": "source",
+        "path": "vendor/n7x_audit_v4/n7x/src/n7x/pipeline/normalizer.py",
+        "sha256": "c7d3d85039b3bc01ef2740b0ce4673865695670c5f0af8e4b32b257182da269d"
+      },
+      {
+        "bytes": 9135,
+        "layer": "source",
+        "path": "src/cmar/github_activity.py",
+        "sha256": "3a76017005383f5947e40be240b105c1a759e2b0d9b38a37f8678f1bd077dea6"
+      },
+      {
+        "bytes": 8824,
+        "layer": "test",
+        "path": "artifacts/test_doctor_default.json",
+        "sha256": "5ff1053c2c409d3ee4667cdfbe044e3f3f6480bf812b2c394867c78118e54d73"
+      }
+    ],
+    "layer_bytes": {
+      "ci": 1666,
+      "config": 151007,
+      "docs": 23525,
+      "other": 28694060,
+      "schema": 897,
+      "security": 776,
+      "source": 196853,
+      "test": 55008
+    },
+    "layer_files": {
+      "ci": 2,
+      "config": 21,
+      "docs": 29,
+      "other": 7,
+      "schema": 8,
+      "security": 1,
+      "source": 44,
+      "test": 14
+    },
+    "license_present": true,
+    "missing_surface": [],
+    "package_files": [
+      "pyproject.toml"
+    ],
+    "release_metadata_present": true,
+    "risk_flags": [],
+    "root": "/tmp/cmar_final_repository_v1_4_1",
+    "scanner_version": "cmar-scan/1.4.1",
+    "schemas_present": true,
+    "security_present": true,
+    "tests_present": true,
+    "total_bytes": 29123792,
+    "total_files": 126
+  },
+  "voids": []
 }

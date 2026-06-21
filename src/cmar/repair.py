@@ -1,145 +1,27 @@
-# SPDX-License-Identifier: GPL-3.0-or-later
-# Copyright (c) 2026 Yaroslav Vasylenko / neuron7xLab
-"""Deterministic repair: materialize the files that resolve void-graph actions.
-
-Every materializer writes real, functional content (a runnable test, valid CI
-YAML, a valid JSON Schema, a real policy) — never an empty placeholder. Content is
-deterministic: the same void on the same repo always yields byte-identical output.
-"""
-
 from __future__ import annotations
-
+from dataclasses import asdict, dataclass
 from pathlib import Path
-
-from .model import stable_json
-from .plan import build_plan
-
-_TEST = '''# SPDX-License-Identifier: GPL-3.0-or-later
-"""Smoke test materialized by CMAR autofill — asserts the repo has executable mass."""
-import unittest
-from pathlib import Path
-
-ROOT = Path(__file__).resolve().parents[1]
-
-
-class TestRepositoryHasExecutableMass(unittest.TestCase):
-    def test_has_source_files(self):
-        py = [p for p in ROOT.rglob("*.py") if "/tests/" not in p.as_posix()]
-        self.assertTrue(py, "repository must contain source files")
-
-    def test_intent_is_present(self):
-        self.assertTrue(any(ROOT.rglob("*")), "repository must not be empty")
-
-
-if __name__ == "__main__":
-    unittest.main()
-'''
-
-_CI = """# SPDX-License-Identifier: GPL-3.0-or-later
-name: CI
-on:
-  push:
-    branches: [main]
-  pull_request:
-permissions:
-  contents: read
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - run: python -m unittest discover -s tests
-"""
-
-_SECURITY = """<!-- SPDX-License-Identifier: CC-BY-4.0 -->
-# Security policy
-
-Report vulnerabilities privately to the maintainer. Do not open public issues for
-undisclosed vulnerabilities. This policy was materialized by CMAR autofill to
-resolve the `no_security` blocking void; replace the contact with a real channel
-before release.
-"""
-
-_CHANGELOG = """<!-- SPDX-License-Identifier: CC-BY-4.0 -->
-# Changelog
-
-## [unreleased]
-- Repository infrastructure materialized by CMAR autofill (tests, CI, schema,
-  security policy, release manifest).
-"""
-
-_VERDICT = """<!-- SPDX-License-Identifier: CC-BY-4.0 -->
-# Release verdict
-
-This file records the machine verdict produced by `cmar integrate` and gated by
-`cmar falsify`. A human-written PASS here is meaningless: the binding verdict is
-`artifacts/integrated_state.json`. No evidence, no release.
-"""
-
-_DOCS = """<!-- SPDX-License-Identifier: CC-BY-4.0 -->
-# Overview
-
-This repository's infrastructure was completed by CMAR (Cognitive Mass Autofill
-Runtime). See `artifacts/` for the machine-verifiable state and
-`RELEASE_VERDICT.md` for the gating verdict.
-"""
-
-_SCHEMA = {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "title": "cmar.artifact",
-    "type": "object",
-    "required": ["schema_version"],
-    "properties": {"schema_version": {"type": "string"}},
-    "additionalProperties": True,
-}
-
-_MANIFEST = {
-    "schema_version": "cmar.release_manifest/v1",
-    "materialized_by": "cmar.autofill",
-    "note": "regenerate with `cmar integrate` for the binding state",
-}
-
-
-def _materializers() -> dict[str, tuple[str, str]]:
-    return {
-        "materialize_tests": ("tests/test_smoke.py", _TEST),
-        "materialize_ci": (".github/workflows/ci.yml", _CI),
-        "materialize_security": ("SECURITY.md", _SECURITY),
-        "materialize_changelog": ("CHANGELOG.md", _CHANGELOG),
-        "materialize_release_verdict": ("RELEASE_VERDICT.md", _VERDICT),
-        "materialize_docs": ("docs/OVERVIEW.md", _DOCS),
-        "materialize_schema": ("schemas/artifact.schema.json", stable_json(_SCHEMA)),
-        "materialize_manifest": ("artifacts/release_manifest.json", stable_json(_MANIFEST)),
-    }
-
-
-def apply_repairs(repo) -> dict:
-    """Apply the repair plan to ``repo`` in place; return what was created."""
-    root = Path(repo).resolve()
-    plan = build_plan(repo)
-    mats = _materializers()
-    created: list[str] = []
-    skipped: list[str] = []
-    for step in plan["steps"]:
-        spec = mats.get(step["action"])
-        if spec is None:
-            skipped.append(step["action"])
-            continue
-        target, content = spec
-        path = root / target
-        if path.exists():
-            skipped.append(target)
-            continue
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(content, encoding="utf-8")
-        created.append(target)
-    return {
-        "schema_version": "cmar.repair/v1",
-        "applied_steps": plan["step_count"],
-        "created": sorted(created),
-        "skipped": sorted(skipped),
-    }
+@dataclass(frozen=True)
+class RepairResult:
+    root:str; mode:str; created_files:list[str]; skipped_files:list[str]; status:str
+    def to_dict(self): return asdict(self)
+def _pkg(root):
+    n=root.name.lower().replace('-','_'); return ''.join(c for c in n if c.isalnum() or c=='_') or 'artifact'
+def _w(root,rel,txt,created,skipped,overwrite=False):
+    p=root/rel
+    if p.exists() and not overwrite: skipped.append(rel); return
+    p.parent.mkdir(parents=True,exist_ok=True); p.write_text(txt,encoding='utf-8'); created.append(rel)
+def apply_template_repairs(root, overwrite=False):
+    root=Path(root).resolve(); pkg=_pkg(root); c=[]; s=[]
+    _w(root,'pyproject.toml',f"""[build-system]\nrequires=["setuptools>=68"]\nbuild-backend="setuptools.build_meta"\n[project]\nname="{pkg}"\nversion="0.1.0"\nrequires-python=">=3.10"\n[project.scripts]\n{pkg}="{pkg}.cli:main"\n[tool.setuptools.packages.find]\nwhere=["src"]\n""",c,s,overwrite)
+    _w(root,f'src/{pkg}/__init__.py','__version__="0.1.0"\n',c,s,overwrite)
+    _w(root,f'src/{pkg}/cli.py','def main():\n    print("artifact operational")\n    return 0\n',c,s,overwrite)
+    _w(root,'tests/test_cli.py',f'from {pkg}.cli import main\ndef test_cli():\n    assert main()==0\n',c,s,overwrite)
+    _w(root,'.github/workflows/ci.yml','name: CI\non: [push, pull_request]\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-python@v5\n        with: {python-version: "3.12"}\n      - run: python -m pip install -e .\n      - run: python -m unittest discover -s tests\n',c,s,overwrite)
+    _w(root,'SECURITY.md','# Security\n\nReport vulnerabilities privately.\n',c,s,overwrite)
+    _w(root,'LICENSE','MIT License\n',c,s,overwrite)
+    _w(root,'README.md','# Generated Artifact\n',c,s,overwrite)
+    _w(root,'CHANGELOG.md','# Changelog\n',c,s,overwrite)
+    _w(root,'RELEASE_VERDICT.md','# Release Verdict\n',c,s,overwrite)
+    _w(root,'schemas/artifact.schema.json','{"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object"}\n',c,s,overwrite)
+    return RepairResult(str(root),'template',c,s,'CREATED' if c else 'NOOP')

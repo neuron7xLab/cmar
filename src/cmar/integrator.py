@@ -1,65 +1,35 @@
-# SPDX-License-Identifier: GPL-3.0-or-later
-# Copyright (c) 2026 Yaroslav Vasylenko / neuron7xLab
-"""Integration layer: chain the streams so each output feeds the next, one verdict.
-
-scan -> normalize -> quantize -> voids -> plan -> protocol -> ledger -> verdict.
-The integrated verdict is emergent: it depends on every upstream stream and the
-hash chain over their outputs detects any tampering or drift.
-"""
-
 from __future__ import annotations
-
-from .ledger import build_ledger
-from .model import sha256_obj
-from .normalizer import normalize
-from .plan import build_plan
-from .protocol import validate_protocol
-from .quantizer import quantize
-from .scan import scan_repo
+import json
+from pathlib import Path
+from .models import IntegratedState
+from .scanner import scan_repository
+from .normalizer import normalize_payload, normalize_github_activity
+from .quantizer import quantize_normalized_report
 from .voids import build_void_graph
+from .planner import build_repair_plan
+from .ledger import build_mass_ledger
+from .protocol import validate_protocol_payload
+from .falsifier import falsify_payload
 
+def _load_github_activity(github_activity):
+    """Accept a report dict/object or a path to a github_activity JSON artifact."""
+    if github_activity is None: return None
+    if hasattr(github_activity,'to_dict'): return github_activity.to_dict()
+    if isinstance(github_activity,dict): return github_activity
+    if isinstance(github_activity,(str,Path)): return json.loads(Path(github_activity).read_text(encoding='utf-8'))
+    raise TypeError('github_activity must be a path, dict, or report object')
 
-def integrate(repo) -> dict:
-    scan = scan_repo(repo)
-    norm = normalize(repo)
-    quant = quantize(repo)
-    voids = build_void_graph(repo)
-    plan = build_plan(repo)
-    protocol = validate_protocol(repo)
-    ledger = build_ledger(repo)
-
-    # chain the stream digests: each link carries the previous root
-    prev = "0" * 64
-    chain = []
-    for name, digest in [
-        ("scan", scan["scan_sha256"]),
-        ("normalized", norm["normalized_sha256"]),
-        ("quantized", quant["quantized_sha256"]),
-        ("protocol", protocol["protocol_sha256"]),
-        ("plan", plan["plan_sha256"]),
-        ("ledger", ledger["head_hash"]),
-    ]:
-        link = sha256_obj({"prev": prev, "stream": name, "digest": digest})
-        chain.append({"stream": name, "digest": digest, "link": link})
-        prev = link
-
-    # release verdict: RELEASE only when everything lines up
-    release_ready = (
-        protocol["verdict"] == "VALID"
-        and voids["blocking_voids"] == 0
-        and ledger["status"] == "OK"
-        and quant["overall_state"] in {"STRONG", "RELEASE"}
-    )
-    verdict = "RELEASE_READY" if release_ready else "BLOCKED"
-    return {
-        "schema_version": "cmar.integrated/v1",
-        "repo": scan["repo"],
-        "readiness_score": quant["readiness_score"],
-        "overall_state": quant["overall_state"],
-        "blocking_voids": voids["blocking_voids"],
-        "ledger_status": ledger["status"],
-        "protocol_verdict": protocol["verdict"],
-        "stream_chain": chain,
-        "root_hash": prev,
-        "release_verdict": verdict,
-    }
+def integrate_artifact_streams(root,target_valid_mass=1048576,github_activity=None):
+    scan=scan_repository(root); sd=scan.to_dict(); norm=normalize_payload({'scan':sd,'mass_ledger':{'target_valid_mass_bytes':target_valid_mass},'protocol_report':{'valid':True}}); quant=quantize_normalized_report(norm); voids=build_void_graph(scan); plan=build_repair_plan(scan,voids); ledger=build_mass_ledger(scan,voids,target_valid_mass); payload={'scan':sd,'voids':[v.to_dict() for v in voids],'repair_plan':plan.to_dict(),'mass_ledger':ledger.to_dict()}; proto=validate_protocol_payload(payload); payload['protocol_report']=proto.to_dict(); payload['quantization_report']=quant.to_dict(); fals=falsify_payload(payload)
+    if not proto.valid: verdict={'state':'PROTOCOL_REJECTED','gate':'FAIL_PROTOCOL','reason':'protocol rejected payload'}
+    elif fals.verdict=='FALSIFIED': verdict={'state':'FALSIFIED','gate':'FAIL_FALSIFICATION','reason':'critical falsification findings exist'}
+    elif ledger.release_blocked: verdict={'state':'VOID_BLOCKED','gate':'FAIL_RELEASE','reason':'blocking voids remain'}
+    elif quant.verdict in {'RELEASE','STRONG'}: verdict={'state':'RELEASE_CANDIDATE','gate':'PASS','reason':'integrated release state accepted'}
+    else: verdict={'state':'REPAIR_REQUIRED','gate':'CONTINUE_REPAIR','reason':'state below threshold'}
+    gh=_load_github_activity(github_activity); gh_signals=None; flow=['scan','normalize','quantize','voids','repair_plan','protocol','falsify','mass_ledger']
+    if gh is not None:
+        gh_signals=normalize_github_activity(gh); flow+=['github_activity','github_signals']
+        # Auxiliary evidence only: GitHub activity never overrides repository quality.
+        verdict={**verdict,'github_evidence':'auxiliary','github_overrides_quality':False}
+    flow.append('integrated_verdict')
+    return IntegratedState('cmar-integrator/1.4.1',str(scan.root),flow,sd,norm.to_dict(),quant.to_dict(),[v.to_dict() for v in voids],plan.to_dict(),proto.to_dict(),fals.to_dict(),ledger.to_dict(),verdict,gh,gh_signals)

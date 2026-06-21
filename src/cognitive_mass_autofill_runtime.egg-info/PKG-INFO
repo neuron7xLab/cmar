@@ -1,0 +1,74 @@
+Metadata-Version: 2.4
+Name: cognitive-mass-autofill-runtime
+Version: 1.5.0
+Summary: Cognitive artifact-materialization runtime with normalization, quantization, integration, falsification, autofill, and real GitHub activity evidence.
+License: MIT
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: license-file
+
+# CMAR Cognitive Mass Autofill Runtime
+
+Executable runtime for repository state transformation.
+
+```bash
+cmar scan examples/seed_14kb_intent
+cmar normalize examples/seed_14kb_intent --out artifacts/normalized_state.json
+cmar quantize examples/seed_14kb_intent --out artifacts/quantized_state.json
+cmar falsify examples/seed_14kb_intent --out artifacts/falsification_report.json
+cmar integrate examples/seed_14kb_intent --out artifacts/integrated_state.json
+cmar autofill /tmp/cmar_seed_copy --out artifacts/autofill_report.json
+python scripts/release_check.py
+```
+
+
+## Audit Stream Integration v1.4.1
+
+```bash
+cmar audit-scan data/external_audit_seed/n7x-audit-v4.zip --out artifacts/audit_snapshot.json
+cmar audit-project data/external_audit_seed/n7x-audit-v4.zip --out artifacts/audit_projection.json
+cmar integrate examples/seed_14kb_intent --audit-package data/external_audit_seed/n7x-audit-v4.zip --out artifacts/fused_integrated_state.json
+```
+
+
+## Final hardening v1.4.1
+
+```bash
+cmar doctor
+cmar corpus-eval benchmark_corpus/runtime_v13/artifact_state_stress.jsonl --limit 256 --out artifacts/corpus_eval_report.json
+python scripts/release_check.py
+```
+
+`cmar doctor` now defaults to the current directory. The benchmark corpus is now consumed by tests and release check, so it is not dead mass.
+
+
+## Real GitHub Activity Evidence v1.5.0
+
+CMAR can collect **real** engineering-activity evidence for a GitHub owner using
+the authenticated GitHub CLI. It never fakes private data, never prints or stores
+tokens, and fails closed when authentication is missing.
+
+```bash
+# 1. Authenticate locally (operator action — credentials never touch the repo)
+gh auth status   # or: gh auth login
+
+# 2. Collect real activity (last 30 days)
+cmar github-activity neuron7xLab --days 30 --out artifacts/github_activity_30d.json
+
+# 3. Fuse the activity report into the integrated release state (auxiliary evidence)
+cmar integrate . --github-activity artifacts/github_activity_30d.json --out artifacts/integrated_state_with_github.json
+
+# 4. One-shot runtime that collects live activity and integrates it
+cmar runtime . --github-owner neuron7xLab --days 30 --out artifacts/runtime_real_account.json
+```
+
+Allowed authentication sources: the GitHub CLI session, `GITHUB_TOKEN`, or a
+fine-grained PAT — **environment only**. If auth is absent, the command returns a
+machine-readable error (`{"authenticated": false, "collection_errors": ["gh_auth_missing"]}`)
+and a non-zero exit code.
+
+GitHub activity is an **auxiliary** evidence stream. The normalized signals
+(`commit_activity_ratio`, `pr_merge_ratio`, `active_days_ratio`,
+`repository_activity_ratio`, `github_visibility_signal`) never override repository
+quality — the integrated verdict records `github_overrides_quality: false`.
