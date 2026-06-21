@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "cmar.quantized",
+  "type": "object",
+  "required": ["schema_version"],
+  "properties": {"schema_version": {"type": "string", "const": "cmar.quantized/v1"}},
+  "additionalProperties": true
+}

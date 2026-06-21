@@ -1,0 +1,13 @@
+{
+  "blocking_voids": 5,
+  "doctor_sha256": "49d74a9a14fba4e5cf30aeff7123b6244fb01e8a8a2cb5d288b100080d1948ed",
+  "falsification_verdict": "PARTIAL",
+  "healthy": true,
+  "overall_state": "WEAK",
+  "protocol_verdict": "VALID",
+  "readiness_score": 0.1,
+  "release_verdict": "BLOCKED",
+  "repo": "seed_14kb_intent",
+  "root_hash": "f4e1f814b4b04ebb17b6071d686f740992845e4eb181523b3014e4f4485e40f3",
+  "schema_version": "cmar.doctor/v1"
+}

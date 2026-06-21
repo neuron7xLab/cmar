@@ -1,0 +1,12 @@
+{
+  "falsification_sha256": "95e3766be6c504061e239f67329bd0a278611611df5478d3d571b5e405d833a3",
+  "hard_findings": [],
+  "repo": "seed_14kb_intent",
+  "schema_version": "cmar.falsification/v1",
+  "verdict": "PARTIAL",
+  "weak_findings": [
+    "no tests",
+    "no CI",
+    "no schemas"
+  ]
+}

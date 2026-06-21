@@ -1,0 +1,30 @@
+{
+  "after": {
+    "blocking_voids": 0,
+    "ledger_status": "OK",
+    "total_mass_bytes": 7733,
+    "valid_mass_bytes": 6368,
+    "void_count": 0
+  },
+  "before": {
+    "blocking_voids": 5,
+    "ledger_status": "BLOCKED",
+    "total_mass_bytes": 5272,
+    "valid_mass_bytes": 0,
+    "void_count": 8
+  },
+  "blocking_voids_closed": 5,
+  "created": [
+    ".github/workflows/ci.yml",
+    "CHANGELOG.md",
+    "RELEASE_VERDICT.md",
+    "SECURITY.md",
+    "artifacts/release_manifest.json",
+    "docs/OVERVIEW.md",
+    "schemas/artifact.schema.json",
+    "tests/test_smoke.py"
+  ],
+  "improved": true,
+  "schema_version": "cmar.autofill/v1",
+  "valid_mass_gained_bytes": 6368
+}

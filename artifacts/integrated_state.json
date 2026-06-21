@@ -1,0 +1,43 @@
+{
+  "blocking_voids": 5,
+  "ledger_status": "BLOCKED",
+  "overall_state": "WEAK",
+  "protocol_verdict": "VALID",
+  "readiness_score": 0.1,
+  "release_verdict": "BLOCKED",
+  "repo": "seed_14kb_intent",
+  "root_hash": "f4e1f814b4b04ebb17b6071d686f740992845e4eb181523b3014e4f4485e40f3",
+  "schema_version": "cmar.integrated/v1",
+  "stream_chain": [
+    {
+      "digest": "19c16921700949d62831663630681c4e760a96a548d9f0a50ce497ea0fa52434",
+      "link": "7eb71aa429c722caea651c58c5ff0fcf353176f753d39ab963cb959c244dfeae",
+      "stream": "scan"
+    },
+    {
+      "digest": "9cfcb1c9363a402a47282973330506f9b3a813e94deb4780676e1f9f7e00e3a6",
+      "link": "3479ca2ea2a2f8b7c7d918c408cdbdfaa00abce4a771be1f3a05397d1f7a3c9f",
+      "stream": "normalized"
+    },
+    {
+      "digest": "fbeb83022ed6ff304f1113ac376889780740481adb453fb804e65611f63adcaa",
+      "link": "157d7523c85eae3314c2c76ec0d9025fdcd6e39597be362a413de9853207950d",
+      "stream": "quantized"
+    },
+    {
+      "digest": "fc862eb65d741ca6a5aedebff4e7ac63fc82869269bc9b853b2023435f1b2379",
+      "link": "69aed5f0880e689af459b8b98948194c2223b969f002d60be7876af8c33726fc",
+      "stream": "protocol"
+    },
+    {
+      "digest": "97737c3429db4cd5c3cf20021de4cdaa85b9adf2ea9ca8064015c7c519a78e51",
+      "link": "a500dfc9287267639862fb61a92d2694cb94fef748bdb54bac6f1a74c6e90c2d",
+      "stream": "plan"
+    },
+    {
+      "digest": "3660137a6bb156c77694643935edc12adfef41a17c10308f469007ea2021fa0e",
+      "link": "f4e1f814b4b04ebb17b6071d686f740992845e4eb181523b3014e4f4485e40f3",
+      "stream": "ledger"
+    }
+  ]
+}
