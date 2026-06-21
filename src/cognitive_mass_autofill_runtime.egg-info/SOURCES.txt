@@ -19,6 +19,8 @@ src/cmar/repair.py
 src/cmar/report.py
 src/cmar/runtime.py
 src/cmar/scanner.py
+src/cmar/server.py
+src/cmar/synthesis.py
 src/cmar/voids.py
 src/cognitive_mass_autofill_runtime.egg-info/PKG-INFO
 src/cognitive_mass_autofill_runtime.egg-info/SOURCES.txt
@@ -31,3 +33,5 @@ tests/test_cli_contracts.py
 tests/test_github_activity.py
 tests/test_runtime_real_account.py
 tests/test_runtime_suite.py
+tests/test_server.py
+tests/test_synthesis.py

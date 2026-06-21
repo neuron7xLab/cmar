@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.6.0
+
+- Added cross-stream synthesis (`src/cmar/synthesis.py`): joins the repository-quality stream and the GitHub-activity stream into an emergent convergence state (`CONVERGENT_MATURE` / `ACTIVITY_WITHOUT_STRUCTURE` / `STRUCTURE_WITHOUT_ACTIVITY` / `IMMATURE_BOTH_STREAMS`) with a `stream_coherence` scalar and an `activity_theater_suspected` cross-stream finding. Descriptive only — never overrides the release gate.
+- Wired synthesis into `integrate`/`runtime` (`cross_stream_synthesis` field) when a GitHub stream is present.
+- Recalibrated `commit_activity_ratio` to the heavy-tailed GitHub distribution: soft saturation `cpd/(cpd+k)` (k=3.0) preserves the origin slope (low/normal behavior unchanged) and removes the hard clamp that destroyed ordering on very active accounts.
+- Added `cmar serve` — a zero-dependency stdlib HTTP runtime server (`/health`, `/version`, `/runtime`, `/integrate`, `/github-activity`) for external agents; read-only, fixed root, fail-closed, never returns tokens.
+- Added `tests/test_synthesis.py` and `tests/test_server.py` (39 tests total).
+
 ## 1.5.0
 
 - Added real GitHub activity runtime (`src/cmar/github_activity.py`) using the authenticated `gh` CLI; fails closed on missing auth, never prints or stores tokens, accumulates partial API failures in `collection_errors`.

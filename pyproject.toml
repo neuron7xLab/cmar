@@ -3,8 +3,8 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 [project]
 name = "cognitive-mass-autofill-runtime"
-version = "1.5.0"
-description = "Cognitive artifact-materialization runtime with normalization, quantization, integration, falsification, autofill, and real GitHub activity evidence."
+version = "1.6.0"
+description = "Cognitive artifact-materialization runtime with normalization, quantization, cross-stream synthesis, falsification, autofill, real GitHub activity evidence, and an HTTP runtime server."
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}

@@ -449,6 +449,7 @@
     ]
   },
   "cmar_integrated_state": {
+    "cross_stream_synthesis": null,
     "falsification_report": {
       "checked_invariants": [
         "tests_present",

@@ -65,6 +65,9 @@ def c_github_activity(a):
     report = collect_github_activity(a.owner, a.days)
     emit(report, a.out)
     return 0 if report.authenticated else 1
+def c_serve(a):
+    from .server import run
+    return run(a.host, a.port, a.root)
 def c_ledger(a):
     scan, voids, plan, ledger = stack(a.root, a.target_valid_mass)
     return emit(ledger, a.out)
@@ -120,6 +123,11 @@ def build_parser():
     ga.add_argument("--days", type=int, default=30)
     ga.add_argument("--out")
     ga.set_defaults(func=c_github_activity)
+    sv = sub.add_parser("serve")
+    sv.add_argument("root", nargs="?", default=".")
+    sv.add_argument("--host", default="127.0.0.1")
+    sv.add_argument("--port", type=int, default=8787)
+    sv.set_defaults(func=c_serve)
     audit_scan = sub.add_parser("audit-scan")
     audit_scan.add_argument("audit_package")
     audit_scan.add_argument("--out")

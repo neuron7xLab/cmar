@@ -62,3 +62,33 @@ GitHub activity is an **auxiliary** evidence stream. The normalized signals
 (`commit_activity_ratio`, `pr_merge_ratio`, `active_days_ratio`,
 `repository_activity_ratio`, `github_visibility_signal`) never override repository
 quality — the integrated verdict records `github_overrides_quality: false`.
+
+
+## Cross-stream synthesis v1.6.0
+
+When both the repository-quality stream and the GitHub-activity stream are
+present, `integrate`/`runtime` emit an **emergent** `cross_stream_synthesis`
+state that no single module can produce alone:
+
+- `convergence_state` ∈ {`CONVERGENT_MATURE`, `ACTIVITY_WITHOUT_STRUCTURE`,
+  `STRUCTURE_WITHOUT_ACTIVITY`, `IMMATURE_BOTH_STREAMS`}
+- `stream_coherence` — how strongly structure and activity agree (1.0 = full agreement)
+- `activity_theater_suspected` — high activity masking weak structure
+
+It is descriptive: `overrides_quality: false` — activity never raises the gate.
+
+
+## HTTP runtime server v1.6.0 (deploy)
+
+Move CMAR from dev CLI to a running service external agents can call:
+
+```bash
+cmar serve . --host 127.0.0.1 --port 8787
+# GET /health  /version  /runtime  /integrate  /github-activity?owner=<login>&days=30
+curl -s http://127.0.0.1:8787/health
+curl -s "http://127.0.0.1:8787/runtime"
+```
+
+Zero-dependency (stdlib only), read-only, fixed root, fail-closed, never returns
+tokens. Binds to localhost by default; put it behind an authenticating proxy
+before exposing publicly (it shares the server's GitHub read scope).

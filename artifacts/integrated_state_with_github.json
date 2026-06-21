@@ -1,4 +1,20 @@
 {
+  "cross_stream_synthesis": {
+    "activity_scalar": 0.836287,
+    "activity_theater_suspected": false,
+    "convergence_state": "CONVERGENT_MATURE",
+    "emergent": true,
+    "inputs": [
+      "normalized_state.release_readiness",
+      "github_signals"
+    ],
+    "overrides_quality": false,
+    "reason": "structure and activity both attested",
+    "repo_quality_scalar": 0.75,
+    "stream_coherence": 0.913713,
+    "synthesis_version": "cmar-synthesis/1.0.0",
+    "tau": 0.5
+  },
   "falsification_report": {
     "checked_invariants": [
       "tests_present",
@@ -27,6 +43,7 @@
     "mass_ledger",
     "github_activity",
     "github_signals",
+    "cross_stream_synthesis",
     "integrated_verdict"
   ],
   "github_activity": {
@@ -53,12 +70,12 @@
     ],
     "authenticated": true,
     "collection_errors": [],
-    "commits_authored": 1110,
-    "contribution_days": 29,
+    "commits_authored": 1111,
+    "contribution_days": 28,
     "data_source": "gh_api",
     "issues_closed": 21,
     "issues_opened": 35,
-    "latest_activity_utc": "2026-06-21T21:39:26+00:00",
+    "latest_activity_utc": "2026-06-21T21:43:03+00:00",
     "owner": "neuron7xLab",
     "private_repositories_if_visible": 18,
     "public_repositories": 14,
@@ -69,8 +86,8 @@
     "window_days": 30
   },
   "github_signals": {
-    "active_days_ratio": 0.966667,
-    "commit_activity_ratio": 0.925,
+    "active_days_ratio": 0.933333,
+    "commit_activity_ratio": 0.925062,
     "github_visibility_signal": 1.0,
     "pr_merge_ratio": 0.893004,
     "repository_activity_ratio": 0.59375
@@ -84,22 +101,22 @@
   },
   "integrator_version": "cmar-integrator/1.4.1",
   "mass_ledger": {
-    "artifact_hash": "c353b6f33461c5631663509a1b936747e0d20546688d6567d81d97bd98a83fab",
+    "artifact_hash": "cb74f08378b755cf21038a3fd4925d2d6bf529904ecc6effeaba4895e3c7147b",
     "blocking_voids": 0,
     "hollow_mass_bytes": 28694060,
-    "hollow_mass_ratio": 0.985147,
+    "hollow_mass_ratio": 0.984613,
     "ledger_version": "cmar-mass-ledger/1.4.1",
     "release_blocked": false,
     "status": "PARTIAL_VALIDATED",
     "target_valid_mass_bytes": 1048576,
-    "total_bytes": 29126679,
-    "valid_mass_bytes": 432619,
+    "total_bytes": 29142475,
+    "valid_mass_bytes": 448415,
     "verdict": "Valid structure exists but target mass is not reached.",
     "void_closure_rate": 1.0,
     "voids_detected": 0
   },
   "normalized_state": {
-    "artifact_hash": "c353b6f33461c5631663509a1b936747e0d20546688d6567d81d97bd98a83fab",
+    "artifact_hash": "cb74f08378b755cf21038a3fd4925d2d6bf529904ecc6effeaba4895e3c7147b",
     "baselines": {
       "docs": 0.3,
       "source": 0.2,
@@ -108,16 +125,16 @@
     "method": "baseline_clamped_unit_interval",
     "normalizer_version": "cmar-normalizer/1.4.1",
     "release_readiness": 0.75,
-    "structural_score": 0.509347,
+    "structural_score": 0.509875,
     "vector": {
       "blocking_pressure": 1.0,
       "ci_presence": 1.0,
-      "docs_ratio": 0.002692,
+      "docs_ratio": 0.002959,
       "protocol_validity": 1.0,
       "schema_presence": 1.0,
       "security_presence": 1.0,
-      "source_mass_ratio": 0.033882,
-      "test_mass_ratio": 0.019506,
+      "source_mass_ratio": 0.035347,
+      "test_mass_ratio": 0.020944,
       "valid_mass_ratio": 0.0,
       "void_pressure": 1.0
     }
@@ -134,12 +151,12 @@
     "information_loss": {
       "blocking_pressure": 0.075,
       "ci_presence": 0.075,
-      "docs_ratio": 0.097308,
+      "docs_ratio": 0.097041,
       "protocol_validity": 0.075,
       "schema_presence": 0.075,
       "security_presence": 0.075,
-      "source_mass_ratio": 0.066118,
-      "test_mass_ratio": 0.080494,
+      "source_mass_ratio": 0.064653,
+      "test_mass_ratio": 0.079056,
       "valid_mass_ratio": 0.1,
       "void_pressure": 0.075
     },
@@ -180,13 +197,13 @@
   },
   "repair_plan": {
     "actions": [],
-    "artifact_hash": "c353b6f33461c5631663509a1b936747e0d20546688d6567d81d97bd98a83fab",
+    "artifact_hash": "cb74f08378b755cf21038a3fd4925d2d6bf529904ecc6effeaba4895e3c7147b",
     "plan_version": "cmar-repair-plan/1.4.1",
     "status": "NO_ACTIONS_REQUIRED"
   },
   "root": "/tmp/cmar_final_repository_v1_4_1",
   "scan": {
-    "artifact_hash": "c353b6f33461c5631663509a1b936747e0d20546688d6567d81d97bd98a83fab",
+    "artifact_hash": "cb74f08378b755cf21038a3fd4925d2d6bf529904ecc6effeaba4895e3c7147b",
     "ci_present": true,
     "docs_present": true,
     "entrypoints": [
@@ -220,10 +237,10 @@
         "sha256": "95f57aea8f369c3ca439a5e8c2e3e4db26de1f682735ca808821a1a8be9ffb4e"
       },
       {
-        "bytes": 26814,
+        "bytes": 26850,
         "layer": "config",
         "path": "artifacts/fused_integrated_state.json",
-        "sha256": "997d0a4a763d8969673174355cede858dd3dec25db531923fbc81738a0d22c41"
+        "sha256": "b6f2d67b6b44b859e87588d146297b27469037cfbc74c5f3e3f4547b1ec376c0"
       },
       {
         "bytes": 26782,
@@ -250,10 +267,10 @@
         "sha256": "750663ec1ffa407691231dbb2de6e446dc6e17bc031b9df2500f4941c8d52130"
       },
       {
-        "bytes": 14931,
+        "bytes": 14928,
         "layer": "config",
         "path": "artifacts/runtime_real_account.json",
-        "sha256": "00285e2068edee75b939aa11a5bfbf50c6fd29d07159d5cb43ecd0d79cf17bbb"
+        "sha256": "f7debcea4433c9e1de772c59ef54fc90529c22feaea1170c02c1717c78ad2bf3"
       },
       {
         "bytes": 12987,
@@ -274,10 +291,10 @@
         "sha256": "7d5f3bf8adb87f66954b151b643bb93e67bd76073781e12b1ac52bd91ff5e8e4"
       },
       {
-        "bytes": 10547,
+        "bytes": 11056,
         "layer": "config",
         "path": "artifacts/integrated_state_with_github.json",
-        "sha256": "4ee4ae2edf9884108694cd88c0340b219c83ccc07c04d96d4ad7ab2f367717ae"
+        "sha256": "917f6208cf01bfce31248f4ceef06eaab07272fe795e64b3caafbf917caeddf8"
       },
       {
         "bytes": 10122,
@@ -318,13 +335,13 @@
     ],
     "layer_bytes": {
       "ci": 1666,
-      "config": 151568,
-      "docs": 23525,
+      "config": 152146,
+      "docs": 25874,
       "other": 28694060,
       "schema": 897,
       "security": 776,
-      "source": 197372,
-      "test": 56815
+      "source": 206020,
+      "test": 61036
     },
     "layer_files": {
       "ci": 2,
@@ -333,8 +350,8 @@
       "other": 7,
       "schema": 8,
       "security": 1,
-      "source": 44,
-      "test": 14
+      "source": 46,
+      "test": 16
     },
     "license_present": true,
     "missing_surface": [],
@@ -348,8 +365,8 @@
     "schemas_present": true,
     "security_present": true,
     "tests_present": true,
-    "total_bytes": 29126679,
-    "total_files": 126
+    "total_bytes": 29142475,
+    "total_files": 130
   },
   "voids": []
 }

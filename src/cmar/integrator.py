@@ -10,6 +10,7 @@ from .planner import build_repair_plan
 from .ledger import build_mass_ledger
 from .protocol import validate_protocol_payload
 from .falsifier import falsify_payload
+from .synthesis import synthesize_cross_stream
 
 def _load_github_activity(github_activity):
     """Accept a report dict/object or a path to a github_activity JSON artifact."""
@@ -26,10 +27,15 @@ def integrate_artifact_streams(root,target_valid_mass=1048576,github_activity=No
     elif ledger.release_blocked: verdict={'state':'VOID_BLOCKED','gate':'FAIL_RELEASE','reason':'blocking voids remain'}
     elif quant.verdict in {'RELEASE','STRONG'}: verdict={'state':'RELEASE_CANDIDATE','gate':'PASS','reason':'integrated release state accepted'}
     else: verdict={'state':'REPAIR_REQUIRED','gate':'CONTINUE_REPAIR','reason':'state below threshold'}
-    gh=_load_github_activity(github_activity); gh_signals=None; flow=['scan','normalize','quantize','voids','repair_plan','protocol','falsify','mass_ledger']
+    gh=_load_github_activity(github_activity); gh_signals=None; synthesis=None; flow=['scan','normalize','quantize','voids','repair_plan','protocol','falsify','mass_ledger']
     if gh is not None:
         gh_signals=normalize_github_activity(gh); flow+=['github_activity','github_signals']
         # Auxiliary evidence only: GitHub activity never overrides repository quality.
         verdict={**verdict,'github_evidence':'auxiliary','github_overrides_quality':False}
     flow.append('integrated_verdict')
-    return IntegratedState('cmar-integrator/1.4.1',str(scan.root),flow,sd,norm.to_dict(),quant.to_dict(),[v.to_dict() for v in voids],plan.to_dict(),proto.to_dict(),fals.to_dict(),ledger.to_dict(),verdict,gh,gh_signals)
+    state=IntegratedState('cmar-integrator/1.4.1',str(scan.root),flow,sd,norm.to_dict(),quant.to_dict(),[v.to_dict() for v in voids],plan.to_dict(),proto.to_dict(),fals.to_dict(),ledger.to_dict(),verdict,gh,gh_signals)
+    if gh is not None:
+        # Emergent join: output of the repo + github streams becomes input to synthesis.
+        synthesis=synthesize_cross_stream(state.to_dict()); object.__setattr__(state,'cross_stream_synthesis',synthesis)
+        if synthesis: flow.insert(flow.index('integrated_verdict'),'cross_stream_synthesis')
+    return state
