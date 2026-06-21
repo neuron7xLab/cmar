@@ -9,8 +9,11 @@
     },
     "entropy_estimate": 0.555556,
     "expansion_verdict": "CONVERGING",
+    "fit_quality": null,
     "horizon": 5,
     "interpretation": "[LOW confidence: conservative baseline, no history] mass grows ~1069/iter and voids do not increase; potential_mass=5464 at horizon 5",
+    "model": "baseline_autofill_delta",
+    "nonlinearity_warning": null,
     "potential_mass": 5464,
     "projected_states": [
       {

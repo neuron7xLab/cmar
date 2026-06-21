@@ -22,8 +22,32 @@ def _num(x, default=0.0):
         return float(default)
 
 
+def _ols(ys):
+    """OLS over equally-spaced x=0..n-1. Returns (slope, r2). Evidence: OLS beats
+    the two-endpoint estimator under noise (study mean err 0.131 vs 0.163)."""
+    n = len(ys)
+    if n < 2:
+        return 0.0, 1.0
+    xs = list(range(n))
+    mx = (n - 1) / 2.0
+    my = sum(ys) / n
+    sxx = sum((x - mx) ** 2 for x in xs)
+    sxy = sum((x - mx) * (y - my) for x, y in zip(xs, ys))
+    slope = sxy / sxx if sxx else 0.0
+    intercept = my - slope * mx
+    ss_res = sum((y - (intercept + slope * x)) ** 2 for x, y in zip(xs, ys))
+    ss_tot = sum((y - my) ** 2 for y in ys)
+    r2 = 1.0 - ss_res / ss_tot if ss_tot else 1.0
+    return slope, r2
+
+
 def compute_expansion(ledger: dict, history: list[dict] | None = None, horizon: int = 5) -> dict:
-    """Project valid_mass and blocking_voids `horizon` iterations forward."""
+    """Project valid_mass and blocking_voids `horizon` iterations forward.
+
+    Velocity is estimated by OLS over the full (history + current) series; the
+    confidence is gated on fit quality (R^2), not point count alone, per the
+    findings in studies/expansion_validity/REPORT.md.
+    """
     history = list(history or [])
     if horizon <= 0:
         horizon = 5
@@ -32,19 +56,35 @@ def compute_expansion(ledger: dict, history: list[dict] | None = None, horizon: 
     cur_voids = _num(ledger.get("blocking_voids"))
     total_voids = _num(ledger.get("voids_detected"))
 
-    # --- velocity ---
+    # --- velocity (OLS over the measured series) ---
     series = [*history, {"valid_mass_bytes": cur_mass, "blocking_voids": cur_voids}]
-    if len(series) >= 2:
-        steps = len(series) - 1
-        mass_velocity = (_num(series[-1]["valid_mass_bytes"]) - _num(series[0]["valid_mass_bytes"])) / steps
-        voids_closed_per_iter = (_num(series[0]["blocking_voids"]) - _num(series[-1]["blocking_voids"])) / steps
-        confidence = "HIGH"
+    n = len(series)
+    fit_quality = None
+    nonlinearity_warning = None
+    if n >= 2:
+        mass_series = [_num(s.get("valid_mass_bytes")) for s in series]
+        voids_series = [_num(s.get("blocking_voids")) for s in series]
+        mass_velocity, fit_quality = _ols(mass_series)
+        voids_slope, _ = _ols(voids_series)
+        voids_closed_per_iter = -voids_slope  # closing == voids decreasing
         measured_closure_rate = round(voids_closed_per_iter, 6)
+        model = "linear_ols"
+        if n < 3:
+            confidence = "LOW"  # too few points to assess fit
+        elif fit_quality >= 0.9:
+            confidence = "HIGH"
+        else:
+            confidence = "MEDIUM"
+        if fit_quality is not None and fit_quality < 0.9:
+            nonlinearity_warning = (
+                f"linear fit weak (R2={round(fit_quality, 4)}); potential_mass magnitude "
+                "is unreliable on this non-linear trajectory — trust direction only")
     else:
         mass_velocity = float(_BASELINE_MASS_VELOCITY)
         voids_closed_per_iter = _BASELINE_VOIDS_PER_ITER
         confidence = "LOW"
         measured_closure_rate = None  # no history -> closure rate is unmeasured
+        model = "baseline_autofill_delta"
 
     # --- projected states ---
     projected = []
@@ -81,6 +121,9 @@ def compute_expansion(ledger: dict, history: list[dict] | None = None, horizon: 
         "schema": SCHEMA,
         "horizon": horizon,
         "confidence": confidence,
+        "model": model,
+        "fit_quality": round(fit_quality, 6) if fit_quality is not None else None,
+        "nonlinearity_warning": nonlinearity_warning,
         "current": {
             "valid_mass_bytes": int(cur_mass),
             "blocking_voids": int(cur_voids),

@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: cognitive-mass-autofill-runtime
-Version: 1.7.0
+Version: 1.8.0
 Summary: Cognitive artifact-materialization runtime with normalization, quantization, cross-stream synthesis, future-state expansion projection, falsification, autofill, real GitHub activity evidence, and an HTTP runtime server.
 License: MIT
 Requires-Python: >=3.10

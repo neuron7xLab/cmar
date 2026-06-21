@@ -55,12 +55,32 @@ class ExpanderTests(unittest.TestCase):
         self.assertAlmostEqual(rep["entropy_estimate"], 5 / (6 + 1), places=6)
 
     def test_measured_velocity_with_history(self):
+        # 2 points (1 history + current): velocity is measurable but confidence
+        # stays LOW — too few points to assess fit quality (study Q3).
         history = [{"valid_mass_bytes": 100, "blocking_voids": 4}]
         cur = {"valid_mass_bytes": 200, "blocking_voids": 2, "voids_detected": 4}
         rep = compute_expansion(cur, history=history, horizon=3)
-        self.assertEqual(rep["confidence"], "HIGH")
+        self.assertEqual(rep["confidence"], "LOW")
+        self.assertEqual(rep["model"], "linear_ols")
         self.assertEqual(rep["velocity"]["valid_mass_per_iteration"], 100.0)
         self.assertEqual(rep["velocity"]["voids_closed_per_iteration"], 2.0)
+
+    def test_high_confidence_on_clean_linear_history(self):
+        history = [{"valid_mass_bytes": m, "blocking_voids": 0} for m in (100, 200, 300, 400)]
+        cur = {"valid_mass_bytes": 500, "blocking_voids": 0, "voids_detected": 0}
+        rep = compute_expansion(cur, history=history, horizon=5)
+        self.assertEqual(rep["confidence"], "HIGH")
+        self.assertGreaterEqual(rep["fit_quality"], 0.99)
+        self.assertIsNone(rep["nonlinearity_warning"])
+
+    def test_medium_confidence_and_warning_on_nonlinear_history(self):
+        # saturating series -> weak linear fit -> MEDIUM + nonlinearity warning
+        history = [{"valid_mass_bytes": m, "blocking_voids": 0} for m in (100, 600, 850, 960)]
+        cur = {"valid_mass_bytes": 1000, "blocking_voids": 0, "voids_detected": 0}
+        rep = compute_expansion(cur, history=history, horizon=5)
+        self.assertEqual(rep["confidence"], "MEDIUM")
+        self.assertLess(rep["fit_quality"], 0.9)
+        self.assertIsNotNone(rep["nonlinearity_warning"])
 
 
 class F11InvariantTests(unittest.TestCase):

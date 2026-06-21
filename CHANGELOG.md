@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.8.0
+
+- Added an empirical validity study of the expansion projector (`studies/expansion_validity/`): 4 real measured trajectories, OLS vs two-endpoint, forecast error vs the 0.15 criterion, falsification test of `expansion_verdict`. Verdict: directionally predictive (not falsified); magnitude reliable only under local linearity. See `studies/expansion_validity/REPORT.md`.
+- Evidence-driven expander upgrade: velocity now estimated by **OLS** over the full series (beats two-endpoint under noise); `confidence` is gated on fit quality (`LOW` <3 pts / `MEDIUM` R²<0.9 / `HIGH` R²≥0.9) instead of point count; added `model`, `fit_quality`, and a `nonlinearity_warning` that flags when `potential_mass` magnitude is unreliable on non-linear trajectories.
+
 ## 1.7.0
 
 - Added future-state projector (`src/cmar/expander.py`): `compute_expansion(ledger, history, horizon)` computes `potential_mass`, an `expansion_vector` (velocity), `projected_states`, a deterministic `entropy_estimate` (`blocking_voids / (voids_detected + 1)`), and an `expansion_verdict` (`CONVERGING` / `STABLE` / `DIVERGING`) derived from velocity signs. Empty history → conservative baseline marked `confidence: LOW`.
