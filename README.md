@@ -7,22 +7,22 @@ against real repositories, refreshed automatically once a day.
 <!-- CMAR-STATS:START -->
 ### 🛰️ CMAR Truth Stats — validated by execution, not by claim
 
-_Owner `neuron7xLab` (user) · last 30d · generated 2026-06-22T03:13:50.990868+00:00 · source: gh_api + local CMAR scan_
+_Owner `neuron7xLab` (user) · last 30d · generated 2026-06-22T12:28:57.854998+00:00 · source: gh_api + local CMAR scan_
 
 | authored commits | PRs merged/opened | issues closed/opened | contribution days | repos scanned |
 |---:|---:|---:|---:|---:|
-| **861** | 440/493 | 19/32 | 17 | 13/13 |
+| **869** | 448/496 | 19/32 | 17 | 14/14 |
 
 | 🧱 debt (blocking voids) | 🕳️ gaps (falsified repos / findings) | 🔓 critical vulns |
 |---:|---:|---:|
-| **11** | 2 repos / 11 findings | **n/a** |
+| **10** | 2 repos / 10 findings | **n/a** |
 
 <details><summary>Repos needing truth-work</summary>
 
 | repo | status | falsify | debt | crit vulns |
 |---|---|---|---:|---:|
 | `.github` | FAIL | FALSIFIED | 5 | n/a |
-| `neuron7xLab` | FAIL | FALSIFIED | 5 | n/a |
+| `neuron7xLab` | FAIL | FALSIFIED | 4 | n/a |
 | `Intentia-Amoris` | PARTIAL | NOT_FALSIFIED | 1 | n/a |
 
 </details>
