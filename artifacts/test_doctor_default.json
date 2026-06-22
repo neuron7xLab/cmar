@@ -18,22 +18,22 @@
     "verdict": "NOT_FALSIFIED"
   },
   "mass_ledger": {
-    "artifact_hash": "4f173ba150092cb6ff6ad6c44a30755fdaee27b5cc7b487d1fc32642da39a337",
+    "artifact_hash": "a2dfa9565a82734880636bc43ec08cd66822b59ca10b340a45bc24855adfc502",
     "blocking_voids": 0,
-    "hollow_mass_bytes": 28696259,
-    "hollow_mass_ratio": 0.982375,
+    "hollow_mass_bytes": 28696315,
+    "hollow_mass_ratio": 0.982214,
     "ledger_version": "cmar-mass-ledger/1.4.1",
     "release_blocked": false,
     "status": "PARTIAL_VALIDATED",
     "target_valid_mass_bytes": 1048576,
-    "total_bytes": 29211110,
-    "valid_mass_bytes": 514851,
+    "total_bytes": 29215954,
+    "valid_mass_bytes": 519639,
     "verdict": "Valid structure exists but target mass is not reached.",
     "void_closure_rate": 1.0,
     "voids_detected": 0
   },
   "normalization_report": {
-    "artifact_hash": "4f173ba150092cb6ff6ad6c44a30755fdaee27b5cc7b487d1fc32642da39a337",
+    "artifact_hash": "a2dfa9565a82734880636bc43ec08cd66822b59ca10b340a45bc24855adfc502",
     "baselines": {
       "docs": 0.3,
       "source": 0.2,
@@ -41,18 +41,18 @@
     },
     "method": "baseline_clamped_unit_interval",
     "normalizer_version": "cmar-normalizer/1.4.1",
-    "release_readiness": 0.87275,
-    "structural_score": 0.510825,
+    "release_readiness": 0.873892,
+    "structural_score": 0.51094,
     "vector": {
       "blocking_pressure": 1.0,
       "ci_presence": 1.0,
-      "docs_ratio": 0.003737,
+      "docs_ratio": 0.003853,
       "protocol_validity": 1.0,
       "schema_presence": 1.0,
       "security_presence": 1.0,
-      "source_mass_ratio": 0.038403,
-      "test_mass_ratio": 0.02281,
-      "valid_mass_ratio": 0.491,
+      "source_mass_ratio": 0.038979,
+      "test_mass_ratio": 0.022807,
+      "valid_mass_ratio": 0.495566,
       "void_pressure": 1.0
     }
   },
@@ -68,13 +68,13 @@
     "information_loss": {
       "blocking_pressure": 0.075,
       "ci_presence": 0.075,
-      "docs_ratio": 0.096263,
+      "docs_ratio": 0.096147,
       "protocol_validity": 0.075,
       "schema_presence": 0.075,
       "security_presence": 0.075,
-      "source_mass_ratio": 0.061597,
-      "test_mass_ratio": 0.07719,
-      "valid_mass_ratio": 0.034,
+      "source_mass_ratio": 0.061021,
+      "test_mass_ratio": 0.077193,
+      "valid_mass_ratio": 0.029434,
       "void_pressure": 0.075
     },
     "mean_ordinal": 2.6,
@@ -114,12 +114,12 @@
   },
   "repair_plan": {
     "actions": [],
-    "artifact_hash": "4f173ba150092cb6ff6ad6c44a30755fdaee27b5cc7b487d1fc32642da39a337",
+    "artifact_hash": "a2dfa9565a82734880636bc43ec08cd66822b59ca10b340a45bc24855adfc502",
     "plan_version": "cmar-repair-plan/1.4.1",
     "status": "NO_ACTIONS_REQUIRED"
   },
   "scan": {
-    "artifact_hash": "4f173ba150092cb6ff6ad6c44a30755fdaee27b5cc7b487d1fc32642da39a337",
+    "artifact_hash": "a2dfa9565a82734880636bc43ec08cd66822b59ca10b340a45bc24855adfc502",
     "ci_present": true,
     "docs_present": true,
     "entrypoints": [
@@ -177,10 +177,10 @@
         "sha256": "8a237c01fc5cd40f65b84d5f9de15298d00d84245c39b6052f02fa7998fdbba2"
       },
       {
-        "bytes": 19397,
+        "bytes": 19619,
         "layer": "config",
         "path": "RELEASE_MANIFEST.json",
-        "sha256": "b52f902ac5620e41fc44feac6816d4dab5c638a05d431c2ac222f9f727fe3a1d"
+        "sha256": "bf1985f20b80436e5ffe9618bece31b7fc8402d87c391ce5ea6b5820f9fd6e98"
       },
       {
         "bytes": 16882,
@@ -201,10 +201,10 @@
         "sha256": "6399273c0977ce1a4057dc448950952a7a693c339411b5b95f92c36b22eb5f47"
       },
       {
-        "bytes": 12819,
+        "bytes": 12918,
         "layer": "config",
         "path": "artifacts/integrated_state.json",
-        "sha256": "9fae3fe9183d3bffd726c1209ab4e7dd0a0d4cb0584db4f6e5d0453c082a471b"
+        "sha256": "9f5e61a1f76d3c336858cbb0536a117b05783a035f34aa388c492c5d947855c8"
       },
       {
         "bytes": 12479,
@@ -213,10 +213,10 @@
         "sha256": "dc8c4c188f1a531b617ab2acb3b738d314d2a16a386818c9c2ed2296b4464de7"
       },
       {
-        "bytes": 12330,
+        "bytes": 12444,
         "layer": "config",
         "path": "artifacts/integrated_state_with_github.json",
-        "sha256": "6aeaf7d103c353e982689db0d856becb32b5f5978e037da942a175c4a1080af2"
+        "sha256": "9fb5d2ede8cadc7821dc4c90738ce354d622db520881cce050faf5f60f2c6917"
       },
       {
         "bytes": 11441,
@@ -251,13 +251,13 @@
     ],
     "layer_bytes": {
       "ci": 1666,
-      "config": 187773,
-      "docs": 32750,
-      "other": 28696259,
+      "config": 188138,
+      "docs": 33770,
+      "other": 28696315,
       "schema": 897,
       "security": 776,
-      "source": 224359,
-      "test": 66630
+      "source": 227760,
+      "test": 66632
     },
     "layer_files": {
       "ci": 2,
@@ -266,7 +266,7 @@
       "other": 7,
       "schema": 8,
       "security": 1,
-      "source": 48,
+      "source": 49,
       "test": 17
     },
     "license_present": true,
@@ -281,8 +281,8 @@
     "schemas_present": true,
     "security_present": true,
     "tests_present": true,
-    "total_bytes": 29211110,
-    "total_files": 139
+    "total_bytes": 29215954,
+    "total_files": 140
   },
   "voids": []
 }
