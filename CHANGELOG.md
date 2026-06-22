@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.9.0
+
+- Added `cmar stats <owner>` and `src/cmar/stats.py`: computes **real** owner truth-metrics across public repos — authored GitHub activity, debt (blocking voids), gaps (falsification verdicts/findings), and critical Dependabot vulnerabilities — by cloning + running CMAR each run. Fail-closed; unavailable data is `null`/`n/a`, never faked.
+- Added `scripts/update_readme_stats.py` + a `<!-- CMAR-STATS:START/END -->` block in `README.md`: a live, self-updating truth dashboard.
+- Added `.github/workflows/daily-stats.yml`: refreshes the README dashboard once a day (cron) and on demand; uses `CMAR_PAT` secret if present (private repos + cross-repo vuln data), else the scoped token.
+- Added `tests/test_stats.py` (67 tests total).
+
 ## 1.8.1
 
 - GitHub activity now detects **owner type** (`user` / `organization` / `unknown`) via `gh api users/<owner>` and scopes search queries accordingly: organizations use `org:<owner>`, **user accounts use `author:<owner>`** (previously `org:` was used for all owners, which mislabeled repo-commits as authored commits for user accounts). Added `owner_type` to the report schema. Real check: `neuron7xLab` is a User → `commits_authored` now counts authored commits, not all repo commits.

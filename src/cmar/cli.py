@@ -21,6 +21,7 @@ from .corpus_eval import evaluate_corpus
 from .report import doctor_markdown
 from .github_activity import collect_github_activity
 from .expander import compute_expansion
+from .stats import compute_owner_stats, render_markdown
 
 def _history_path():
     return Path(os.environ.get("CMAR_LEDGER_HISTORY", "artifacts/ledger_history.jsonl"))
@@ -100,6 +101,13 @@ def c_github_activity(a):
 def c_serve(a):
     from .server import run
     return run(a.host, a.port, a.root)
+def c_stats(a):
+    stats = compute_owner_stats(a.owner, a.days, scan=not a.no_scan)
+    if a.markdown:
+        Path(a.markdown).parent.mkdir(parents=True, exist_ok=True)
+        Path(a.markdown).write_text(render_markdown(stats), encoding="utf-8")
+    emit(stats, a.out)
+    return 0 if stats.get("authenticated") else 1
 def c_ledger(a):
     scan, voids, plan, ledger = stack(a.root, a.target_valid_mass)
     _append_ledger_history(ledger.to_dict())
@@ -171,6 +179,13 @@ def build_parser():
     sv.add_argument("--host", default="127.0.0.1")
     sv.add_argument("--port", type=int, default=8787)
     sv.set_defaults(func=c_serve)
+    st = sub.add_parser("stats")
+    st.add_argument("owner")
+    st.add_argument("--days", type=int, default=30)
+    st.add_argument("--no-scan", action="store_true")
+    st.add_argument("--markdown")
+    st.add_argument("--out")
+    st.set_defaults(func=c_stats)
     audit_scan = sub.add_parser("audit-scan")
     audit_scan.add_argument("audit_package")
     audit_scan.add_argument("--out")

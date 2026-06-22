@@ -1,10 +1,10 @@
 {
   "name": "cognitive-mass-autofill-runtime",
-  "version": "1.8.1",
+  "version": "1.9.0",
   "status": "PASS",
   "generated_by": "scripts/generate_manifest.py",
-  "file_count": 115,
-  "total_bytes": 29051793,
+  "file_count": 123,
+  "total_bytes": 29137645,
   "commands": {
     "unittest": 0,
     "doctor": 0,
@@ -15,7 +15,6 @@
   },
   "artifact_paths": [
     "artifacts/.gitkeep",
-    "artifacts/audit_fusion_report.json",
     "artifacts/audit_projection.json",
     "artifacts/audit_snapshot.json",
     "artifacts/autofill_report.json",
@@ -25,38 +24,26 @@
     "artifacts/falsification_report.json",
     "artifacts/fused_integrated_state.json",
     "artifacts/github_activity_30d.json",
-    "artifacts/integrated_state.json",
-    "artifacts/integrated_state_with_github.json",
-    "artifacts/ledger_history.jsonl",
-    "artifacts/mass_ledger.json",
     "artifacts/normalized_state.json",
+    "artifacts/owner_stats.json",
     "artifacts/quantized_state.json",
     "artifacts/release_check_summary.json",
-    "artifacts/repair_plan.json",
     "artifacts/repository_tree.txt",
     "artifacts/runtime_real_account.json",
-    "artifacts/runtime_report.json",
-    "artifacts/self_expansion.json",
-    "artifacts/self_falsification.json",
-    "artifacts/self_integrated.json",
-    "artifacts/self_ledger.json",
-    "artifacts/self_normalized.json",
-    "artifacts/self_plan.json",
-    "artifacts/self_protocol.json",
-    "artifacts/self_quantized.json",
-    "artifacts/self_runtime.json",
-    "artifacts/self_scan.json",
-    "artifacts/self_voids.json",
     "artifacts/test_corpus_eval.json",
     "artifacts/test_doctor_default.json",
-    "artifacts/test_github_activity_input.json",
-    "artifacts/void_graph.json"
+    "artifacts/test_github_activity_input.json"
   ],
   "files": [
     {
       "path": ".github/workflows/ci.yml",
       "bytes": 462,
       "sha256": "58e93cae438e13b13077a141c83b8c296f2e6251da998991f37f47ed6e0bf5ad"
+    },
+    {
+      "path": ".github/workflows/daily-stats.yml",
+      "bytes": 1181,
+      "sha256": "e7f1d1e3edcc8228d4c53f58c45fa50e0f6b326c4c6f144a3375d42a46d14c88"
     },
     {
       "path": ".gitignore",
@@ -70,8 +57,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 5910,
-      "sha256": "9e8fccb92b24e446dd9cbb0fde0895d4c7caa8c7cd886f167b606b7e4c91226b"
+      "bytes": 6658,
+      "sha256": "aee815a78f55fc6e243bf5c1573e4f1445f1cdea7b10bede9015ad4d45bd23ed"
     },
     {
       "path": "CITATION.cff",
@@ -110,13 +97,13 @@
     },
     {
       "path": "README.md",
-      "bytes": 4908,
-      "sha256": "0fb4de448360a03ed077f6249428501fa203a1b2b3a83871919635d82f8657e2"
+      "bytes": 5930,
+      "sha256": "3306a30649e370bff33819d0941315783687e9083a3b9d01dff25cb80ab03833"
     },
     {
       "path": "RELEASE_VERDICT.md",
       "bytes": 1619,
-      "sha256": "9f760ade816280f3ef1d41df0b8fbb0cee2098a4354e995804cb2ef61848a3a9"
+      "sha256": "d67cac0e83417668b43ddf85d51fdf7f50787c46bc72cf55d16627e6c119b413"
     },
     {
       "path": "SECURITY.md",
@@ -231,7 +218,7 @@
     {
       "path": "pyproject.toml",
       "bytes": 553,
-      "sha256": "e1e826f264c68d8717609470d4c58c41d9002178dfc0c67a4efa4dde2c44dac9"
+      "sha256": "594232126191dcf067cc9be523babaae6259bb20e7a94f79d50a0f0ca2cd336a"
     },
     {
       "path": "schemas/autofill_report.schema.json",
@@ -284,9 +271,14 @@
       "sha256": "f01bb27940becb8b2a9290d051ddd5e10990f0dfdf4e9e9c2d4a7c115c90c981"
     },
     {
+      "path": "scripts/update_readme_stats.py",
+      "bytes": 2031,
+      "sha256": "c8d2de0e8c904f0b50201da016ca8d3e942dc8f8a03e82ae1318fc715adb6f46"
+    },
+    {
       "path": "src/cmar/__init__.py",
-      "bytes": 878,
-      "sha256": "c60a192e3cb857f332b56cf2d4e9aaf83d67e8a3a79ec623bc0f6c659114967b"
+      "bytes": 934,
+      "sha256": "413718a172e6e04b58a02cf58a8016cbfd8424c4e909c577c6f077c1791842a7"
     },
     {
       "path": "src/cmar/audit_stream.py",
@@ -300,8 +292,8 @@
     },
     {
       "path": "src/cmar/cli.py",
-      "bytes": 8936,
-      "sha256": "c2399495ab313a85d813d03d13eeeefbf736f7394f5adaeaa0a55423c159b552"
+      "bytes": 9579,
+      "sha256": "b6b809eee3228f1a3580e90b76307a462e2e27e9a2f32141e97000f657b3419c"
     },
     {
       "path": "src/cmar/corpus_eval.py",
@@ -382,6 +374,11 @@
       "path": "src/cmar/server.py",
       "bytes": 4334,
       "sha256": "be5ce91cbc66b47b5b0948257677a3d1ee3d13abf748d4103cf0303690ea2d6b"
+    },
+    {
+      "path": "src/cmar/stats.py",
+      "bytes": 8351,
+      "sha256": "ff8313b61666371aa0092167dc23f915c8042bac9d4ef16c5061657e4e11f668"
     },
     {
       "path": "src/cmar/synthesis.py",
@@ -467,6 +464,11 @@
       "path": "tests/test_server.py",
       "bytes": 1868,
       "sha256": "585bf4a55af08e49f6b5d2d21249c087825c18d4c92e74029a21066d77f239a4"
+    },
+    {
+      "path": "tests/test_stats.py",
+      "bytes": 3023,
+      "sha256": "04f8201ab538417625081526e8f8914e010f854cb3560917ab87db2261b0ad60"
     },
     {
       "path": "tests/test_synthesis.py",
@@ -627,6 +629,26 @@
       "path": "vendor/n7x_audit_v4/n7x/tests/test_scorer.py",
       "bytes": 5596,
       "sha256": "43a3875a6b5215ee1d3296b98fc9e86ed21feefba585e3b673490e7cf546c27b"
+    },
+    {
+      "path": "verdicts/GeoSync.json",
+      "bytes": 24492,
+      "sha256": "f7ccec12275d3ef2bb70827fda679900ce109e435fb363e5f4947391216ed4a3"
+    },
+    {
+      "path": "verdicts/bsff_v0_1_5_development_full_package.json",
+      "bytes": 13846,
+      "sha256": "9918350f9e765ba41f9690162f339f2f29f4e86febe5adb6505e4c588b034cb7"
+    },
+    {
+      "path": "verdicts/cognitive-mirror-methods.json",
+      "bytes": 13864,
+      "sha256": "1f2306f0a72a05c3068982c073ba892270c78cfe5b86554ebe8d3cdf6a1ba445"
+    },
+    {
+      "path": "verdicts/cross_asset_sync_regime.json",
+      "bytes": 16595,
+      "sha256": "fe8e945779063c5095174b3e901d52d9195da3fb696c0f98fddea8184615c899"
     }
   ]
 }

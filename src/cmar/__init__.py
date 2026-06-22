@@ -1,5 +1,5 @@
 """CMAR Cognitive Mass Autofill Runtime."""
-__version__='1.8.1'
+__version__='1.9.0'
 from .scanner import scan_repository
 from .normalizer import normalize_repository
 from .quantizer import quantize_repository
@@ -20,3 +20,4 @@ from .github_activity import collect_github_activity, GitHubActivityReport
 from .normalizer import normalize_github_activity
 from .synthesis import synthesize_cross_stream
 from .expander import compute_expansion
+from .stats import compute_owner_stats, render_markdown

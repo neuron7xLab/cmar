@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: cognitive-mass-autofill-runtime
-Version: 1.8.1
+Version: 1.9.0
 Summary: Cognitive artifact-materialization runtime with normalization, quantization, cross-stream synthesis, future-state expansion projection, falsification, autofill, real GitHub activity evidence, and an HTTP runtime server.
 License: MIT
 Requires-Python: >=3.10
@@ -10,7 +10,13 @@ Dynamic: license-file
 
 # CMAR Cognitive Mass Autofill Runtime
 
-Executable runtime for repository state transformation.
+Executable runtime for repository state transformation. **Truth is validated by
+execution, not by claim** — every metric below is computed by running CMAR
+against real repositories, refreshed automatically once a day.
+
+<!-- CMAR-STATS:START -->
+_stats not generated yet — run `python scripts/update_readme_stats.py neuron7xLab` or wait for the daily job._
+<!-- CMAR-STATS:END -->
 
 ```bash
 cmar scan examples/seed_14kb_intent

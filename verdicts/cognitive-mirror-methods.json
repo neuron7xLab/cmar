@@ -1,0 +1,458 @@
+{
+  "autofill_report": null,
+  "falsification_report": {
+    "checked_invariants": [
+      "tests_present",
+      "ci_present",
+      "schemas_present",
+      "entrypoint_present",
+      "protocol_valid",
+      "ledger_hash_matches_scan_hash",
+      "valid_mass_not_greater_than_total_mass",
+      "no_pass_with_blocking_voids",
+      "docs_not_dominating_executable_mass",
+      "no_release_bucket_with_failed_protocol",
+      "expansion_not_diverging_on_release"
+    ],
+    "falsifier_version": "cmar-falsifier/1.4.1",
+    "findings": [],
+    "verdict": "NOT_FALSIFIED"
+  },
+  "final_status": "PARTIAL",
+  "github_activity": null,
+  "integrated_state": {
+    "cross_stream_synthesis": null,
+    "expansion": {
+      "confidence": "LOW",
+      "current": {
+        "blocking_voids": 0,
+        "valid_mass_bytes": 1050513,
+        "void_closure_rate": null
+      },
+      "entropy_estimate": 0.0,
+      "expansion_verdict": "CONVERGING",
+      "fit_quality": null,
+      "horizon": 5,
+      "interpretation": "[LOW confidence: conservative baseline, no history] mass grows ~1069/iter and voids do not increase; potential_mass=1055858 at horizon 5",
+      "model": "baseline_autofill_delta",
+      "nonlinearity_warning": null,
+      "potential_mass": 1055858,
+      "projected_states": [
+        {
+          "blocking_voids": 0,
+          "iteration": 1,
+          "valid_mass_bytes": 1051582
+        },
+        {
+          "blocking_voids": 0,
+          "iteration": 2,
+          "valid_mass_bytes": 1052651
+        },
+        {
+          "blocking_voids": 0,
+          "iteration": 3,
+          "valid_mass_bytes": 1053720
+        },
+        {
+          "blocking_voids": 0,
+          "iteration": 4,
+          "valid_mass_bytes": 1054789
+        },
+        {
+          "blocking_voids": 0,
+          "iteration": 5,
+          "valid_mass_bytes": 1055858
+        }
+      ],
+      "schema": "cmar/expansion_report/v1",
+      "velocity": {
+        "valid_mass_per_iteration": 1069.0,
+        "voids_closed_per_iteration": 1.0
+      }
+    },
+    "expansion_verdict": "CONVERGING",
+    "falsification_report": {
+      "checked_invariants": [
+        "tests_present",
+        "ci_present",
+        "schemas_present",
+        "entrypoint_present",
+        "protocol_valid",
+        "ledger_hash_matches_scan_hash",
+        "valid_mass_not_greater_than_total_mass",
+        "no_pass_with_blocking_voids",
+        "docs_not_dominating_executable_mass",
+        "no_release_bucket_with_failed_protocol",
+        "expansion_not_diverging_on_release"
+      ],
+      "falsifier_version": "cmar-falsifier/1.4.1",
+      "findings": [],
+      "verdict": "NOT_FALSIFIED"
+    },
+    "flow": [
+      "scan",
+      "normalize",
+      "quantize",
+      "voids",
+      "repair_plan",
+      "protocol",
+      "falsify",
+      "mass_ledger",
+      "expansion",
+      "integrated_verdict"
+    ],
+    "github_activity": null,
+    "github_signals": null,
+    "integrated_verdict": {
+      "gate": "CONTINUE_REPAIR",
+      "reason": "state below threshold",
+      "state": "REPAIR_REQUIRED"
+    },
+    "integrator_version": "cmar-integrator/1.4.1",
+    "mass_ledger": {
+      "artifact_hash": "25951b81945b6447d9b3221dab9aab37619fe9a8370753447d57f28cd73a53a4",
+      "blocking_voids": 0,
+      "hollow_mass_bytes": 218536,
+      "hollow_mass_ratio": 0.172205,
+      "ledger_version": "cmar-mass-ledger/1.4.1",
+      "release_blocked": false,
+      "status": "PASS",
+      "target_valid_mass_bytes": 1048576,
+      "total_bytes": 1269049,
+      "valid_mass_bytes": 1050513,
+      "verdict": "Artifact passes release gate and target valid mass.",
+      "void_closure_rate": 1.0,
+      "voids_detected": 0
+    },
+    "normalized_state": {
+      "artifact_hash": "25951b81945b6447d9b3221dab9aab37619fe9a8370753447d57f28cd73a53a4",
+      "baselines": {
+        "docs": 0.3,
+        "source": 0.2,
+        "test": 0.1
+      },
+      "method": "baseline_clamped_unit_interval",
+      "normalizer_version": "cmar-normalizer/1.4.1",
+      "release_readiness": 0.75,
+      "structural_score": 0.941585,
+      "vector": {
+        "blocking_pressure": 1.0,
+        "ci_presence": 1.0,
+        "docs_ratio": 0.64951,
+        "protocol_validity": 1.0,
+        "schema_presence": 1.0,
+        "security_presence": 1.0,
+        "source_mass_ratio": 1.0,
+        "test_mass_ratio": 1.0,
+        "valid_mass_ratio": 0.0,
+        "void_pressure": 1.0
+      }
+    },
+    "potential_mass": 1055858,
+    "protocol_report": {
+      "issues": [],
+      "protocol_version": "cmar-protocol/1.4.1",
+      "schema_valid": true,
+      "semantic_valid": true,
+      "syntax_valid": true,
+      "valid": true
+    },
+    "quantized_state": {
+      "information_loss": {
+        "blocking_pressure": 0.075,
+        "ci_presence": 0.075,
+        "docs_ratio": 0.12451,
+        "protocol_validity": 0.075,
+        "schema_presence": 0.075,
+        "security_presence": 0.075,
+        "source_mass_ratio": 0.075,
+        "test_mass_ratio": 0.075,
+        "valid_mass_ratio": 0.1,
+        "void_pressure": 0.075
+      },
+      "mean_ordinal": 3.4,
+      "method": "visible_threshold_bucket_quantization",
+      "ordinal_vector": {
+        "blocking_pressure": 4,
+        "ci_presence": 4,
+        "docs_ratio": 2,
+        "protocol_validity": 4,
+        "schema_presence": 4,
+        "security_presence": 4,
+        "source_mass_ratio": 4,
+        "test_mass_ratio": 4,
+        "valid_mass_ratio": 0,
+        "void_pressure": 4
+      },
+      "quantizer_version": "cmar-quantizer/1.4.1",
+      "state_vector": {
+        "blocking_pressure": "RELEASE",
+        "ci_presence": "RELEASE",
+        "docs_ratio": "PARTIAL",
+        "protocol_validity": "RELEASE",
+        "schema_presence": "RELEASE",
+        "security_presence": "RELEASE",
+        "source_mass_ratio": "RELEASE",
+        "test_mass_ratio": "RELEASE",
+        "valid_mass_ratio": "VOID",
+        "void_pressure": "RELEASE"
+      },
+      "thresholds": [
+        0.2,
+        0.4,
+        0.65,
+        0.85
+      ],
+      "verdict": "VOID"
+    },
+    "repair_plan": {
+      "actions": [],
+      "artifact_hash": "25951b81945b6447d9b3221dab9aab37619fe9a8370753447d57f28cd73a53a4",
+      "plan_version": "cmar-repair-plan/1.4.1",
+      "status": "NO_ACTIONS_REQUIRED"
+    },
+    "root": "/home/neuro7/projects/cognitive-mirror-methods",
+    "scan": {
+      "artifact_hash": "25951b81945b6447d9b3221dab9aab37619fe9a8370753447d57f28cd73a53a4",
+      "ci_present": true,
+      "docs_present": true,
+      "entrypoints": [
+        "noesis/cli.py",
+        "noesis/contracts/physics_boundary_cli.py",
+        "pyproject.toml",
+        "tests/test_cli.py"
+      ],
+      "largest_files": [
+        {
+          "bytes": 69632,
+          "layer": "other",
+          "path": ".coverage",
+          "sha256": "857116f8e39be911c03d6eb7b5dae0d51cf1e9b0e2e4f5f888aaecdb0f80a3c2"
+        },
+        {
+          "bytes": 44249,
+          "layer": "source",
+          "path": "noesis/pipeline_core.py",
+          "sha256": "54a6c56e2aa734154b65528e21faf3cc51912f4a8a6c59f1f3a369d2d9d35835"
+        },
+        {
+          "bytes": 31762,
+          "layer": "source",
+          "path": "noesis/cli.py",
+          "sha256": "271a062fbcfa27fc3e869a3199a3a097765fbd28e91948ff67afec332c76bf2b"
+        },
+        {
+          "bytes": 29711,
+          "layer": "config",
+          "path": "data/physics_boundary_report.json",
+          "sha256": "f968a755a05da6d17fab49602a3200826a0d23658036cf1c930dafe67bd5db69"
+        },
+        {
+          "bytes": 25773,
+          "layer": "source",
+          "path": "noesis/bibliography.py",
+          "sha256": "364112fd39fdee8a8eab14e5dccb0e84a4b6c797f0db3e282d486eaa4b7f0c2c"
+        },
+        {
+          "bytes": 24404,
+          "layer": "source",
+          "path": "noesis/contracts/physics_boundary_validator.py",
+          "sha256": "b1d59e7063addcde528081f2c19c1665c33a7b4d172960e855b0bf6fdebd2823"
+        },
+        {
+          "bytes": 24200,
+          "layer": "config",
+          "path": "data/sources.json",
+          "sha256": "d2fcbfbdd7efa95fbe8e261b90a25dee848587f04779553d7fc296425e30afbc"
+        },
+        {
+          "bytes": 24001,
+          "layer": "docs",
+          "path": "VERDICT.md",
+          "sha256": "3ebbf57025421de22cebe54856f20554c221f3ac75aa285b99725927583a4d4c"
+        },
+        {
+          "bytes": 21726,
+          "layer": "other",
+          "path": ".hypothesis/unicode_data/15.0.0/charmap.json.gz",
+          "sha256": "8abfc879628d614023972fed9312f25b379d9ae945416d25f2df3f0606c9228b"
+        },
+        {
+          "bytes": 19284,
+          "layer": "config",
+          "path": "data/source_graph.json",
+          "sha256": "1a010dae4ec96406d605c2e3b768bcc503e4d429721fd6db4d63647b371187ec"
+        },
+        {
+          "bytes": 17951,
+          "layer": "config",
+          "path": "data/claim_source_ledger.json",
+          "sha256": "46f639c6923848346270e6ff2dd0009812e4aaad8949ac1c81c948faff76f459"
+        },
+        {
+          "bytes": 16704,
+          "layer": "docs",
+          "path": "docs/BIBLIOGRAPHY.md",
+          "sha256": "e2e36e78055872a6c686ce48c68f00c48615fc434e6896b5ffc7c01513e6153b"
+        },
+        {
+          "bytes": 16459,
+          "layer": "source",
+          "path": "noesis/benchmark.py",
+          "sha256": "c754db93097e80757f7ac7b27f1134e54750b659659a9d40c9b247b630eae5a3"
+        },
+        {
+          "bytes": 15085,
+          "layer": "docs",
+          "path": "docs/quarantine/CIVILIZATIONAL_METAPHYSICS.md",
+          "sha256": "ac5d286d5e8ffaa10cd438dc1400ba237345886fa7014021f60e310ce4f436d0"
+        },
+        {
+          "bytes": 14948,
+          "layer": "config",
+          "path": "data/physics_boundary_contract.json",
+          "sha256": "bc981e3bdd879cce2509979669a20f0da6a6b71145513ec5615b64153f290ef2"
+        },
+        {
+          "bytes": 13598,
+          "layer": "test",
+          "path": "tests/test_dynamic_stress.py",
+          "sha256": "5de5ab64c861982f93c09eb72ead241a83497ed9c3364e3c95be7d42c4ba7379"
+        },
+        {
+          "bytes": 12900,
+          "layer": "source",
+          "path": "app/api.py",
+          "sha256": "eda901e5de745143df547c6a866c1fd994a47493824f83495d10fd3c51e540fb"
+        },
+        {
+          "bytes": 11674,
+          "layer": "source",
+          "path": "noesis/ontology.py",
+          "sha256": "412855f2dae8512a954433e7912d612d8cad8810ee96f885f50fb17db4f55c42"
+        },
+        {
+          "bytes": 10392,
+          "layer": "docs",
+          "path": "docs/BIBLIOGRAPHIC_EVIDENCE_GRAPH.md",
+          "sha256": "b0c24e98e118fa83b4d046be5d9e7b460c60f6ab4844710469740ac651e74237"
+        },
+        {
+          "bytes": 9835,
+          "layer": "source",
+          "path": "noesis/theories.py",
+          "sha256": "c2d40c68e508b02cff723db29631630b01285e14823bf7e2aee2bb4cf7c955b0"
+        }
+      ],
+      "layer_bytes": {
+        "ci": 1466,
+        "config": 125043,
+        "docs": 247278,
+        "other": 218536,
+        "schema": 55254,
+        "security": 1391,
+        "source": 453500,
+        "test": 166581
+      },
+      "layer_files": {
+        "ci": 1,
+        "config": 14,
+        "docs": 111,
+        "other": 187,
+        "schema": 57,
+        "security": 1,
+        "source": 83,
+        "test": 45
+      },
+      "license_present": true,
+      "missing_surface": [],
+      "package_files": [
+        "pyproject.toml"
+      ],
+      "release_metadata_present": true,
+      "risk_flags": [],
+      "root": "/home/neuro7/projects/cognitive-mirror-methods",
+      "scanner_version": "cmar-scan/1.4.1",
+      "schemas_present": true,
+      "security_present": true,
+      "tests_present": true,
+      "total_bytes": 1269049,
+      "total_files": 499
+    },
+    "voids": []
+  },
+  "normalized_state": {
+    "artifact_hash": "25951b81945b6447d9b3221dab9aab37619fe9a8370753447d57f28cd73a53a4",
+    "baselines": {
+      "docs": 0.3,
+      "source": 0.2,
+      "test": 0.1
+    },
+    "method": "baseline_clamped_unit_interval",
+    "normalizer_version": "cmar-normalizer/1.4.1",
+    "release_readiness": 1.0,
+    "structural_score": 0.941585,
+    "vector": {
+      "blocking_pressure": 1.0,
+      "ci_presence": 1.0,
+      "docs_ratio": 0.64951,
+      "protocol_validity": 1.0,
+      "schema_presence": 1.0,
+      "security_presence": 1.0,
+      "source_mass_ratio": 1.0,
+      "test_mass_ratio": 1.0,
+      "valid_mass_ratio": 1.0,
+      "void_pressure": 1.0
+    }
+  },
+  "quantized_state": {
+    "information_loss": {
+      "blocking_pressure": 0.075,
+      "ci_presence": 0.075,
+      "docs_ratio": 0.12451,
+      "protocol_validity": 0.075,
+      "schema_presence": 0.075,
+      "security_presence": 0.075,
+      "source_mass_ratio": 0.075,
+      "test_mass_ratio": 0.075,
+      "valid_mass_ratio": 0.075,
+      "void_pressure": 0.075
+    },
+    "mean_ordinal": 3.8,
+    "method": "visible_threshold_bucket_quantization",
+    "ordinal_vector": {
+      "blocking_pressure": 4,
+      "ci_presence": 4,
+      "docs_ratio": 2,
+      "protocol_validity": 4,
+      "schema_presence": 4,
+      "security_presence": 4,
+      "source_mass_ratio": 4,
+      "test_mass_ratio": 4,
+      "valid_mass_ratio": 4,
+      "void_pressure": 4
+    },
+    "quantizer_version": "cmar-quantizer/1.4.1",
+    "state_vector": {
+      "blocking_pressure": "RELEASE",
+      "ci_presence": "RELEASE",
+      "docs_ratio": "PARTIAL",
+      "protocol_validity": "RELEASE",
+      "schema_presence": "RELEASE",
+      "security_presence": "RELEASE",
+      "source_mass_ratio": "RELEASE",
+      "test_mass_ratio": "RELEASE",
+      "valid_mass_ratio": "RELEASE",
+      "void_pressure": "RELEASE"
+    },
+    "thresholds": [
+      0.2,
+      0.4,
+      0.65,
+      0.85
+    ],
+    "verdict": "RELEASE"
+  },
+  "root": "/home/neuro7/projects/cognitive-mirror-methods",
+  "runtime_version": "cmar-runtime/1.4.1"
+}

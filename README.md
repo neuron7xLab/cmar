@@ -1,6 +1,33 @@
 # CMAR Cognitive Mass Autofill Runtime
 
-Executable runtime for repository state transformation.
+Executable runtime for repository state transformation. **Truth is validated by
+execution, not by claim** — every metric below is computed by running CMAR
+against real repositories, refreshed automatically once a day.
+
+<!-- CMAR-STATS:START -->
+### 🛰️ CMAR Truth Stats — validated by execution, not by claim
+
+_Owner `neuron7xLab` (user) · last 30d · generated 2026-06-22T03:11:15.164197+00:00 · source: gh_api + local CMAR scan_
+
+| authored commits | PRs merged/opened | issues closed/opened | contribution days | repos scanned |
+|---:|---:|---:|---:|---:|
+| **875** | 455/508 | 20/35 | 18 | 13/13 |
+
+| 🧱 debt (blocking voids) | 🕳️ gaps (falsified repos / findings) | 🔓 critical vulns |
+|---:|---:|---:|
+| **11** | 2 repos / 11 findings | **0** |
+
+<details><summary>Repos needing truth-work</summary>
+
+| repo | status | falsify | debt | crit vulns |
+|---|---|---|---:|---:|
+| `.github` | FAIL | FALSIFIED | 5 | n/a |
+| `neuron7xLab` | FAIL | FALSIFIED | 5 | 0 |
+| `Intentia-Amoris` | PARTIAL | NOT_FALSIFIED | 1 | 0 |
+
+</details>
+
+<!-- CMAR-STATS:END -->
 
 ```bash
 cmar scan examples/seed_14kb_intent

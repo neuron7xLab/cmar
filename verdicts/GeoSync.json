@@ -1,0 +1,588 @@
+{
+  "autofill_report": null,
+  "falsification_report": {
+    "checked_invariants": [
+      "tests_present",
+      "ci_present",
+      "schemas_present",
+      "entrypoint_present",
+      "protocol_valid",
+      "ledger_hash_matches_scan_hash",
+      "valid_mass_not_greater_than_total_mass",
+      "no_pass_with_blocking_voids",
+      "docs_not_dominating_executable_mass",
+      "no_release_bucket_with_failed_protocol",
+      "expansion_not_diverging_on_release"
+    ],
+    "falsifier_version": "cmar-falsifier/1.4.1",
+    "findings": [],
+    "verdict": "NOT_FALSIFIED"
+  },
+  "final_status": "PARTIAL",
+  "github_activity": null,
+  "integrated_state": {
+    "cross_stream_synthesis": null,
+    "expansion": {
+      "confidence": "LOW",
+      "current": {
+        "blocking_voids": 0,
+        "valid_mass_bytes": 262586814,
+        "void_closure_rate": null
+      },
+      "entropy_estimate": 0.0,
+      "expansion_verdict": "CONVERGING",
+      "fit_quality": null,
+      "horizon": 5,
+      "interpretation": "[LOW confidence: conservative baseline, no history] mass grows ~1069/iter and voids do not increase; potential_mass=262592159 at horizon 5",
+      "model": "baseline_autofill_delta",
+      "nonlinearity_warning": null,
+      "potential_mass": 262592159,
+      "projected_states": [
+        {
+          "blocking_voids": 0,
+          "iteration": 1,
+          "valid_mass_bytes": 262587883
+        },
+        {
+          "blocking_voids": 0,
+          "iteration": 2,
+          "valid_mass_bytes": 262588952
+        },
+        {
+          "blocking_voids": 0,
+          "iteration": 3,
+          "valid_mass_bytes": 262590021
+        },
+        {
+          "blocking_voids": 0,
+          "iteration": 4,
+          "valid_mass_bytes": 262591090
+        },
+        {
+          "blocking_voids": 0,
+          "iteration": 5,
+          "valid_mass_bytes": 262592159
+        }
+      ],
+      "schema": "cmar/expansion_report/v1",
+      "velocity": {
+        "valid_mass_per_iteration": 1069.0,
+        "voids_closed_per_iteration": 1.0
+      }
+    },
+    "expansion_verdict": "CONVERGING",
+    "falsification_report": {
+      "checked_invariants": [
+        "tests_present",
+        "ci_present",
+        "schemas_present",
+        "entrypoint_present",
+        "protocol_valid",
+        "ledger_hash_matches_scan_hash",
+        "valid_mass_not_greater_than_total_mass",
+        "no_pass_with_blocking_voids",
+        "docs_not_dominating_executable_mass",
+        "no_release_bucket_with_failed_protocol",
+        "expansion_not_diverging_on_release"
+      ],
+      "falsifier_version": "cmar-falsifier/1.4.1",
+      "findings": [],
+      "verdict": "NOT_FALSIFIED"
+    },
+    "flow": [
+      "scan",
+      "normalize",
+      "quantize",
+      "voids",
+      "repair_plan",
+      "protocol",
+      "falsify",
+      "mass_ledger",
+      "expansion",
+      "integrated_verdict"
+    ],
+    "github_activity": null,
+    "github_signals": null,
+    "integrated_verdict": {
+      "gate": "CONTINUE_REPAIR",
+      "reason": "state below threshold",
+      "state": "REPAIR_REQUIRED"
+    },
+    "integrator_version": "cmar-integrator/1.4.1",
+    "mass_ledger": {
+      "artifact_hash": "a37598a53a921be7dc3a3726d0e1a7185c6b56e6d55b785e1f49d13769a7e79c",
+      "blocking_voids": 0,
+      "hollow_mass_bytes": 259292582,
+      "hollow_mass_ratio": 0.496844,
+      "ledger_version": "cmar-mass-ledger/1.4.1",
+      "release_blocked": false,
+      "status": "PASS",
+      "target_valid_mass_bytes": 1048576,
+      "total_bytes": 521879396,
+      "valid_mass_bytes": 262586814,
+      "verdict": "Artifact passes release gate and target valid mass.",
+      "void_closure_rate": 1.0,
+      "voids_detected": 0
+    },
+    "normalized_state": {
+      "artifact_hash": "a37598a53a921be7dc3a3726d0e1a7185c6b56e6d55b785e1f49d13769a7e79c",
+      "baselines": {
+        "docs": 0.3,
+        "source": 0.2,
+        "test": 0.1
+      },
+      "method": "baseline_clamped_unit_interval",
+      "normalizer_version": "cmar-normalizer/1.4.1",
+      "release_readiness": 0.75,
+      "structural_score": 0.811859,
+      "vector": {
+        "blocking_pressure": 1.0,
+        "ci_presence": 1.0,
+        "docs_ratio": 0.26203,
+        "protocol_validity": 1.0,
+        "schema_presence": 1.0,
+        "security_presence": 1.0,
+        "source_mass_ratio": 0.609126,
+        "test_mass_ratio": 1.0,
+        "valid_mass_ratio": 0.0,
+        "void_pressure": 1.0
+      }
+    },
+    "potential_mass": 262592159,
+    "protocol_report": {
+      "issues": [],
+      "protocol_version": "cmar-protocol/1.4.1",
+      "schema_valid": true,
+      "semantic_valid": true,
+      "syntax_valid": true,
+      "valid": true
+    },
+    "quantized_state": {
+      "information_loss": {
+        "blocking_pressure": 0.075,
+        "ci_presence": 0.075,
+        "docs_ratio": 0.03797,
+        "protocol_validity": 0.075,
+        "schema_presence": 0.075,
+        "security_presence": 0.075,
+        "source_mass_ratio": 0.084126,
+        "test_mass_ratio": 0.075,
+        "valid_mass_ratio": 0.1,
+        "void_pressure": 0.075
+      },
+      "mean_ordinal": 3.1,
+      "method": "visible_threshold_bucket_quantization",
+      "ordinal_vector": {
+        "blocking_pressure": 4,
+        "ci_presence": 4,
+        "docs_ratio": 1,
+        "protocol_validity": 4,
+        "schema_presence": 4,
+        "security_presence": 4,
+        "source_mass_ratio": 2,
+        "test_mass_ratio": 4,
+        "valid_mass_ratio": 0,
+        "void_pressure": 4
+      },
+      "quantizer_version": "cmar-quantizer/1.4.1",
+      "state_vector": {
+        "blocking_pressure": "RELEASE",
+        "ci_presence": "RELEASE",
+        "docs_ratio": "WEAK",
+        "protocol_validity": "RELEASE",
+        "schema_presence": "RELEASE",
+        "security_presence": "RELEASE",
+        "source_mass_ratio": "PARTIAL",
+        "test_mass_ratio": "RELEASE",
+        "valid_mass_ratio": "VOID",
+        "void_pressure": "RELEASE"
+      },
+      "thresholds": [
+        0.2,
+        0.4,
+        0.65,
+        0.85
+      ],
+      "verdict": "VOID"
+    },
+    "repair_plan": {
+      "actions": [],
+      "artifact_hash": "a37598a53a921be7dc3a3726d0e1a7185c6b56e6d55b785e1f49d13769a7e79c",
+      "plan_version": "cmar-repair-plan/1.4.1",
+      "status": "NO_ACTIONS_REQUIRED"
+    },
+    "root": "/home/neuro7/GeoSync",
+    "scan": {
+      "artifact_hash": "a37598a53a921be7dc3a3726d0e1a7185c6b56e6d55b785e1f49d13769a7e79c",
+      "ci_present": true,
+      "docs_present": true,
+      "entrypoints": [
+        ".claude/worktrees/agent-a412f3035c2a23682/apps/risk_guardian/cli.py",
+        ".claude/worktrees/agent-a412f3035c2a23682/cli/amm_cli.py",
+        ".claude/worktrees/agent-a412f3035c2a23682/cli/geosync_cli.py",
+        ".claude/worktrees/agent-a412f3035c2a23682/core/kuramoto/cli.py",
+        ".claude/worktrees/agent-a412f3035c2a23682/core/neuro/serotonin/profiler/cli.py",
+        ".claude/worktrees/agent-a412f3035c2a23682/cortex_service/app/__main__.py",
+        ".claude/worktrees/agent-a412f3035c2a23682/geosync/mfn/cli.py",
+        ".claude/worktrees/agent-a412f3035c2a23682/interfaces/cli.py",
+        ".claude/worktrees/agent-a412f3035c2a23682/nak_controller/tests/test_cli.py",
+        ".claude/worktrees/agent-a412f3035c2a23682/research/microstructure/l2_cli.py",
+        ".claude/worktrees/agent-a412f3035c2a23682/research/systemic_risk/cli.py",
+        ".claude/worktrees/agent-a412f3035c2a23682/scripts/__main__.py",
+        ".claude/worktrees/agent-a412f3035c2a23682/scripts/cli.py",
+        ".claude/worktrees/agent-a412f3035c2a23682/scripts/data_annotation_cli.py",
+        ".claude/worktrees/agent-a412f3035c2a23682/src/geosync/sdk/mlsdm/__main__.py",
+        ".claude/worktrees/agent-a412f3035c2a23682/tacl/__main__.py",
+        ".claude/worktrees/agent-a412f3035c2a23682/tests/evolution/test_bond_evolver_cli.py",
+        ".claude/worktrees/agent-a412f3035c2a23682/tests/integration/test_database_migration_cli.py",
+        ".claude/worktrees/agent-a412f3035c2a23682/tests/scripts/test_cli.py",
+        ".claude/worktrees/agent-a412f3035c2a23682/tests/sdk/mlsdm/test_cli.py",
+        ".claude/worktrees/agent-a412f3035c2a23682/tests/tools/test_research_cli.py",
+        ".claude/worktrees/agent-a412f3035c2a23682/tests/unit/application/runtime/test_server_cli.py",
+        ".claude/worktrees/agent-a412f3035c2a23682/tests/unit/cli/test_amm_cli.py",
+        ".claude/worktrees/agent-a412f3035c2a23682/tests/unit/cli/test_fete_backtest_cli.py",
+        ".claude/worktrees/agent-a412f3035c2a23682/tests/unit/core/test_kuramoto_cli.py",
+        ".claude/worktrees/agent-a412f3035c2a23682/tests/unit/mfn/test_mfn_cli.py",
+        ".claude/worktrees/agent-a412f3035c2a23682/tests/unit/test_geosync_cli.py",
+        ".claude/worktrees/agent-a412f3035c2a23682/tests/unit/test_interfaces_cli.py",
+        ".claude/worktrees/agent-a412f3035c2a23682/tools/research/research_cli.py",
+        ".claude/worktrees/agent-a412f3035c2a23682/tools/synthetic_l2/__main__.py",
+        ".claude/worktrees/agent-a412f3035c2a23682/tools/synthetic_l2/cli.py",
+        ".claude/worktrees/agent-a412f3035c2a23682/tools/vendor/fpma/__main__.py",
+        ".claude/worktrees/agent-a412f3035c2a23682/tools/vendor/fpma/cli.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/apps/risk_guardian/cli.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/cli/amm_cli.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/cli/geosync_cli.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/core/kuramoto/cli.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/core/neuro/serotonin/profiler/cli.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/cortex_service/app/__main__.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/geosync/mfn/cli.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/interfaces/cli.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/nak_controller/tests/test_cli.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/research/microstructure/l2_cli.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/research/systemic_risk/cli.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/scripts/__main__.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/scripts/cli.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/scripts/data_annotation_cli.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/src/geosync/sdk/mlsdm/__main__.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/tacl/__main__.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/tests/evolution/test_bond_evolver_cli.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/tests/integration/test_database_migration_cli.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/tests/scripts/test_cli.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/tests/sdk/mlsdm/test_cli.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/tests/tools/test_research_cli.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/tests/unit/application/runtime/test_server_cli.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/tests/unit/cli/test_amm_cli.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/tests/unit/cli/test_fete_backtest_cli.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/tests/unit/core/test_kuramoto_cli.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/tests/unit/mfn/test_mfn_cli.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/tests/unit/test_geosync_cli.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/tests/unit/test_interfaces_cli.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/tools/research/research_cli.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/tools/synthetic_l2/__main__.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/tools/synthetic_l2/cli.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/tools/vendor/fpma/__main__.py",
+        ".claude/worktrees/agent-a8eaa84fc523d1574/tools/vendor/fpma/cli.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/apps/risk_guardian/cli.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/cli/amm_cli.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/cli/geosync_cli.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/core/kuramoto/cli.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/core/neuro/serotonin/profiler/cli.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/cortex_service/app/__main__.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/geosync/mfn/cli.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/interfaces/cli.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/nak_controller/tests/test_cli.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/research/microstructure/l2_cli.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/research/systemic_risk/cli.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/scripts/__main__.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/scripts/cli.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/scripts/data_annotation_cli.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/src/geosync/sdk/mlsdm/__main__.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/tacl/__main__.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/tests/evolution/test_bond_evolver_cli.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/tests/integration/test_database_migration_cli.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/tests/scripts/test_cli.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/tests/sdk/mlsdm/test_cli.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/tests/tools/test_research_cli.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/tests/unit/application/runtime/test_server_cli.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/tests/unit/cli/test_amm_cli.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/tests/unit/cli/test_fete_backtest_cli.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/tests/unit/core/test_kuramoto_cli.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/tests/unit/mfn/test_mfn_cli.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/tests/unit/test_geosync_cli.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/tests/unit/test_interfaces_cli.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/tools/research/research_cli.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/tools/synthetic_l2/__main__.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/tools/synthetic_l2/cli.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/tools/vendor/fpma/__main__.py",
+        ".claude/worktrees/agent-ac5541bfe22b1a572/tools/vendor/fpma/cli.py",
+        "apps/risk_guardian/cli.py",
+        "cli/amm_cli.py",
+        "cli/geosync_cli.py",
+        "core/kuramoto/cli.py",
+        "core/neuro/serotonin/profiler/cli.py",
+        "cortex_service/app/__main__.py",
+        "geosync/mfn/cli.py",
+        "interfaces/cli.py",
+        "nak_controller/tests/test_cli.py",
+        "pyproject.toml",
+        "research/microstructure/l2_cli.py",
+        "research/systemic_risk/cli.py",
+        "scripts/__main__.py",
+        "scripts/cli.py",
+        "scripts/data_annotation_cli.py",
+        "src/geosync/sdk/mlsdm/__main__.py",
+        "tacl/__main__.py",
+        "tests/evolution/test_bond_evolver_cli.py",
+        "tests/integration/test_database_migration_cli.py",
+        "tests/scripts/test_cli.py",
+        "tests/sdk/mlsdm/test_cli.py",
+        "tests/tools/test_research_cli.py",
+        "tests/unit/application/runtime/test_server_cli.py",
+        "tests/unit/cli/test_amm_cli.py",
+        "tests/unit/cli/test_fete_backtest_cli.py",
+        "tests/unit/core/test_kuramoto_cli.py",
+        "tests/unit/mfn/test_mfn_cli.py",
+        "tests/unit/test_geosync_cli.py",
+        "tests/unit/test_interfaces_cli.py",
+        "tools/research/research_cli.py",
+        "tools/synthetic_l2/__main__.py",
+        "tools/synthetic_l2/cli.py",
+        "tools/vendor/fpma/__main__.py",
+        "tools/vendor/fpma/cli.py"
+      ],
+      "largest_files": [
+        {
+          "bytes": 19790245,
+          "layer": "test",
+          "path": ".claude/worktrees/agent-a412f3035c2a23682/tests/fixtures/recordings/tests_adapters_test_public_contract.py__test_public_symbols_recorded[binance].yaml",
+          "sha256": "acd15e4d40cad6a3e69b28a1763f16b5f677d2cbc00901080a7f7a1c3ab3fc16"
+        },
+        {
+          "bytes": 19790245,
+          "layer": "test",
+          "path": ".claude/worktrees/agent-ac5541bfe22b1a572/tests/fixtures/recordings/tests_adapters_test_public_contract.py__test_public_symbols_recorded[binance].yaml",
+          "sha256": "acd15e4d40cad6a3e69b28a1763f16b5f677d2cbc00901080a7f7a1c3ab3fc16"
+        },
+        {
+          "bytes": 19790245,
+          "layer": "test",
+          "path": ".claude/worktrees/agent-a8eaa84fc523d1574/tests/fixtures/recordings/tests_adapters_test_public_contract.py__test_public_symbols_recorded[binance].yaml",
+          "sha256": "acd15e4d40cad6a3e69b28a1763f16b5f677d2cbc00901080a7f7a1c3ab3fc16"
+        },
+        {
+          "bytes": 19790245,
+          "layer": "test",
+          "path": "tests/fixtures/recordings/tests_adapters_test_public_contract.py__test_public_symbols_recorded[binance].yaml",
+          "sha256": "acd15e4d40cad6a3e69b28a1763f16b5f677d2cbc00901080a7f7a1c3ab3fc16"
+        },
+        {
+          "bytes": 6727491,
+          "layer": "other",
+          "path": ".claude/worktrees/agent-a412f3035c2a23682/data/askar_full/panel_hourly.parquet",
+          "sha256": "3f2bcf6fbdebdf50310a675046dbf268c5fdaa7c3aa80f4e0fe4f8029e3f7908"
+        },
+        {
+          "bytes": 6727491,
+          "layer": "other",
+          "path": ".claude/worktrees/agent-ac5541bfe22b1a572/data/askar_full/panel_hourly.parquet",
+          "sha256": "3f2bcf6fbdebdf50310a675046dbf268c5fdaa7c3aa80f4e0fe4f8029e3f7908"
+        },
+        {
+          "bytes": 6727491,
+          "layer": "other",
+          "path": ".claude/worktrees/agent-a8eaa84fc523d1574/data/askar_full/panel_hourly.parquet",
+          "sha256": "3f2bcf6fbdebdf50310a675046dbf268c5fdaa7c3aa80f4e0fe4f8029e3f7908"
+        },
+        {
+          "bytes": 6727491,
+          "layer": "other",
+          "path": "data/askar_full/panel_hourly.parquet",
+          "sha256": "3f2bcf6fbdebdf50310a675046dbf268c5fdaa7c3aa80f4e0fe4f8029e3f7908"
+        },
+        {
+          "bytes": 6281149,
+          "layer": "other",
+          "path": ".claude/worktrees/agent-a412f3035c2a23682/data/askar_full/panel_hourly_extended.parquet",
+          "sha256": "c32cfd8285c918cfa7527568b1c91b5e3ac36f70e7b339d07d122ce997cd4d77"
+        },
+        {
+          "bytes": 6281149,
+          "layer": "other",
+          "path": ".claude/worktrees/agent-ac5541bfe22b1a572/data/askar_full/panel_hourly_extended.parquet",
+          "sha256": "c32cfd8285c918cfa7527568b1c91b5e3ac36f70e7b339d07d122ce997cd4d77"
+        },
+        {
+          "bytes": 6281149,
+          "layer": "other",
+          "path": ".claude/worktrees/agent-a8eaa84fc523d1574/data/askar_full/panel_hourly_extended.parquet",
+          "sha256": "c32cfd8285c918cfa7527568b1c91b5e3ac36f70e7b339d07d122ce997cd4d77"
+        },
+        {
+          "bytes": 6281149,
+          "layer": "other",
+          "path": "data/askar_full/panel_hourly_extended.parquet",
+          "sha256": "c32cfd8285c918cfa7527568b1c91b5e3ac36f70e7b339d07d122ce997cd4d77"
+        },
+        {
+          "bytes": 4538921,
+          "layer": "other",
+          "path": ".claude/worktrees/agent-a412f3035c2a23682/data/askar_full/panel_fx_hourly.parquet",
+          "sha256": "8019a0ca01149e798e3be8a8cb24f6085c309a405711b70162ddeda098f0b490"
+        },
+        {
+          "bytes": 4538921,
+          "layer": "other",
+          "path": ".claude/worktrees/agent-ac5541bfe22b1a572/data/askar_full/panel_fx_hourly.parquet",
+          "sha256": "8019a0ca01149e798e3be8a8cb24f6085c309a405711b70162ddeda098f0b490"
+        },
+        {
+          "bytes": 4538921,
+          "layer": "other",
+          "path": ".claude/worktrees/agent-a8eaa84fc523d1574/data/askar_full/panel_fx_hourly.parquet",
+          "sha256": "8019a0ca01149e798e3be8a8cb24f6085c309a405711b70162ddeda098f0b490"
+        },
+        {
+          "bytes": 4538921,
+          "layer": "other",
+          "path": "data/askar_full/panel_fx_hourly.parquet",
+          "sha256": "8019a0ca01149e798e3be8a8cb24f6085c309a405711b70162ddeda098f0b490"
+        },
+        {
+          "bytes": 4295079,
+          "layer": "other",
+          "path": ".claude/worktrees/agent-a412f3035c2a23682/results/neurophase_gate_history.csv",
+          "sha256": "d94c21286f589e6d1550bc7401bb630a2460067d13666d36e87320ad464f3b1c"
+        },
+        {
+          "bytes": 4295079,
+          "layer": "other",
+          "path": ".claude/worktrees/agent-ac5541bfe22b1a572/results/neurophase_gate_history.csv",
+          "sha256": "d94c21286f589e6d1550bc7401bb630a2460067d13666d36e87320ad464f3b1c"
+        },
+        {
+          "bytes": 4295079,
+          "layer": "other",
+          "path": ".claude/worktrees/agent-a8eaa84fc523d1574/results/neurophase_gate_history.csv",
+          "sha256": "d94c21286f589e6d1550bc7401bb630a2460067d13666d36e87320ad464f3b1c"
+        },
+        {
+          "bytes": 4295079,
+          "layer": "other",
+          "path": "results/neurophase_gate_history.csv",
+          "sha256": "d94c21286f589e6d1550bc7401bb630a2460067d13666d36e87320ad464f3b1c"
+        }
+      ],
+      "layer_bytes": {
+        "ci": 719792,
+        "config": 22863534,
+        "docs": 41024423,
+        "other": 259292582,
+        "schema": 2504476,
+        "security": 217356,
+        "source": 63578018,
+        "test": 131679215
+      },
+      "layer_files": {
+        "ci": 192,
+        "config": 3374,
+        "docs": 4179,
+        "other": 2959,
+        "schema": 517,
+        "security": 38,
+        "source": 7760,
+        "test": 6799
+      },
+      "license_present": true,
+      "missing_surface": [],
+      "package_files": [
+        "go.mod",
+        "pyproject.toml"
+      ],
+      "release_metadata_present": true,
+      "risk_flags": [],
+      "root": "/home/neuro7/GeoSync",
+      "scanner_version": "cmar-scan/1.4.1",
+      "schemas_present": true,
+      "security_present": true,
+      "tests_present": true,
+      "total_bytes": 521879396,
+      "total_files": 25818
+    },
+    "voids": []
+  },
+  "normalized_state": {
+    "artifact_hash": "a37598a53a921be7dc3a3726d0e1a7185c6b56e6d55b785e1f49d13769a7e79c",
+    "baselines": {
+      "docs": 0.3,
+      "source": 0.2,
+      "test": 0.1
+    },
+    "method": "baseline_clamped_unit_interval",
+    "normalizer_version": "cmar-normalizer/1.4.1",
+    "release_readiness": 1.0,
+    "structural_score": 0.811859,
+    "vector": {
+      "blocking_pressure": 1.0,
+      "ci_presence": 1.0,
+      "docs_ratio": 0.26203,
+      "protocol_validity": 1.0,
+      "schema_presence": 1.0,
+      "security_presence": 1.0,
+      "source_mass_ratio": 0.609126,
+      "test_mass_ratio": 1.0,
+      "valid_mass_ratio": 1.0,
+      "void_pressure": 1.0
+    }
+  },
+  "quantized_state": {
+    "information_loss": {
+      "blocking_pressure": 0.075,
+      "ci_presence": 0.075,
+      "docs_ratio": 0.03797,
+      "protocol_validity": 0.075,
+      "schema_presence": 0.075,
+      "security_presence": 0.075,
+      "source_mass_ratio": 0.084126,
+      "test_mass_ratio": 0.075,
+      "valid_mass_ratio": 0.075,
+      "void_pressure": 0.075
+    },
+    "mean_ordinal": 3.5,
+    "method": "visible_threshold_bucket_quantization",
+    "ordinal_vector": {
+      "blocking_pressure": 4,
+      "ci_presence": 4,
+      "docs_ratio": 1,
+      "protocol_validity": 4,
+      "schema_presence": 4,
+      "security_presence": 4,
+      "source_mass_ratio": 2,
+      "test_mass_ratio": 4,
+      "valid_mass_ratio": 4,
+      "void_pressure": 4
+    },
+    "quantizer_version": "cmar-quantizer/1.4.1",
+    "state_vector": {
+      "blocking_pressure": "RELEASE",
+      "ci_presence": "RELEASE",
+      "docs_ratio": "WEAK",
+      "protocol_validity": "RELEASE",
+      "schema_presence": "RELEASE",
+      "security_presence": "RELEASE",
+      "source_mass_ratio": "PARTIAL",
+      "test_mass_ratio": "RELEASE",
+      "valid_mass_ratio": "RELEASE",
+      "void_pressure": "RELEASE"
+    },
+    "thresholds": [
+      0.2,
+      0.4,
+      0.65,
+      0.85
+    ],
+    "verdict": "RELEASE"
+  },
+  "root": "/home/neuro7/GeoSync",
+  "runtime_version": "cmar-runtime/1.4.1"
+}

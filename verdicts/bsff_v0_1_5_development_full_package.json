@@ -1,0 +1,456 @@
+{
+  "autofill_report": null,
+  "falsification_report": {
+    "checked_invariants": [
+      "tests_present",
+      "ci_present",
+      "schemas_present",
+      "entrypoint_present",
+      "protocol_valid",
+      "ledger_hash_matches_scan_hash",
+      "valid_mass_not_greater_than_total_mass",
+      "no_pass_with_blocking_voids",
+      "docs_not_dominating_executable_mass",
+      "no_release_bucket_with_failed_protocol",
+      "expansion_not_diverging_on_release"
+    ],
+    "falsifier_version": "cmar-falsifier/1.4.1",
+    "findings": [],
+    "verdict": "NOT_FALSIFIED"
+  },
+  "final_status": "PARTIAL",
+  "github_activity": null,
+  "integrated_state": {
+    "cross_stream_synthesis": null,
+    "expansion": {
+      "confidence": "LOW",
+      "current": {
+        "blocking_voids": 0,
+        "valid_mass_bytes": 390733,
+        "void_closure_rate": null
+      },
+      "entropy_estimate": 0.0,
+      "expansion_verdict": "CONVERGING",
+      "fit_quality": null,
+      "horizon": 5,
+      "interpretation": "[LOW confidence: conservative baseline, no history] mass grows ~1069/iter and voids do not increase; potential_mass=396078 at horizon 5",
+      "model": "baseline_autofill_delta",
+      "nonlinearity_warning": null,
+      "potential_mass": 396078,
+      "projected_states": [
+        {
+          "blocking_voids": 0,
+          "iteration": 1,
+          "valid_mass_bytes": 391802
+        },
+        {
+          "blocking_voids": 0,
+          "iteration": 2,
+          "valid_mass_bytes": 392871
+        },
+        {
+          "blocking_voids": 0,
+          "iteration": 3,
+          "valid_mass_bytes": 393940
+        },
+        {
+          "blocking_voids": 0,
+          "iteration": 4,
+          "valid_mass_bytes": 395009
+        },
+        {
+          "blocking_voids": 0,
+          "iteration": 5,
+          "valid_mass_bytes": 396078
+        }
+      ],
+      "schema": "cmar/expansion_report/v1",
+      "velocity": {
+        "valid_mass_per_iteration": 1069.0,
+        "voids_closed_per_iteration": 1.0
+      }
+    },
+    "expansion_verdict": "CONVERGING",
+    "falsification_report": {
+      "checked_invariants": [
+        "tests_present",
+        "ci_present",
+        "schemas_present",
+        "entrypoint_present",
+        "protocol_valid",
+        "ledger_hash_matches_scan_hash",
+        "valid_mass_not_greater_than_total_mass",
+        "no_pass_with_blocking_voids",
+        "docs_not_dominating_executable_mass",
+        "no_release_bucket_with_failed_protocol",
+        "expansion_not_diverging_on_release"
+      ],
+      "falsifier_version": "cmar-falsifier/1.4.1",
+      "findings": [],
+      "verdict": "NOT_FALSIFIED"
+    },
+    "flow": [
+      "scan",
+      "normalize",
+      "quantize",
+      "voids",
+      "repair_plan",
+      "protocol",
+      "falsify",
+      "mass_ledger",
+      "expansion",
+      "integrated_verdict"
+    ],
+    "github_activity": null,
+    "github_signals": null,
+    "integrated_verdict": {
+      "gate": "CONTINUE_REPAIR",
+      "reason": "state below threshold",
+      "state": "REPAIR_REQUIRED"
+    },
+    "integrator_version": "cmar-integrator/1.4.1",
+    "mass_ledger": {
+      "artifact_hash": "03145d3c14647c6b1e50fec1b6ff0a18c6480e7601acc9fbcb360d9024263dd8",
+      "blocking_voids": 0,
+      "hollow_mass_bytes": 10197189,
+      "hollow_mass_ratio": 0.963096,
+      "ledger_version": "cmar-mass-ledger/1.4.1",
+      "release_blocked": false,
+      "status": "PARTIAL_VALIDATED",
+      "target_valid_mass_bytes": 1048576,
+      "total_bytes": 10587922,
+      "valid_mass_bytes": 390733,
+      "verdict": "Valid structure exists but target mass is not reached.",
+      "void_closure_rate": 1.0,
+      "voids_detected": 0
+    },
+    "normalized_state": {
+      "artifact_hash": "03145d3c14647c6b1e50fec1b6ff0a18c6480e7601acc9fbcb360d9024263dd8",
+      "baselines": {
+        "docs": 0.3,
+        "source": 0.2,
+        "test": 0.1
+      },
+      "method": "baseline_clamped_unit_interval",
+      "normalizer_version": "cmar-normalizer/1.4.1",
+      "release_readiness": 0.75,
+      "structural_score": 0.521394,
+      "vector": {
+        "blocking_pressure": 1.0,
+        "ci_presence": 1.0,
+        "docs_ratio": 0.0408,
+        "protocol_validity": 1.0,
+        "schema_presence": 1.0,
+        "security_presence": 1.0,
+        "source_mass_ratio": 0.051514,
+        "test_mass_ratio": 0.036048,
+        "valid_mass_ratio": 0.0,
+        "void_pressure": 1.0
+      }
+    },
+    "potential_mass": 396078,
+    "protocol_report": {
+      "issues": [],
+      "protocol_version": "cmar-protocol/1.4.1",
+      "schema_valid": true,
+      "semantic_valid": true,
+      "syntax_valid": true,
+      "valid": true
+    },
+    "quantized_state": {
+      "information_loss": {
+        "blocking_pressure": 0.075,
+        "ci_presence": 0.075,
+        "docs_ratio": 0.0592,
+        "protocol_validity": 0.075,
+        "schema_presence": 0.075,
+        "security_presence": 0.075,
+        "source_mass_ratio": 0.048486,
+        "test_mass_ratio": 0.063952,
+        "valid_mass_ratio": 0.1,
+        "void_pressure": 0.075
+      },
+      "mean_ordinal": 2.4,
+      "method": "visible_threshold_bucket_quantization",
+      "ordinal_vector": {
+        "blocking_pressure": 4,
+        "ci_presence": 4,
+        "docs_ratio": 0,
+        "protocol_validity": 4,
+        "schema_presence": 4,
+        "security_presence": 4,
+        "source_mass_ratio": 0,
+        "test_mass_ratio": 0,
+        "valid_mass_ratio": 0,
+        "void_pressure": 4
+      },
+      "quantizer_version": "cmar-quantizer/1.4.1",
+      "state_vector": {
+        "blocking_pressure": "RELEASE",
+        "ci_presence": "RELEASE",
+        "docs_ratio": "VOID",
+        "protocol_validity": "RELEASE",
+        "schema_presence": "RELEASE",
+        "security_presence": "RELEASE",
+        "source_mass_ratio": "VOID",
+        "test_mass_ratio": "VOID",
+        "valid_mass_ratio": "VOID",
+        "void_pressure": "RELEASE"
+      },
+      "thresholds": [
+        0.2,
+        0.4,
+        0.65,
+        0.85
+      ],
+      "verdict": "VOID"
+    },
+    "repair_plan": {
+      "actions": [],
+      "artifact_hash": "03145d3c14647c6b1e50fec1b6ff0a18c6480e7601acc9fbcb360d9024263dd8",
+      "plan_version": "cmar-repair-plan/1.4.1",
+      "status": "NO_ACTIONS_REQUIRED"
+    },
+    "root": "/home/neuro7/Desktop/bsff_v0_1_5_development_full_package",
+    "scan": {
+      "artifact_hash": "03145d3c14647c6b1e50fec1b6ff0a18c6480e7601acc9fbcb360d9024263dd8",
+      "ci_present": true,
+      "docs_present": true,
+      "entrypoints": [
+        "pyproject.toml",
+        "src/bsff/cli.py"
+      ],
+      "largest_files": [
+        {
+          "bytes": 10028942,
+          "layer": "other",
+          "path": "data/validation/bsff_validation_corpus_v0_1_5.npz",
+          "sha256": "c4fa6c15446f57c5ac5bdfb22f97946e961f935432417ebf8ec496c1a2b131dd"
+        },
+        {
+          "bytes": 106496,
+          "layer": "other",
+          "path": ".coverage",
+          "sha256": "3705d3adf404e9fa098397136b918a795294a84c8103110d4fd966c3b7983ee9"
+        },
+        {
+          "bytes": 41597,
+          "layer": "config",
+          "path": "artifacts/provenance_manifest.json",
+          "sha256": "b90eddc68100a64493ea17acd80fe394e3b8670eb68c058d40b92429a7d4e5fd"
+        },
+        {
+          "bytes": 35193,
+          "layer": "docs",
+          "path": "LICENSE",
+          "sha256": "531da5bfa05e885a161a6c71ad63ef8b802bb61ae58996a8ac97a9c1071a1901"
+        },
+        {
+          "bytes": 35193,
+          "layer": "docs",
+          "path": "LICENSES/GPL-3.0-or-later.txt",
+          "sha256": "531da5bfa05e885a161a6c71ad63ef8b802bb61ae58996a8ac97a9c1071a1901"
+        },
+        {
+          "bytes": 19554,
+          "layer": "other",
+          "path": "src/bsff.egg-info/PKG-INFO",
+          "sha256": "6181e847dbb576e07e99b35216e04f62cc53e2ddef6e409fcd363bac35f018d9"
+        },
+        {
+          "bytes": 18785,
+          "layer": "docs",
+          "path": "README.md",
+          "sha256": "caf12649bf9d52fd847cd905314b51c83eb86ec7d53a0fb916fc36a69eb48ba3"
+        },
+        {
+          "bytes": 17264,
+          "layer": "config",
+          "path": "artifacts/MANIFEST.json",
+          "sha256": "052897ab45df555b0ee71ec00393747b03804d572131f9a3c23a68e051ca4d9c"
+        },
+        {
+          "bytes": 11548,
+          "layer": "source",
+          "path": "src/bsff/surrogate_engine.py",
+          "sha256": "4ab68684b7848f5a2a14ef2cc7936ec67ff8df22443b1f112e8400eaf1b3733e"
+        },
+        {
+          "bytes": 6861,
+          "layer": "source",
+          "path": "src/bsff/leakage_deep.py",
+          "sha256": "f2dae9d72e6592a0e7ead467723a7500a1e11333823942636c52239a6fcc3bb8"
+        },
+        {
+          "bytes": 6831,
+          "layer": "config",
+          "path": "artifacts/bsff_phase1_validation.json",
+          "sha256": "0710770017bc7278e66aa1ce1cba1f85bacff11cda745d466aee6083faba4e6a"
+        },
+        {
+          "bytes": 6421,
+          "layer": "source",
+          "path": "src/bsff/pipeline.py",
+          "sha256": "71eb32592f0f558876ec4087732518154696a96b9b3121233e56549373c50732"
+        },
+        {
+          "bytes": 5536,
+          "layer": "test",
+          "path": "tests/test_deep_leakage_probes.py",
+          "sha256": "6154b3496ffb5338c23c3b9a7dea4b202b93ee74b83a2d64325a6792d8f17eff"
+        },
+        {
+          "bytes": 5046,
+          "layer": "source",
+          "path": "src/bsff/stages.py",
+          "sha256": "cbfd0173d25c9e8e97c66b2cbdde45d97bda5b6fb660e204a132aa435a2408d6"
+        },
+        {
+          "bytes": 4878,
+          "layer": "source",
+          "path": "tools/cross_validate_surrogate.py",
+          "sha256": "a8edd9e73a73d02677c07b1e86610c44078e32158e930602ec717defb63dfd61"
+        },
+        {
+          "bytes": 4782,
+          "layer": "source",
+          "path": "tools/generate_validation_corpus.py",
+          "sha256": "80155524c38af679ea9f9684daddbced66f5c9a5ea258f4be832d09fc92274fb"
+        },
+        {
+          "bytes": 4654,
+          "layer": "source",
+          "path": "src/bsff/policy.py",
+          "sha256": "bded59ac9d9b83cd7c6bf06a1519b924652633878523acb4b3f08569416c7846"
+        },
+        {
+          "bytes": 4431,
+          "layer": "other",
+          "path": ".hypothesis/constants/d2b72496fefbd262",
+          "sha256": "74c39c73e28a5e959e013a284c1999a055c67be6ad721d03453a7332b81eb09b"
+        },
+        {
+          "bytes": 4406,
+          "layer": "source",
+          "path": "src/bsff/verdict_engine.py",
+          "sha256": "d255e9e24a7e5d682b091b5a39c303124cd85101920c527172b3082461f14d1e"
+        },
+        {
+          "bytes": 4356,
+          "layer": "docs",
+          "path": "paper/paper.md",
+          "sha256": "b27070ac0bcf1321e8ff249fe652c3bf64a633c34f059ce7cd0138492dbb9f42"
+        }
+      ],
+      "layer_bytes": {
+        "ci": 11493,
+        "config": 83694,
+        "docs": 129595,
+        "other": 10197189,
+        "schema": 12653,
+        "security": 6046,
+        "source": 109085,
+        "test": 38167
+      },
+      "layer_files": {
+        "ci": 7,
+        "config": 17,
+        "docs": 35,
+        "other": 111,
+        "schema": 7,
+        "security": 8,
+        "source": 34,
+        "test": 23
+      },
+      "license_present": true,
+      "missing_surface": [],
+      "package_files": [
+        "pyproject.toml"
+      ],
+      "release_metadata_present": true,
+      "risk_flags": [],
+      "root": "/home/neuro7/Desktop/bsff_v0_1_5_development_full_package",
+      "scanner_version": "cmar-scan/1.4.1",
+      "schemas_present": true,
+      "security_present": true,
+      "tests_present": true,
+      "total_bytes": 10587922,
+      "total_files": 242
+    },
+    "voids": []
+  },
+  "normalized_state": {
+    "artifact_hash": "03145d3c14647c6b1e50fec1b6ff0a18c6480e7601acc9fbcb360d9024263dd8",
+    "baselines": {
+      "docs": 0.3,
+      "source": 0.2,
+      "test": 0.1
+    },
+    "method": "baseline_clamped_unit_interval",
+    "normalizer_version": "cmar-normalizer/1.4.1",
+    "release_readiness": 0.843158,
+    "structural_score": 0.521394,
+    "vector": {
+      "blocking_pressure": 1.0,
+      "ci_presence": 1.0,
+      "docs_ratio": 0.0408,
+      "protocol_validity": 1.0,
+      "schema_presence": 1.0,
+      "security_presence": 1.0,
+      "source_mass_ratio": 0.051514,
+      "test_mass_ratio": 0.036048,
+      "valid_mass_ratio": 0.372632,
+      "void_pressure": 1.0
+    }
+  },
+  "quantized_state": {
+    "information_loss": {
+      "blocking_pressure": 0.075,
+      "ci_presence": 0.075,
+      "docs_ratio": 0.0592,
+      "protocol_validity": 0.075,
+      "schema_presence": 0.075,
+      "security_presence": 0.075,
+      "source_mass_ratio": 0.048486,
+      "test_mass_ratio": 0.063952,
+      "valid_mass_ratio": 0.072632,
+      "void_pressure": 0.075
+    },
+    "mean_ordinal": 2.5,
+    "method": "visible_threshold_bucket_quantization",
+    "ordinal_vector": {
+      "blocking_pressure": 4,
+      "ci_presence": 4,
+      "docs_ratio": 0,
+      "protocol_validity": 4,
+      "schema_presence": 4,
+      "security_presence": 4,
+      "source_mass_ratio": 0,
+      "test_mass_ratio": 0,
+      "valid_mass_ratio": 1,
+      "void_pressure": 4
+    },
+    "quantizer_version": "cmar-quantizer/1.4.1",
+    "state_vector": {
+      "blocking_pressure": "RELEASE",
+      "ci_presence": "RELEASE",
+      "docs_ratio": "VOID",
+      "protocol_validity": "RELEASE",
+      "schema_presence": "RELEASE",
+      "security_presence": "RELEASE",
+      "source_mass_ratio": "VOID",
+      "test_mass_ratio": "VOID",
+      "valid_mass_ratio": "WEAK",
+      "void_pressure": "RELEASE"
+    },
+    "thresholds": [
+      0.2,
+      0.4,
+      0.65,
+      0.85
+    ],
+    "verdict": "VOID"
+  },
+  "root": "/home/neuro7/Desktop/bsff_v0_1_5_development_full_package",
+  "runtime_version": "cmar-runtime/1.4.1"
+}

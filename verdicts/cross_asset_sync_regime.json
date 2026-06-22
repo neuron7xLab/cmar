@@ -1,0 +1,545 @@
+{
+  "autofill_report": null,
+  "falsification_report": {
+    "checked_invariants": [
+      "tests_present",
+      "ci_present",
+      "schemas_present",
+      "entrypoint_present",
+      "protocol_valid",
+      "ledger_hash_matches_scan_hash",
+      "valid_mass_not_greater_than_total_mass",
+      "no_pass_with_blocking_voids",
+      "docs_not_dominating_executable_mass",
+      "no_release_bucket_with_failed_protocol",
+      "expansion_not_diverging_on_release"
+    ],
+    "falsifier_version": "cmar-falsifier/1.4.1",
+    "findings": [
+      {
+        "code": "missing_entrypoint",
+        "field": "scan.missing_surface",
+        "message": "entrypoint absent",
+        "severity": "critical"
+      }
+    ],
+    "verdict": "FALSIFIED"
+  },
+  "final_status": "FAIL",
+  "github_activity": null,
+  "integrated_state": {
+    "cross_stream_synthesis": null,
+    "expansion": {
+      "confidence": "LOW",
+      "current": {
+        "blocking_voids": 2,
+        "valid_mass_bytes": 761562,
+        "void_closure_rate": null
+      },
+      "entropy_estimate": 0.5,
+      "expansion_verdict": "CONVERGING",
+      "fit_quality": null,
+      "horizon": 5,
+      "interpretation": "[LOW confidence: conservative baseline, no history] mass grows ~1069/iter and voids do not increase; potential_mass=766907 at horizon 5",
+      "model": "baseline_autofill_delta",
+      "nonlinearity_warning": null,
+      "potential_mass": 766907,
+      "projected_states": [
+        {
+          "blocking_voids": 1,
+          "iteration": 1,
+          "valid_mass_bytes": 762631
+        },
+        {
+          "blocking_voids": 0,
+          "iteration": 2,
+          "valid_mass_bytes": 763700
+        },
+        {
+          "blocking_voids": 0,
+          "iteration": 3,
+          "valid_mass_bytes": 764769
+        },
+        {
+          "blocking_voids": 0,
+          "iteration": 4,
+          "valid_mass_bytes": 765838
+        },
+        {
+          "blocking_voids": 0,
+          "iteration": 5,
+          "valid_mass_bytes": 766907
+        }
+      ],
+      "schema": "cmar/expansion_report/v1",
+      "velocity": {
+        "valid_mass_per_iteration": 1069.0,
+        "voids_closed_per_iteration": 1.0
+      }
+    },
+    "expansion_verdict": "CONVERGING",
+    "falsification_report": {
+      "checked_invariants": [
+        "tests_present",
+        "ci_present",
+        "schemas_present",
+        "entrypoint_present",
+        "protocol_valid",
+        "ledger_hash_matches_scan_hash",
+        "valid_mass_not_greater_than_total_mass",
+        "no_pass_with_blocking_voids",
+        "docs_not_dominating_executable_mass",
+        "no_release_bucket_with_failed_protocol",
+        "expansion_not_diverging_on_release"
+      ],
+      "falsifier_version": "cmar-falsifier/1.4.1",
+      "findings": [
+        {
+          "code": "missing_entrypoint",
+          "field": "scan.missing_surface",
+          "message": "entrypoint absent",
+          "severity": "critical"
+        }
+      ],
+      "verdict": "FALSIFIED"
+    },
+    "flow": [
+      "scan",
+      "normalize",
+      "quantize",
+      "voids",
+      "repair_plan",
+      "protocol",
+      "falsify",
+      "mass_ledger",
+      "expansion",
+      "integrated_verdict"
+    ],
+    "github_activity": null,
+    "github_signals": null,
+    "integrated_verdict": {
+      "gate": "FAIL_FALSIFICATION",
+      "reason": "critical falsification findings exist",
+      "state": "FALSIFIED"
+    },
+    "integrator_version": "cmar-integrator/1.4.1",
+    "mass_ledger": {
+      "artifact_hash": "063e07f093b29ee7bef26b729dd95dda06b1359f217b257a71c0dcedda030673",
+      "blocking_voids": 2,
+      "hollow_mass_bytes": 13768039,
+      "hollow_mass_ratio": 0.947585,
+      "ledger_version": "cmar-mass-ledger/1.4.1",
+      "release_blocked": true,
+      "status": "BLOCKED",
+      "target_valid_mass_bytes": 1048576,
+      "total_bytes": 14529601,
+      "valid_mass_bytes": 761562,
+      "verdict": "Release is blocked by critical voids.",
+      "void_closure_rate": 0.0,
+      "voids_detected": 3
+    },
+    "normalized_state": {
+      "artifact_hash": "063e07f093b29ee7bef26b729dd95dda06b1359f217b257a71c0dcedda030673",
+      "baselines": {
+        "docs": 0.3,
+        "source": 0.2,
+        "test": 0.1
+      },
+      "method": "baseline_clamped_unit_interval",
+      "normalizer_version": "cmar-normalizer/1.4.1",
+      "release_readiness": 0.75,
+      "structural_score": 0.365977,
+      "vector": {
+        "blocking_pressure": 1.0,
+        "ci_presence": 1.0,
+        "docs_ratio": 0.023492,
+        "protocol_validity": 1.0,
+        "schema_presence": 1.0,
+        "security_presence": 0.0,
+        "source_mass_ratio": 0.13691,
+        "test_mass_ratio": 0.035457,
+        "valid_mass_ratio": 0.0,
+        "void_pressure": 1.0
+      }
+    },
+    "potential_mass": 766907,
+    "protocol_report": {
+      "issues": [],
+      "protocol_version": "cmar-protocol/1.4.1",
+      "schema_valid": true,
+      "semantic_valid": true,
+      "syntax_valid": true,
+      "valid": true
+    },
+    "quantized_state": {
+      "information_loss": {
+        "blocking_pressure": 0.075,
+        "ci_presence": 0.075,
+        "docs_ratio": 0.076508,
+        "protocol_validity": 0.075,
+        "schema_presence": 0.075,
+        "security_presence": 0.1,
+        "source_mass_ratio": 0.03691,
+        "test_mass_ratio": 0.064543,
+        "valid_mass_ratio": 0.1,
+        "void_pressure": 0.075
+      },
+      "mean_ordinal": 2.0,
+      "method": "visible_threshold_bucket_quantization",
+      "ordinal_vector": {
+        "blocking_pressure": 4,
+        "ci_presence": 4,
+        "docs_ratio": 0,
+        "protocol_validity": 4,
+        "schema_presence": 4,
+        "security_presence": 0,
+        "source_mass_ratio": 0,
+        "test_mass_ratio": 0,
+        "valid_mass_ratio": 0,
+        "void_pressure": 4
+      },
+      "quantizer_version": "cmar-quantizer/1.4.1",
+      "state_vector": {
+        "blocking_pressure": "RELEASE",
+        "ci_presence": "RELEASE",
+        "docs_ratio": "VOID",
+        "protocol_validity": "RELEASE",
+        "schema_presence": "RELEASE",
+        "security_presence": "VOID",
+        "source_mass_ratio": "VOID",
+        "test_mass_ratio": "VOID",
+        "valid_mass_ratio": "VOID",
+        "void_pressure": "RELEASE"
+      },
+      "thresholds": [
+        0.2,
+        0.4,
+        0.65,
+        0.85
+      ],
+      "verdict": "VOID"
+    },
+    "repair_plan": {
+      "actions": [
+        {
+          "acceptance_gate": "machine gate must pass",
+          "action_id": "R-001",
+          "command_hint": "Add CLI entrypoint.",
+          "priority": 28.0,
+          "target_paths": [
+            "src/<pkg>/cli.py",
+            "pyproject.toml"
+          ],
+          "title": "No executable entrypoint detected",
+          "void_id": "V-EXEC-001"
+        },
+        {
+          "acceptance_gate": "machine gate must pass",
+          "action_id": "R-002",
+          "command_hint": "Add pyproject.toml.",
+          "priority": 26.0,
+          "target_paths": [
+            "pyproject.toml"
+          ],
+          "title": "No package metadata detected",
+          "void_id": "V-CAP-001"
+        },
+        {
+          "acceptance_gate": "machine gate must pass",
+          "action_id": "R-003",
+          "command_hint": "Add SECURITY.md.",
+          "priority": 7.0,
+          "target_paths": [
+            "SECURITY.md"
+          ],
+          "title": "No security policy detected",
+          "void_id": "V-SEC-001"
+        }
+      ],
+      "artifact_hash": "063e07f093b29ee7bef26b729dd95dda06b1359f217b257a71c0dcedda030673",
+      "plan_version": "cmar-repair-plan/1.4.1",
+      "status": "REPAIR_REQUIRED"
+    },
+    "root": "/home/neuro7/spikes/cross_asset_sync_regime",
+    "scan": {
+      "artifact_hash": "063e07f093b29ee7bef26b729dd95dda06b1359f217b257a71c0dcedda030673",
+      "ci_present": true,
+      "docs_present": true,
+      "entrypoints": [],
+      "largest_files": [
+        {
+          "bytes": 863544,
+          "layer": "other",
+          "path": "paper/final/main.pdf",
+          "sha256": "518e55007484661c9ca79a3596cb7f5b6a7d71c0b5d1dd6f6fd9939768dcad23"
+        },
+        {
+          "bytes": 817013,
+          "layer": "other",
+          "path": "paper/journal/main.pdf",
+          "sha256": "f003d4e7b4b44d3f4002633d1eb3f7df7f0b3bf50a9031a90547b609e0c4e07a"
+        },
+        {
+          "bytes": 817013,
+          "layer": "other",
+          "path": "paper/journal/kuramoto-cross-asset-journal.pdf",
+          "sha256": "f003d4e7b4b44d3f4002633d1eb3f7df7f0b3bf50a9031a90547b609e0c4e07a"
+        },
+        {
+          "bytes": 816559,
+          "layer": "other",
+          "path": "paper/final/kuramoto-cross-asset-final.pdf",
+          "sha256": "428cf23424358199c7a070d7435962e6f73cef04c0d1d22f69ae3622fddf6abe"
+        },
+        {
+          "bytes": 802372,
+          "layer": "other",
+          "path": "arxiv_bundle/kuramoto-cross-asset.pdf",
+          "sha256": "6db7d45176db9b3379e506f72fd5195ef53e73e9ba37ec56e17fcef2f127585b"
+        },
+        {
+          "bytes": 802372,
+          "layer": "other",
+          "path": "paper/main.pdf",
+          "sha256": "6db7d45176db9b3379e506f72fd5195ef53e73e9ba37ec56e17fcef2f127585b"
+        },
+        {
+          "bytes": 443215,
+          "layer": "other",
+          "path": "results/eureka_features.csv",
+          "sha256": "6b67618f9b35969c192893491170325765a9a30ba71b0896269e47f262f4380d"
+        },
+        {
+          "bytes": 381700,
+          "layer": "other",
+          "path": "results/strategy_v2_returns.csv",
+          "sha256": "87312e9b6b5ea82ecc8a6142e0f2b85395a3a70a55e54cf9252b11402af234fc"
+        },
+        {
+          "bytes": 314531,
+          "layer": "other",
+          "path": "results/strategy_returns.csv",
+          "sha256": "49cae84825b141f2a7dd25cbb2b4b3be24e0ec010e95e074a5fbee8796f46971"
+        },
+        {
+          "bytes": 273158,
+          "layer": "other",
+          "path": "results/eureka_strategy_returns.csv",
+          "sha256": "460f1d626faad485c2e34168599222e965e528de1c9c2a37cfd53a9ac55ff707"
+        },
+        {
+          "bytes": 258566,
+          "layer": "other",
+          "path": "arxiv_bundle/figures/prop1_R_vs_rho_bar.png",
+          "sha256": "70c9614f6c8ee50b9a76796e700bb00e1fbd3aa0ae04dfeefe7d8d9bd3811f37"
+        },
+        {
+          "bytes": 258566,
+          "layer": "other",
+          "path": "figures/prop1_R_vs_rho_bar.png",
+          "sha256": "70c9614f6c8ee50b9a76796e700bb00e1fbd3aa0ae04dfeefe7d8d9bd3811f37"
+        },
+        {
+          "bytes": 258566,
+          "layer": "other",
+          "path": "paper/final/figures/prop1_R_vs_rho_bar.png",
+          "sha256": "70c9614f6c8ee50b9a76796e700bb00e1fbd3aa0ae04dfeefe7d8d9bd3811f37"
+        },
+        {
+          "bytes": 258566,
+          "layer": "other",
+          "path": "paper/journal/figures/prop1_R_vs_rho_bar.png",
+          "sha256": "70c9614f6c8ee50b9a76796e700bb00e1fbd3aa0ae04dfeefe7d8d9bd3811f37"
+        },
+        {
+          "bytes": 257168,
+          "layer": "other",
+          "path": "arxiv_bundle/figures/theory_boundary_sims.png",
+          "sha256": "e73b2209c1d67ed04e3606e713fddbb4803e84ed981775a7d7c85f71e75e7050"
+        },
+        {
+          "bytes": 257168,
+          "layer": "other",
+          "path": "figures/theory_boundary_sims.png",
+          "sha256": "e73b2209c1d67ed04e3606e713fddbb4803e84ed981775a7d7c85f71e75e7050"
+        },
+        {
+          "bytes": 257168,
+          "layer": "other",
+          "path": "paper/final/figures/theory_boundary_sims.png",
+          "sha256": "e73b2209c1d67ed04e3606e713fddbb4803e84ed981775a7d7c85f71e75e7050"
+        },
+        {
+          "bytes": 257168,
+          "layer": "other",
+          "path": "paper/journal/figures/theory_boundary_sims.png",
+          "sha256": "e73b2209c1d67ed04e3606e713fddbb4803e84ed981775a7d7c85f71e75e7050"
+        },
+        {
+          "bytes": 232546,
+          "layer": "other",
+          "path": "results/epsilon_series.csv",
+          "sha256": "0e54a9fbfac1ca4fac7993075c4214a821f6e830f2fa550db17d52e208ad0128"
+        },
+        {
+          "bytes": 232100,
+          "layer": "other",
+          "path": "data/gld_1d.csv",
+          "sha256": "3c279e7f2b7adec96aef39a467539117f79c42911857d42532b9b8284bbebb64"
+        }
+      ],
+      "layer_bytes": {
+        "ci": 9759,
+        "config": 198720,
+        "docs": 102400,
+        "other": 13768039,
+        "schema": 1315,
+        "source": 397850,
+        "test": 51518
+      },
+      "layer_files": {
+        "ci": 2,
+        "config": 54,
+        "docs": 23,
+        "other": 67,
+        "schema": 1,
+        "source": 44,
+        "test": 18
+      },
+      "license_present": true,
+      "missing_surface": [
+        "entrypoint",
+        "package_metadata",
+        "security"
+      ],
+      "package_files": [],
+      "release_metadata_present": true,
+      "risk_flags": [],
+      "root": "/home/neuro7/spikes/cross_asset_sync_regime",
+      "scanner_version": "cmar-scan/1.4.1",
+      "schemas_present": true,
+      "security_present": false,
+      "tests_present": true,
+      "total_bytes": 14529601,
+      "total_files": 209
+    },
+    "voids": [
+      {
+        "blocks_release": true,
+        "description": "No executable entrypoint detected",
+        "estimated_valid_bytes": 4096,
+        "evidence": [
+          "entrypoints=[]"
+        ],
+        "recommended_action": "Add CLI entrypoint.",
+        "severity": "critical",
+        "title": "No executable entrypoint detected",
+        "void_id": "V-EXEC-001",
+        "void_type": "execution_void",
+        "weight": 14
+      },
+      {
+        "blocks_release": true,
+        "description": "No package metadata detected",
+        "estimated_valid_bytes": 4096,
+        "evidence": [
+          "package_files=[]"
+        ],
+        "recommended_action": "Add pyproject.toml.",
+        "severity": "critical",
+        "title": "No package metadata detected",
+        "void_id": "V-CAP-001",
+        "void_type": "capability_void",
+        "weight": 13
+      },
+      {
+        "blocks_release": false,
+        "description": "No security policy detected",
+        "estimated_valid_bytes": 4096,
+        "evidence": [
+          "security_present=false"
+        ],
+        "recommended_action": "Add SECURITY.md.",
+        "severity": "high",
+        "title": "No security policy detected",
+        "void_id": "V-SEC-001",
+        "void_type": "security_void",
+        "weight": 7
+      }
+    ]
+  },
+  "normalized_state": {
+    "artifact_hash": "063e07f093b29ee7bef26b729dd95dda06b1359f217b257a71c0dcedda030673",
+    "baselines": {
+      "docs": 0.3,
+      "source": 0.2,
+      "test": 0.1
+    },
+    "method": "baseline_clamped_unit_interval",
+    "normalizer_version": "cmar-normalizer/1.4.1",
+    "release_readiness": 0.756571,
+    "structural_score": 0.365977,
+    "vector": {
+      "blocking_pressure": 0.6,
+      "ci_presence": 1.0,
+      "docs_ratio": 0.023492,
+      "protocol_validity": 1.0,
+      "schema_presence": 1.0,
+      "security_presence": 0.0,
+      "source_mass_ratio": 0.13691,
+      "test_mass_ratio": 0.035457,
+      "valid_mass_ratio": 0.726282,
+      "void_pressure": 0.7
+    }
+  },
+  "quantized_state": {
+    "information_loss": {
+      "blocking_pressure": 0.075,
+      "ci_presence": 0.075,
+      "docs_ratio": 0.076508,
+      "protocol_validity": 0.075,
+      "schema_presence": 0.075,
+      "security_presence": 0.1,
+      "source_mass_ratio": 0.03691,
+      "test_mass_ratio": 0.064543,
+      "valid_mass_ratio": 0.023718,
+      "void_pressure": 0.05
+    },
+    "mean_ordinal": 2.0,
+    "method": "visible_threshold_bucket_quantization",
+    "ordinal_vector": {
+      "blocking_pressure": 2,
+      "ci_presence": 4,
+      "docs_ratio": 0,
+      "protocol_validity": 4,
+      "schema_presence": 4,
+      "security_presence": 0,
+      "source_mass_ratio": 0,
+      "test_mass_ratio": 0,
+      "valid_mass_ratio": 3,
+      "void_pressure": 3
+    },
+    "quantizer_version": "cmar-quantizer/1.4.1",
+    "state_vector": {
+      "blocking_pressure": "PARTIAL",
+      "ci_presence": "RELEASE",
+      "docs_ratio": "VOID",
+      "protocol_validity": "RELEASE",
+      "schema_presence": "RELEASE",
+      "security_presence": "VOID",
+      "source_mass_ratio": "VOID",
+      "test_mass_ratio": "VOID",
+      "valid_mass_ratio": "STRONG",
+      "void_pressure": "STRONG"
+    },
+    "thresholds": [
+      0.2,
+      0.4,
+      0.65,
+      0.85
+    ],
+    "verdict": "VOID"
+  },
+  "root": "/home/neuro7/spikes/cross_asset_sync_regime",
+  "runtime_version": "cmar-runtime/1.4.1"
+}
