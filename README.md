@@ -7,26 +7,27 @@ against real repositories, refreshed automatically once a day.
 <!-- CMAR-STATS:START -->
 ### 🛰️ CMAR Truth Stats — validated by execution, not by claim
 
-_Owner `neuron7xLab` (user) · last 30d · generated 2026-06-22T03:11:15.164197+00:00 · source: gh_api + local CMAR scan_
+_Owner `neuron7xLab` (user) · last 30d · generated 2026-06-22T03:13:50.990868+00:00 · source: gh_api + local CMAR scan_
 
 | authored commits | PRs merged/opened | issues closed/opened | contribution days | repos scanned |
 |---:|---:|---:|---:|---:|
-| **875** | 455/508 | 20/35 | 18 | 13/13 |
+| **861** | 440/493 | 19/32 | 17 | 13/13 |
 
 | 🧱 debt (blocking voids) | 🕳️ gaps (falsified repos / findings) | 🔓 critical vulns |
 |---:|---:|---:|
-| **11** | 2 repos / 11 findings | **0** |
+| **11** | 2 repos / 11 findings | **n/a** |
 
 <details><summary>Repos needing truth-work</summary>
 
 | repo | status | falsify | debt | crit vulns |
 |---|---|---|---:|---:|
 | `.github` | FAIL | FALSIFIED | 5 | n/a |
-| `neuron7xLab` | FAIL | FALSIFIED | 5 | 0 |
-| `Intentia-Amoris` | PARTIAL | NOT_FALSIFIED | 1 | 0 |
+| `neuron7xLab` | FAIL | FALSIFIED | 5 | n/a |
+| `Intentia-Amoris` | PARTIAL | NOT_FALSIFIED | 1 | n/a |
 
 </details>
 
+<sub>collection notes: gh_api_failed:user/repos:gh: Resource not accessible by integration (HTTP 403)</sub>
 <!-- CMAR-STATS:END -->
 
 ```bash
