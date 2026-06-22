@@ -5,4 +5,8 @@ __pycache__/
 dist/
 build/
 *.egg-info/
+artifacts/*.json
+artifacts/*.jsonl
+artifacts/*.md
 artifacts/ledger_history.jsonl
+!artifacts/.gitkeep

@@ -51,6 +51,51 @@ def main() -> int:
             failures.append({"command": "expand-gate", "assert": "no growth projected",
                              "potential_mass": data["potential_mass"], "current": data["current"]["valid_mass_bytes"]})
 
+    # JSON artifact parse gate: every --out file produced above must parse.
+    for cmd in commands:
+        if "--out" in cmd:
+            out = ROOT / cmd[cmd.index("--out") + 1]
+            try:
+                json.loads(out.read_text(encoding="utf-8"))
+            except Exception as exc:
+                failures.append({"command": "json-parse", "path": str(out), "error": type(exc).__name__})
+
+    # GitHub-activity fail-closed gate (no live auth): empty PATH removes `gh`.
+    fc_env = {"PATH": "/nonexistent", "PYTHONPATH": str(ROOT / "src")}
+    fc = subprocess.run([PY, "-m", "cmar.cli", "github-activity", "zzz", "--out", "/tmp/cmar_fc.json"],
+                        cwd=ROOT, env=fc_env, text=True, capture_output=True)
+    if fc.returncode == 0:
+        failures.append({"command": "github-fail-closed", "assert": "must exit non-zero without auth"})
+    else:
+        try:
+            d = json.loads(Path("/tmp/cmar_fc.json").read_text(encoding="utf-8"))
+            if d.get("authenticated") is not False or "gh_auth_missing" not in (d.get("collection_errors") or []):
+                failures.append({"command": "github-fail-closed", "assert": "expected authenticated=false + gh_auth_missing", "got": d})
+        except Exception as exc:
+            failures.append({"command": "github-fail-closed", "error": type(exc).__name__})
+
+    # Manifest determinism gate: two regenerations must be byte-identical.
+    g1 = run([PY, "scripts/generate_manifest.py"])
+    m1 = (ROOT / "RELEASE_MANIFEST.json").read_text(encoding="utf-8") if g1.returncode == 0 else None
+    g2 = run([PY, "scripts/generate_manifest.py"])
+    m2 = (ROOT / "RELEASE_MANIFEST.json").read_text(encoding="utf-8") if g2.returncode == 0 else None
+    if m1 is None or m2 is None or m1 != m2:
+        failures.append({"command": "manifest-determinism", "assert": "two regenerations must be identical"})
+
+    # Version-drift gate: package, manifest, and RELEASE_VERDICT must agree.
+    try:
+        sys.path.insert(0, str(ROOT / "src"))
+        import cmar
+        pkg_v = cmar.__version__
+        man_v = json.loads((ROOT / "RELEASE_MANIFEST.json").read_text(encoding="utf-8")).get("version")
+        verdict_txt = (ROOT / "RELEASE_VERDICT.md").read_text(encoding="utf-8")
+        if man_v != pkg_v:
+            failures.append({"command": "version-drift", "package": pkg_v, "manifest": man_v})
+        if pkg_v not in verdict_txt:
+            failures.append({"command": "version-drift", "assert": f"RELEASE_VERDICT.md must mention {pkg_v}"})
+    except Exception as exc:
+        failures.append({"command": "version-drift", "error": type(exc).__name__})
+
     summary={"commands": len(commands), "failures": failures, "status": "PASS" if not failures else "FAIL"}
     (ROOT/"artifacts/release_check_summary.json").parent.mkdir(parents=True, exist_ok=True)
     (ROOT/"artifacts/release_check_summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")

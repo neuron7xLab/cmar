@@ -22,6 +22,8 @@ def _fake_gh_factory():
         joined = " ".join(args)
         if args[:2] == ["auth", "status"]:
             return _proc(returncode=0)
+        if "users/neuron7xLab" in joined and "/repos" not in joined:
+            return _proc(stdout=json.dumps({"type": "Organization", "login": "neuron7xLab"}))
         if "user/repos" in joined:
             return _proc(stdout=json.dumps([
                 {"full_name": "neuron7xLab/alpha", "name": "alpha", "private": False, "pushed_at": "2026-06-20T10:00:00Z"},
@@ -65,6 +67,7 @@ class GitHubActivityTests(unittest.TestCase):
             report = ga.collect_github_activity("neuron7xLab", days=30)
         d = report.to_dict()
         self.assertTrue(d["authenticated"])
+        self.assertEqual(d["owner_type"], "organization")
         self.assertEqual(d["data_source"], "gh_api")
         self.assertEqual(d["report_version"], "cmar-github-activity/1.0.0")
         # other/zzz must be filtered out; alpha+secret+beta remain.
@@ -83,7 +86,7 @@ class GitHubActivityTests(unittest.TestCase):
         with mock.patch.object(ga, "_run_gh", side_effect=_fake_gh_factory()):
             report = ga.collect_github_activity("neuron7xLab", days=30)
         expected = {
-            "report_version", "owner", "window_days", "data_source", "authenticated",
+            "report_version", "owner", "window_days", "data_source", "authenticated", "owner_type",
             "repositories_seen", "public_repositories", "private_repositories_if_visible",
             "commits_authored", "pull_requests_opened", "pull_requests_merged",
             "issues_opened", "issues_closed", "contribution_days", "active_repositories",

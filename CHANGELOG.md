@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.8.1
+
+- GitHub activity now detects **owner type** (`user` / `organization` / `unknown`) via `gh api users/<owner>` and scopes search queries accordingly: organizations use `org:<owner>`, **user accounts use `author:<owner>`** (previously `org:` was used for all owners, which mislabeled repo-commits as authored commits for user accounts). Added `owner_type` to the report schema. Real check: `neuron7xLab` is a User → `commits_authored` now counts authored commits, not all repo commits.
+- Defensive token redaction: any token-like string in captured `gh` stderr is replaced with `[REDACTED]` before entering `collection_errors`/artifacts.
+- Hardened `release_check.py`: added JSON-parse gate, GitHub fail-closed gate (no-auth → non-zero + `gh_auth_missing`), manifest-determinism gate, and version-drift gate (package == manifest == RELEASE_VERDICT).
+- CI matrix across Python 3.10 / 3.11 / 3.12; live GitHub not required (fail-closed tested via mocks).
+- Added `tests/test_github_activity_user_owner.py`, `_org_owner.py`, `_fail_closed.py`, `_no_token_leak.py`; added `docs/OPERATOR_RUNBOOK.md`.
+- Stopped tracking generated `artifacts/*.json|jsonl` (regenerated proof only).
+
 ## 1.8.0
 
 - Added an empirical validity study of the expansion projector (`studies/expansion_validity/`): 4 real measured trajectories, OLS vs two-endpoint, forecast error vs the 0.15 criterion, falsification test of `expansion_verdict`. Verdict: directionally predictive (not falsified); magnitude reliable only under local linearity. See `studies/expansion_validity/REPORT.md`.

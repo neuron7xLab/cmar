@@ -9,6 +9,7 @@ crashing.
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timedelta, timezone
@@ -18,6 +19,14 @@ REPORT_VERSION = "cmar-github-activity/1.0.0"
 DATA_SOURCE = "gh_api"
 _GH_TIMEOUT = 60
 
+# Defensive redaction: never let a token-like string survive into an artifact,
+# even if it appears in captured stderr from the gh CLI.
+_TOKEN_RE = re.compile(r"(gh[posu]_[A-Za-z0-9]+|github_pat_[A-Za-z0-9_]+|(?i:bearer|token)\s+[A-Za-z0-9._\-]+)")
+
+
+def _redact(text: str) -> str:
+    return _TOKEN_RE.sub("[REDACTED]", text)
+
 
 @dataclass
 class GitHubActivityReport:
@@ -26,6 +35,7 @@ class GitHubActivityReport:
     window_days: int
     data_source: str
     authenticated: bool
+    owner_type: str
     repositories_seen: int
     public_repositories: int
     private_repositories_if_visible: int | None
@@ -50,6 +60,7 @@ def _empty_report(owner: str, days: int, authenticated: bool, errors: list[str])
         window_days=days,
         data_source=DATA_SOURCE,
         authenticated=authenticated,
+        owner_type="unknown",
         repositories_seen=0,
         public_repositories=0,
         private_repositories_if_visible=None,
@@ -99,7 +110,7 @@ def _gh_api(path: str, errors: list[str], *, params: dict[str, str] | None = Non
     if proc.returncode != 0:
         # stderr may reference the endpoint but never the token (gh redacts it).
         detail = (proc.stderr or "").strip().splitlines()
-        tail = detail[-1][:160] if detail else "unknown_error"
+        tail = _redact(detail[-1][:160]) if detail else "unknown_error"
         errors.append(f"gh_api_failed:{path}:{tail}")
         return None
     raw = proc.stdout.strip()
@@ -129,9 +140,33 @@ def _utc_date(value: str | None) -> str | None:
     return iso[:10] if iso else None
 
 
-def _search_total(qualifier: str, since: str, owner: str, errors: list[str], *, search: str) -> tuple[int, list[str]]:
+def _detect_owner_type(owner: str, errors: list[str]) -> str:
+    """Return 'organization' | 'user' | 'unknown' via the GitHub users endpoint."""
+    data = _gh_api(f"users/{owner}", errors)
+    if not isinstance(data, dict):
+        return "unknown"
+    t = str(data.get("type", "")).lower()
+    if t == "organization":
+        return "organization"
+    if t == "user":
+        return "user"
+    return "unknown"
+
+
+def _scope_for(owner: str, owner_type: str) -> tuple[str, str]:
+    """Search scope qualifier + commit date field per owner type.
+
+    Organizations are scoped with ``org:``; user accounts MUST use ``author:``
+    (``org:`` returns nothing for a user) — counting commits/PRs/issues the user
+    authored. Unknown falls back to ``org:`` (documented, conservative)."""
+    if owner_type == "user":
+        return f"author:{owner}", "author-date"
+    return f"org:{owner}", "committer-date"
+
+
+def _search_total(scope: str, date_field: str, since: str, errors: list[str], *, search: str) -> tuple[int, list[str]]:
     """Return (total_count, observed_utc_dates) for a search/{search} query."""
-    query = f"org:{owner} {qualifier}:>={since}"
+    query = f"{scope} {date_field}:>={since}"
     data = _gh_api(f"search/{search}", errors, params={"q": query, "per_page": "100"})
     if not isinstance(data, dict):
         return 0, []
@@ -165,6 +200,9 @@ def collect_github_activity(owner: str, days: int = 30) -> GitHubActivityReport:
     since_dt = now - timedelta(days=days)
     since = since_dt.date().isoformat()
 
+    owner_type = _detect_owner_type(owner, errors)
+    scope, commit_date_field = _scope_for(owner, owner_type)
+
     # --- Repository inventory (authenticated endpoints include visible private repos) ---
     repos: dict[str, dict[str, Any]] = {}
     private_visible = False
@@ -177,13 +215,16 @@ def collect_github_activity(owner: str, days: int = 30) -> GitHubActivityReport:
             if full.split("/", 1)[0].lower() == owner.lower():
                 repos[full] = repo
 
-    # Public listing to complete the picture (org first, then user fallback).
-    listing = _gh_api(f"orgs/{owner}/repos", errors, params={"per_page": "100", "type": "all"}, paginate=True)
+    # Public listing via the endpoint matching the detected owner type (avoids a
+    # spurious 404 from probing the wrong endpoint).
+    listing_path = f"users/{owner}/repos" if owner_type == "user" else f"orgs/{owner}/repos"
+    listing = _gh_api(listing_path, errors, params={"per_page": "100", "type": "all"}, paginate=True)
     if not isinstance(listing, list):
-        # 404 for a user account; drop that error and retry the user endpoint.
-        if errors and errors[-1].startswith(f"gh_api_failed:orgs/{owner}/repos"):
+        # Fall back to the other endpoint type, dropping the first probe's error.
+        if errors and errors[-1].startswith(f"gh_api_failed:{listing_path}"):
             errors.pop()
-        listing = _gh_api(f"users/{owner}/repos", errors, params={"per_page": "100", "type": "all"}, paginate=True)
+        alt = f"orgs/{owner}/repos" if owner_type == "user" else f"users/{owner}/repos"
+        listing = _gh_api(alt, errors, params={"per_page": "100", "type": "all"}, paginate=True)
     if isinstance(listing, list):
         for repo in listing:
             full = repo.get("full_name", "")
@@ -208,11 +249,11 @@ def collect_github_activity(owner: str, days: int = 30) -> GitHubActivityReport:
                 active.append(repo.get("name", full))
                 dates.add(pushed[:10])
 
-    # --- Activity counters via the search API ---
-    commits_authored, commit_dates = _search_total("committer-date", since, owner, errors, search="commits")
+    # --- Activity counters via the search API (scope depends on owner type) ---
+    commits_authored, commit_dates = _search_total(scope, commit_date_field, since, errors, search="commits")
 
     def _issue_search(extra: str, date_field: str) -> tuple[int, list[str]]:
-        query = f"org:{owner} {extra} {date_field}:>={since}"
+        query = f"{scope} {extra} {date_field}:>={since}"
         data = _gh_api("search/issues", errors, params={"q": query, "per_page": "100"})
         if not isinstance(data, dict):
             return 0, []
@@ -236,6 +277,7 @@ def collect_github_activity(owner: str, days: int = 30) -> GitHubActivityReport:
         window_days=days,
         data_source=DATA_SOURCE,
         authenticated=True,
+        owner_type=owner_type,
         repositories_seen=len(repos),
         public_repositories=public_count,
         private_repositories_if_visible=(private_count if private_visible else None),

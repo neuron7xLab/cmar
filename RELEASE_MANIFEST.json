@@ -1,10 +1,10 @@
 {
   "name": "cognitive-mass-autofill-runtime",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "status": "PASS",
   "generated_by": "scripts/generate_manifest.py",
-  "file_count": 110,
-  "total_bytes": 29032763,
+  "file_count": 115,
+  "total_bytes": 29051793,
   "commands": {
     "unittest": 0,
     "doctor": 0,
@@ -14,6 +14,7 @@
     "corpus_eval": 0
   },
   "artifact_paths": [
+    "artifacts/.gitkeep",
     "artifacts/audit_fusion_report.json",
     "artifacts/audit_projection.json",
     "artifacts/audit_snapshot.json",
@@ -26,6 +27,7 @@
     "artifacts/github_activity_30d.json",
     "artifacts/integrated_state.json",
     "artifacts/integrated_state_with_github.json",
+    "artifacts/ledger_history.jsonl",
     "artifacts/mass_ledger.json",
     "artifacts/normalized_state.json",
     "artifacts/quantized_state.json",
@@ -34,6 +36,17 @@
     "artifacts/repository_tree.txt",
     "artifacts/runtime_real_account.json",
     "artifacts/runtime_report.json",
+    "artifacts/self_expansion.json",
+    "artifacts/self_falsification.json",
+    "artifacts/self_integrated.json",
+    "artifacts/self_ledger.json",
+    "artifacts/self_normalized.json",
+    "artifacts/self_plan.json",
+    "artifacts/self_protocol.json",
+    "artifacts/self_quantized.json",
+    "artifacts/self_runtime.json",
+    "artifacts/self_scan.json",
+    "artifacts/self_voids.json",
     "artifacts/test_corpus_eval.json",
     "artifacts/test_doctor_default.json",
     "artifacts/test_github_activity_input.json",
@@ -42,13 +55,13 @@
   "files": [
     {
       "path": ".github/workflows/ci.yml",
-      "bytes": 340,
-      "sha256": "f96373eb24c3d495aebc136b0e8232d7f31a0ce020bde1f9cbed4a36be3d0472"
+      "bytes": 462,
+      "sha256": "58e93cae438e13b13077a141c83b8c296f2e6251da998991f37f47ed6e0bf5ad"
     },
     {
       "path": ".gitignore",
-      "bytes": 97,
-      "sha256": "0a982f0b0a26e3c1c156e6ede0657b949b863c408cc5107ebb16282e23e9ee8c"
+      "bytes": 167,
+      "sha256": "6ccd6240b696b9bc67bd40cb48f87f3044f723197aaa889aa4b5b702acd11452"
     },
     {
       "path": "ARCHITECTURE.md",
@@ -57,8 +70,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 4721,
-      "sha256": "542d3122c1964f7e025c5f97fd441d097b4169702a2e7ea626829bf60beb0a9b"
+      "bytes": 5910,
+      "sha256": "9e8fccb92b24e446dd9cbb0fde0895d4c7caa8c7cd886f167b606b7e4c91226b"
     },
     {
       "path": "CITATION.cff",
@@ -103,7 +116,7 @@
     {
       "path": "RELEASE_VERDICT.md",
       "bytes": 1619,
-      "sha256": "7805f94a43f6dfa315c82f402477aadc6fea3ab7a0276c44b667bc3b1ac8433d"
+      "sha256": "9f760ade816280f3ef1d41df0b8fbb0cee2098a4354e995804cb2ef61848a3a9"
     },
     {
       "path": "SECURITY.md",
@@ -144,6 +157,11 @@
       "path": "data/external_audit_seed/n7x_audit_v4_manifest.json",
       "bytes": 3470,
       "sha256": "1783c0a4cd978868f665652191361024517963d40c0750e0e83360e9b82d069d"
+    },
+    {
+      "path": "docs/OPERATOR_RUNBOOK.md",
+      "bytes": 3295,
+      "sha256": "c9a20d04860bfb993362cdcde93b00ed721d83cb094874d76ab69179fb2c3feb"
     },
     {
       "path": "docs/audit_stream_integration.md",
@@ -213,7 +231,7 @@
     {
       "path": "pyproject.toml",
       "bytes": 553,
-      "sha256": "3c1079341d991e03acb737d81819652b47a2894ee0d80652872898527291341d"
+      "sha256": "e1e826f264c68d8717609470d4c58c41d9002178dfc0c67a4efa4dde2c44dac9"
     },
     {
       "path": "schemas/autofill_report.schema.json",
@@ -262,13 +280,13 @@
     },
     {
       "path": "scripts/release_check.py",
-      "bytes": 3842,
-      "sha256": "57ad2702dc85de716f468dd9044f930b5a234f650c725eb58f066141aed0be1e"
+      "bytes": 6481,
+      "sha256": "f01bb27940becb8b2a9290d051ddd5e10990f0dfdf4e9e9c2d4a7c115c90c981"
     },
     {
       "path": "src/cmar/__init__.py",
       "bytes": 878,
-      "sha256": "8ffd5589e776bd07478f2d9fa3fd094dd82cc0c8b386f0f2ce37db6a8edbaf83"
+      "sha256": "c60a192e3cb857f332b56cf2d4e9aaf83d67e8a3a79ec623bc0f6c659114967b"
     },
     {
       "path": "src/cmar/audit_stream.py",
@@ -302,8 +320,8 @@
     },
     {
       "path": "src/cmar/github_activity.py",
-      "bytes": 9135,
-      "sha256": "3a76017005383f5947e40be240b105c1a759e2b0d9b38a37f8678f1bd077dea6"
+      "bytes": 10817,
+      "sha256": "0655d99dd746e27f6333b8dc95c802694a065108458bbf0e5ac52fd64789144e"
     },
     {
       "path": "src/cmar/integrator.py",
@@ -412,8 +430,28 @@
     },
     {
       "path": "tests/test_github_activity.py",
-      "bytes": 8978,
-      "sha256": "278225265dcb575e45218f29ac78a56ddf4aeacdc5aea8b6e5ee857fa349b769"
+      "bytes": 9213,
+      "sha256": "a66242537a2d27f6d8887e9b6fc7d549d8ea000926bbefc84b9285eb85709bbf"
+    },
+    {
+      "path": "tests/test_github_activity_fail_closed.py",
+      "bytes": 2320,
+      "sha256": "90518f93af5e1eb804a0f7b58db178161a9f8f2728b405935a17e9333c94422f"
+    },
+    {
+      "path": "tests/test_github_activity_no_token_leak.py",
+      "bytes": 1843,
+      "sha256": "22ba9fcacdfa76d20682619edfa4037abea344c03bdda12036b0bc4db6124888"
+    },
+    {
+      "path": "tests/test_github_activity_org_owner.py",
+      "bytes": 2745,
+      "sha256": "d14361c13889358a968eedc7c66da81869cfc5db799e29bf94230eacd8e0f1fa"
+    },
+    {
+      "path": "tests/test_github_activity_user_owner.py",
+      "bytes": 2890,
+      "sha256": "5bade442c68c47b0db60c600b8c59f4c61e527dffce0e2842dbe187aff5afd31"
     },
     {
       "path": "tests/test_runtime_real_account.py",

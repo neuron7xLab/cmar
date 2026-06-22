@@ -33,6 +33,10 @@ tests/test_audit_stream.py
 tests/test_cli_contracts.py
 tests/test_expander.py
 tests/test_github_activity.py
+tests/test_github_activity_fail_closed.py
+tests/test_github_activity_no_token_leak.py
+tests/test_github_activity_org_owner.py
+tests/test_github_activity_user_owner.py
 tests/test_runtime_real_account.py
 tests/test_runtime_suite.py
 tests/test_server.py

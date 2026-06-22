@@ -1,5 +1,5 @@
 """CMAR Cognitive Mass Autofill Runtime."""
-__version__='1.8.0'
+__version__='1.8.1'
 from .scanner import scan_repository
 from .normalizer import normalize_repository
 from .quantizer import quantize_repository
