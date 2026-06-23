@@ -7,11 +7,11 @@ against real repositories, refreshed automatically once a day.
 <!-- CMAR-STATS:START -->
 ### 🛰️ CMAR Truth Stats — validated by execution, not by claim
 
-_Owner `neuron7xLab` (user) · last 30d · generated 2026-06-22T12:28:57.854998+00:00 · source: gh_api + local CMAR scan_
+_Owner `neuron7xLab` (user) · last 30d · generated 2026-06-23T10:05:57.221998+00:00 · source: gh_api + local CMAR scan_
 
 | authored commits | PRs merged/opened | issues closed/opened | contribution days | repos scanned |
 |---:|---:|---:|---:|---:|
-| **869** | 448/496 | 19/32 | 17 | 14/14 |
+| **895** | 464/502 | 19/32 | 18 | 14/14 |
 
 | 🧱 debt (blocking voids) | 🕳️ gaps (falsified repos / findings) | 🔓 critical vulns |
 |---:|---:|---:|
