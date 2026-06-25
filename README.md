@@ -30,6 +30,21 @@ _Owner `neuron7xLab` (user) · last 30d · generated 2026-06-25T09:47:13.399177+
 <sub>collection notes: gh_api_failed:user/repos:gh: Resource not accessible by integration (HTTP 403)</sub>
 <!-- CMAR-STATS:END -->
 
+## Install
+
+Python 3.10+. Pure stdlib — no third-party runtime dependencies.
+
+```bash
+git clone https://github.com/neuron7xLab/cmar
+cd cmar
+pip install -e .     # exposes the `cmar` CLI
+cmar doctor          # sanity-check the install
+```
+
+## Quickstart — the core pipeline
+
+Each stage reads an intent seed and writes a machine-readable artifact:
+
 ```bash
 cmar scan examples/seed_14kb_intent
 cmar normalize examples/seed_14kb_intent --out artifacts/normalized_state.json
@@ -41,7 +56,7 @@ python scripts/release_check.py
 ```
 
 
-## Audit Stream Integration v1.4.1
+## Audit stream integration
 
 ```bash
 cmar audit-scan data/external_audit_seed/n7x-audit-v4.zip --out artifacts/audit_snapshot.json
@@ -50,7 +65,7 @@ cmar integrate examples/seed_14kb_intent --audit-package data/external_audit_see
 ```
 
 
-## Final hardening v1.4.1
+## Diagnostics & corpus evaluation
 
 ```bash
 cmar doctor
@@ -61,7 +76,7 @@ python scripts/release_check.py
 `cmar doctor` now defaults to the current directory. The benchmark corpus is now consumed by tests and release check, so it is not dead mass.
 
 
-## Real GitHub Activity Evidence v1.5.0
+## Real GitHub activity evidence
 
 CMAR can collect **real** engineering-activity evidence for a GitHub owner using
 the authenticated GitHub CLI. It never fakes private data, never prints or stores
@@ -92,7 +107,7 @@ GitHub activity is an **auxiliary** evidence stream. The normalized signals
 quality — the integrated verdict records `github_overrides_quality: false`.
 
 
-## Cross-stream synthesis v1.6.0
+## Cross-stream synthesis
 
 When both the repository-quality stream and the GitHub-activity stream are
 present, `integrate`/`runtime` emit an **emergent** `cross_stream_synthesis`
@@ -106,7 +121,7 @@ state that no single module can produce alone:
 It is descriptive: `overrides_quality: false` — activity never raises the gate.
 
 
-## HTTP runtime server v1.6.0 (deploy)
+## HTTP runtime server
 
 Move CMAR from dev CLI to a running service external agents can call:
 
@@ -122,7 +137,7 @@ tokens. Binds to localhost by default; put it behind an authenticating proxy
 before exposing publicly (it shares the server's GitHub read scope).
 
 
-## Future-state projection v1.7.0 (expand)
+## Future-state projection
 
 CMAR projects where the artifact is heading, not just where it is:
 
@@ -141,3 +156,7 @@ runs. `integrate` embeds `expansion` / `potential_mass` / `expansion_verdict`.
 
 Falsifier invariant **F11** (`expansion_not_diverging_on_release`): a release
 must not pass while the system is projected to degrade.
+
+## License
+
+[MIT](LICENSE) © 2023–2026 Yaroslav Vasylenko (neuron7xLab)
